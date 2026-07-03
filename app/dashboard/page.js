@@ -8,44 +8,46 @@ export default function Dashboard() {
       <section style={phone}>
         <header style={top}>
           <div>
-            <p style={muted}>Bienvenue</p>
-            <h1 style={title}>Bonjour Phoenix 👋</h1>
+            <p style={gold}>YVI PAY PRIVATE</p>
+            <h1 style={title}>Bonjour Phoenix</h1>
+            <p style={muted}>Votre espace premium de transfert.</p>
           </div>
           <div style={avatar}>Y</div>
         </header>
 
-        <div style={balanceCard}>
+        <div style={cardGold}>
           <p style={gold}>Solde disponible</p>
           <h2 style={amount}>3 250,00 €</h2>
-          <p style={muted}>Compte premium YVI PAY</p>
+          <p style={muted}>+12% ce mois-ci · Compte vérifié</p>
         </div>
 
         <div style={actions}>
-          <Link href="/envoyer" style={goldButton}>↗ Envoyer</Link>
-          <Link href="/beneficiaires" style={darkButton}>👥 Proches</Link>
+          <Link href="/envoyer" style={goldBtn}>Envoyer</Link>
+          <Link href="/beneficiaires" style={darkBtn}>Proches</Link>
         </div>
 
         <div style={bankCard}>
           <div style={chip}></div>
           <p style={muted}>YVI PAY BLACK</p>
           <h3 style={brand}>YVI PAY</h3>
+          <div style={cardLine}></div>
           <div style={cardBottom}>
             <span>PHOENIX</span>
             <span>•••• 8842</span>
           </div>
         </div>
 
-        <div style={networkCard}>
+        <div style={network}>
           <p style={gold}>Réseau actif</p>
-          <h3 style={{ margin: "8px 0 12px" }}>France → Afrique</h3>
+          <h3 style={networkTitle}>France → Afrique</h3>
           <p style={muted}>Orange Money · MTN MoMo · Mobile Money</p>
         </div>
 
         <div style={transactions}>
-          <h3 style={{ marginTop: 0 }}>Derniers transferts</h3>
-          <Row city="🇨🇩 Kinshasa" detail="Orange Money" amount="-250 €" />
-          <Row city="🇨🇬 Brazzaville" detail="MTN MoMo" amount="-120 €" />
-          <Row city="🇫🇷 Paris" detail="Recharge YVI" amount="+900 €" />
+          <h3 style={sectionTitle}>Derniers transferts</h3>
+          <Transfer country="RDC" city="Kinshasa" method="Orange Money" amount="-250 €" />
+          <Transfer country="CG" city="Brazzaville" method="MTN MoMo" amount="-120 €" />
+          <Transfer country="FR" city="Paris" method="Recharge YVI" amount="+900 €" />
         </div>
 
         <nav style={nav}>
@@ -59,153 +61,170 @@ export default function Dashboard() {
   );
 }
 
-function Row({ city, detail, amount }) {
+function Transfer({ country, city, method, amount }) {
   return (
-    <div style={row}>
-      <span>{city}<br /><small style={smallText}>{detail}</small></span>
-      <strong>{amount}</strong>
+    <div style={transfer}>
+      <div style={transferLeft}>
+        <span style={badge}>{country}</span>
+        <div>
+          <strong>{city}</strong>
+          <p style={muted}>{method}</p>
+        </div>
+      </div>
+      <strong style={amountSmall}>{amount}</strong>
     </div>
   );
 }
 
 const page = {
   minHeight: "100vh",
-  background: "radial-gradient(circle at 50% 0%, #071735 0%, #020918 45%, #000714 100%)",
-  color: "white",
+  background: "radial-gradient(circle at top,#071b3d 0%,#020918 48%,#00040d 100%)",
+  color: "#fff",
   display: "flex",
   justifyContent: "center",
   fontFamily: "Arial, sans-serif",
   padding: "22px",
 };
 
-const phone = {
-  width: "100%",
-  maxWidth: "430px",
-  paddingBottom: "90px",
-};
+const phone = { width: "100%", maxWidth: "430px", paddingBottom: "92px" };
 
 const top = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  marginBottom: "22px",
+  marginBottom: "20px",
 };
 
-const muted = { color: "#cfd7e8", margin: 0 };
-const smallText = { color: "#cfd7e8" };
-const gold = { color: "#f4c85d", margin: 0, fontWeight: "700" };
+const gold = { color: "#f4c85d", margin: 0, fontWeight: 800 };
+const muted = { color: "#cfd7e8", margin: "4px 0 0" };
 
-const title = {
-  fontSize: "28px",
-  margin: "6px 0 0",
-};
+const title = { fontSize: "31px", margin: "7px 0 4px", letterSpacing: "-1px" };
 
 const avatar = {
-  width: "48px",
-  height: "48px",
+  width: "52px",
+  height: "52px",
   borderRadius: "50%",
-  background: "linear-gradient(180deg,#ffd36c,#c88c22)",
-  color: "#141006",
+  background: "linear-gradient(180deg,#ffd36c,#b97812)",
+  color: "#130d02",
   display: "grid",
   placeItems: "center",
-  fontWeight: "900",
+  fontWeight: 900,
+  fontSize: "22px",
+  boxShadow: "0 0 35px rgba(244,200,93,.35)",
 };
 
-const balanceCard = {
-  background: "rgba(255,255,255,.07)",
-  border: "1px solid rgba(244,200,93,.25)",
-  borderRadius: "30px",
-  padding: "24px",
-  boxShadow: "0 25px 80px rgba(0,0,0,.45)",
+const cardGold = {
+  borderRadius: "34px",
+  padding: "26px",
+  background: "linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.04))",
+  border: "1px solid rgba(244,200,93,.35)",
+  boxShadow: "0 30px 90px rgba(0,0,0,.55)",
   marginBottom: "18px",
 };
 
-const amount = {
-  fontSize: "46px",
-  margin: "12px 0",
-};
+const amount = { fontSize: "48px", margin: "12px 0", letterSpacing: "-2px" };
 
-const actions = {
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
-  gap: "12px",
-  marginBottom: "18px",
-};
+const actions = { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "18px" };
 
-const goldButton = {
-  padding: "17px",
+const goldBtn = {
+  padding: "18px",
   borderRadius: "999px",
   background: "linear-gradient(180deg,#ffd36c,#c88c22)",
-  color: "#141006",
+  color: "#120c02",
   textAlign: "center",
-  fontWeight: "900",
+  fontWeight: 900,
   textDecoration: "none",
+  boxShadow: "0 14px 35px rgba(200,140,34,.25)",
 };
 
-const darkButton = {
-  padding: "17px",
+const darkBtn = {
+  padding: "18px",
   borderRadius: "999px",
-  background: "rgba(255,255,255,.09)",
+  background: "rgba(255,255,255,.08)",
   color: "#fff",
   textAlign: "center",
-  fontWeight: "800",
+  fontWeight: 900,
   textDecoration: "none",
   border: "1px solid rgba(255,255,255,.14)",
 };
 
 const bankCard = {
-  height: "220px",
-  borderRadius: "34px",
-  padding: "25px",
-  background: "linear-gradient(135deg,#101827,#020918 70%)",
-  border: "1px solid rgba(244,200,93,.42)",
-  boxShadow: "0 25px 80px rgba(0,0,0,.55)",
+  height: "230px",
+  borderRadius: "36px",
+  padding: "26px",
+  background: "linear-gradient(135deg,#121b2d,#020918 72%)",
+  border: "1px solid rgba(244,200,93,.55)",
+  boxShadow: "0 35px 100px rgba(0,0,0,.65)",
   marginBottom: "18px",
 };
 
 const chip = {
-  width: "50px",
-  height: "36px",
-  borderRadius: "10px",
-  background: "linear-gradient(135deg,#ffd36c,#9b6b19)",
+  width: "54px",
+  height: "40px",
+  borderRadius: "12px",
+  background: "linear-gradient(135deg,#ffe28a,#9b6b19)",
   marginBottom: "22px",
 };
 
 const brand = {
-  letterSpacing: "9px",
   color: "#f4c85d",
-  fontSize: "28px",
-  margin: "18px 0 38px",
+  letterSpacing: "10px",
+  fontSize: "30px",
+  margin: "18px 0 22px",
 };
 
-const cardBottom = {
-  display: "flex",
-  justifyContent: "space-between",
-  letterSpacing: "2px",
+const cardLine = {
+  height: "1px",
+  background: "linear-gradient(90deg,transparent,#f4c85d,transparent)",
+  opacity: .55,
+  marginBottom: "26px",
 };
 
-const networkCard = {
-  borderRadius: "28px",
-  padding: "22px",
-  background: "radial-gradient(circle at 30% 40%,#163b75,#071735 45%,#020918)",
-  border: "1px solid rgba(244,200,93,.25)",
+const cardBottom = { display: "flex", justifyContent: "space-between", letterSpacing: "2px", fontWeight: 700 };
+
+const network = {
+  borderRadius: "30px",
+  padding: "24px",
+  background: "radial-gradient(circle at 20% 20%,#16427f,#071735 55%,#020918)",
+  border: "1px solid rgba(244,200,93,.28)",
   marginBottom: "18px",
 };
 
+const networkTitle = { margin: "8px 0", fontSize: "24px" };
+
 const transactions = {
+  borderRadius: "30px",
+  padding: "24px",
   background: "rgba(255,255,255,.07)",
-  borderRadius: "26px",
-  padding: "22px",
-  border: "1px solid rgba(255,255,255,.1)",
-  boxShadow: "0 20px 60px rgba(0,0,0,.35)",
+  border: "1px solid rgba(255,255,255,.10)",
+  boxShadow: "0 25px 70px rgba(0,0,0,.45)",
 };
 
-const row = {
+const sectionTitle = { margin: "0 0 18px", fontSize: "22px" };
+
+const transfer = {
   display: "flex",
   justifyContent: "space-between",
-  padding: "14px 0",
+  alignItems: "center",
+  padding: "15px 0",
   borderBottom: "1px solid rgba(255,255,255,.08)",
 };
+
+const transferLeft = { display: "flex", gap: "12px", alignItems: "center" };
+
+const badge = {
+  width: "42px",
+  height: "42px",
+  borderRadius: "50%",
+  background: "rgba(244,200,93,.14)",
+  color: "#f4c85d",
+  display: "grid",
+  placeItems: "center",
+  fontWeight: 900,
+  fontSize: "12px",
+};
+
+const amountSmall = { fontSize: "18px" };
 
 const nav = {
   position: "fixed",
@@ -216,11 +235,10 @@ const nav = {
   display: "grid",
   gridTemplateColumns: "repeat(4,1fr)",
   gap: "6px",
-  background: "rgba(2,9,24,.94)",
-  border: "1px solid rgba(244,200,93,.18)",
-  borderRadius: "22px",
-  padding: "12px",
-  zIndex: 10,
+  background: "rgba(2,9,24,.96)",
+  border: "1px solid rgba(244,200,93,.22)",
+  borderRadius: "24px",
+  padding: "13px",
 };
 
 const navItem = {
