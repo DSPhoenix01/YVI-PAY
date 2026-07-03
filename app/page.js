@@ -5,8 +5,8 @@ export default function Home() {
     <main className="home">
       <section className="phone-frame">
         <img src="/yvi-pay-accueil.jpeg" alt="YVI PAY" />
-        <Link className="send-zone" href="/Inscription" aria-label="Envoyer de l'argent" />
-        <Link className="login-zone" href="/Connexion" aria-label="Se connecter" />
+       <Link className="send-zone" href="/inscription" aria-label="Envoyer de l'argent" />
+<Link className="login-zone" href="/connexion" aria-label="Se connecter" />
       </section>
     </main>
   );
