@@ -16,7 +16,7 @@ export default function Connexion() {
           <input className="field" type="email" placeholder="Adresse e-mail" />
           <input className="field" type="password" placeholder="Mot de passe" />
 
-          <Link className="btn" href="/tableau de bord">
+          <Link className="btn" href="/dashboard">
             Se connecter
           </Link>
 
