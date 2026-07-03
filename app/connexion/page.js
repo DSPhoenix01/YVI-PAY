@@ -1,2 +1,33 @@
 import Link from "next/link";
-export default function Connexion(){return <main className="screen"><section className="phone"><div className="logo">YVI PAY</div><div className="card"><h1>Connexion</h1><p>Accédez à votre espace sécurisé.</p><input className="field" placeholder="Adresse e-mail"/><input className="field" placeholder="Mot de passe" type="password"/><Link className="btn" href="/dashboard">Se connecter</Link><p className="center"><Link className="soft" href="/inscription">Créer un compte</Link></p></div></section></main>}
+
+export default function Connexion() {
+  return (
+    <main className="screen">
+      <section className="phone">
+        <Link className="back-link" href="/">← Accueil</Link>
+
+        <div className="logo">YVI PAY</div>
+
+        <div className="card">
+          <p className="eyebrow">Espace sécurisé</p>
+          <h1>Connexion</h1>
+          <p>Accédez à votre compte YVI PAY.</p>
+
+          <input className="field" type="email" placeholder="Adresse e-mail" />
+          <input className="field" type="password" placeholder="Mot de passe" />
+
+          <Link className="btn" href="/tableau de bord">
+            Se connecter
+          </Link>
+
+          <p className="center">
+            Pas encore de compte ?{" "}
+            <Link className="gold" href="/Inscription">
+              Créer un compte
+            </Link>
+          </p>
+        </div>
+      </section>
+    </main>
+  );
+}
