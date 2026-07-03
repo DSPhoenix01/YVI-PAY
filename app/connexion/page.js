@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function Connexion(){return <main className="screen"><section className="phone"><div className="logo">YVI PAY</div><div className="card"><h1>Connexion</h1><p>Accédez à votre espace sécurisé.</p><input className="field" placeholder="Adresse e-mail"/><input className="field" placeholder="Mot de passe" type="password"/><Link className="btn" href="/dashboard">Se connecter</Link><p className="center"><Link className="soft" href="/inscription">Créer un compte</Link></p></div></section></main>}

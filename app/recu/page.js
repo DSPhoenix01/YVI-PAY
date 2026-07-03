@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function Recu(){return <main className="screen"><section className="phone"><div className="logo">YVI PAY</div><div className="card center"><h1>Transfert prêt</h1><p>Votre demande est préparée. Le reçu final apparaîtra après confirmation.</p><div className="item"><span>Montant envoyé</span><strong className="gold">100 €</strong></div><div className="item"><span>Destination</span><strong>Mobile Money</strong></div><Link className="btn" href="/dashboard">Retour accueil</Link></div></section></main>}
