@@ -22,7 +22,7 @@ export default function Connexion() {
 
           <p className="center">
             Pas encore de compte ?{" "}
-            <Link className="gold" href="/Inscription">
+            <Link className="gold" href="/inscription">
               Créer un compte
             </Link>
           </p>
