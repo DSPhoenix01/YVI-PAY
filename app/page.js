@@ -2,10 +2,10 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="home">
+    <main className="Accueil">
       <img src="/yvi-pay-accueil.jpeg" alt="YVI PAY" />
-      <Link className="home-send" href="/inscription" aria-label="Envoyer de l'argent" />
-      <Link className="home-login" href="/connexion" aria-label="Se connecter" />
+      <Link className="Home-Send" href="/Inscription" aria-label="Envoyer de l'argent" />
+      <Link className="connexion à domicile" href="/Connexion" aria-label="Se connecter" />
     </main>
   );
 }
