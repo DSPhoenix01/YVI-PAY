@@ -53,55 +53,6 @@ export default function Dashboard() {
   );
 }
 
-function Hero() {
-  return (
-    <section style={hero}>
-      <div style={topBar}>
-        <div style={brand}>YVI PAY</div>
-        <div style={topIcons}>
-          <span>🔔</span>
-          <span>◎</span>
-        </div>
-      </div>
-
-      <div style={sloganBox}>
-        <p style={sloganWhite}>Votre argent.</p>
-        <p style={sloganWhite}>Vos proches.</p>
-        <p style={sloganGold}>Sans frontières.</p>
-      </div>
-
-      <svg className="yvi-globe" style={globeSvg} viewBox="0 0 430 300">
-        <defs>
-          <radialGradient id="earth" cx="50%" cy="45%" r="65%">
-            <stop offset="0%" stopColor="#1b5fa8" stopOpacity=".55" />
-            <stop offset="58%" stopColor="#08295c" stopOpacity=".8" />
-            <stop offset="100%" stopColor="#020918" stopOpacity="1" />
-          </radialGradient>
-
-          <filter id="goldGlow">
-            <feGaussianBlur stdDeviation="4" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-
-        <circle cx="215" cy="275" r="225" fill="url(#earth)" />
-        <circle cx="215" cy="275" r="225" fill="none" stroke="rgba(78,154,255,.65)" strokeWidth="2" />
-
-        <path className="yvi-line" d="M70 245 C115 145, 190 150, 270 110" fill="none" stroke="#f4c85d" strokeWidth="2.2" strokeLinecap="round" />
-        <path className="yvi-line" d="M105 260 C160 155, 245 145, 360 95" fill="none" stroke="#f4c85d" strokeWidth="2.2" strokeLinecap="round" />
-        <path className="yvi-line" d="M145 270 C200 185, 285 170, 390 135" fill="none" stroke="#f4c85d" strokeWidth="1.8" strokeLinecap="round" opacity=".85" />
-
-        <circle className="yvi-point" cx="90" cy="235" r="5" fill="#ffd36c" filter="url(#goldGlow)" />
-        <circle className="yvi-point" cx="270" cy="110" r="5" fill="#ffd36c" filter="url(#goldGlow)" />
-        <circle className="yvi-point" cx="360" cy="95" r="5" fill="#ffd36c" filter="url(#goldGlow)" />
-        <circle className="yvi-point" cx="390" cy="135" r="5" fill="#ffd36c" filter="url(#goldGlow)" />
-      </svg>
-    </section>
-  );
-}
 
 function Welcome() {
   return (
