@@ -727,9 +727,35 @@ const navItem = {
   fontSize: "11px",
   lineHeight: 1.4,
 };
+function Hero() {
+  return (
+    <section style={hero}>
+      <img
+        src="/yvi-hero-dashboard.png"
+        alt="YVI PAY globe"
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: 1,
+        }}
+      />
 
-const navActive = {
-  ...navItem,
-  color: "#f4c85d",
-  fontWeight: 900,
-};
+      <div style={{ ...topBar, zIndex: 3, paddingTop: "8px" }}>
+        <div style={brand}>YVI PAY</div>
+        <div style={topIcons}>
+          <span>🔔</span>
+          <span>◎</span>
+        </div>
+      </div>
+
+      <div style={{ ...sloganBox, zIndex: 3 }}>
+        <p style={sloganWhite}>Votre argent.</p>
+        <p style={sloganWhite}>Vos proches.</p>
+        <p style={sloganGold}>Sans frontières.</p>
+      </div>
+    </section>
+  );
+}
