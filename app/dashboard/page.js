@@ -5,6 +5,39 @@ import Link from "next/link";
 export default function Dashboard() {
   return (
     <main style={page}>
+      <style>{`
+        @keyframes yviPulse {
+          0%, 100% { opacity: .6; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.35); }
+        }
+
+        @keyframes yviLine {
+          0% { stroke-dashoffset: 520; opacity: .25; }
+          50% { opacity: 1; }
+          100% { stroke-dashoffset: 0; opacity: .9; }
+        }
+
+        @keyframes yviFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-6px); }
+        }
+
+        .yvi-line {
+          stroke-dasharray: 520;
+          stroke-dashoffset: 520;
+          animation: yviLine 5s ease-in-out infinite alternate;
+        }
+
+        .yvi-point {
+          transform-origin: center;
+          animation: yviPulse 2.8s ease-in-out infinite;
+        }
+
+        .yvi-globe {
+          animation: yviFloat 6s ease-in-out infinite;
+        }
+      `}</style>
+
       <section style={app}>
         <Hero />
         <Welcome />
@@ -24,9 +57,7 @@ function Hero() {
   return (
     <section style={hero}>
       <div style={topBar}>
-        <div>
-          <div style={brand}>YVI PAY</div>
-        </div>
+        <div style={brand}>YVI PAY</div>
         <div style={topIcons}>
           <span>🔔</span>
           <span>◎</span>
@@ -39,26 +70,34 @@ function Hero() {
         <p style={sloganGold}>Sans frontières.</p>
       </div>
 
-      <svg style={globeSvg} viewBox="0 0 430 260">
+      <svg className="yvi-globe" style={globeSvg} viewBox="0 0 430 300">
         <defs>
-          <radialGradient id="earthGlow" cx="50%" cy="50%" r="60%">
-            <stop offset="0%" stopColor="#123c75" stopOpacity=".65" />
-            <stop offset="70%" stopColor="#071735" stopOpacity=".75" />
+          <radialGradient id="earth" cx="50%" cy="45%" r="65%">
+            <stop offset="0%" stopColor="#1b5fa8" stopOpacity=".55" />
+            <stop offset="58%" stopColor="#08295c" stopOpacity=".8" />
             <stop offset="100%" stopColor="#020918" stopOpacity="1" />
           </radialGradient>
+
+          <filter id="goldGlow">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
         </defs>
 
-        <circle cx="215" cy="255" r="210" fill="url(#earthGlow)" />
-        <circle cx="215" cy="255" r="210" fill="none" stroke="rgba(80,160,255,.55)" strokeWidth="2" />
+        <circle cx="215" cy="275" r="225" fill="url(#earth)" />
+        <circle cx="215" cy="275" r="225" fill="none" stroke="rgba(78,154,255,.65)" strokeWidth="2" />
 
-        <path d="M28 215 C100 130, 185 150, 245 108" fill="none" stroke="#f4c85d" strokeWidth="2" strokeLinecap="round" />
-        <path d="M75 225 C155 120, 270 120, 385 68" fill="none" stroke="#f4c85d" strokeWidth="2" opacity=".9" strokeLinecap="round" />
-        <path d="M115 230 C175 160, 255 165, 360 120" fill="none" stroke="#f4c85d" strokeWidth="1.5" opacity=".75" strokeLinecap="round" />
+        <path className="yvi-line" d="M70 245 C115 145, 190 150, 270 110" fill="none" stroke="#f4c85d" strokeWidth="2.2" strokeLinecap="round" />
+        <path className="yvi-line" d="M105 260 C160 155, 245 145, 360 95" fill="none" stroke="#f4c85d" strokeWidth="2.2" strokeLinecap="round" />
+        <path className="yvi-line" d="M145 270 C200 185, 285 170, 390 135" fill="none" stroke="#f4c85d" strokeWidth="1.8" strokeLinecap="round" opacity=".85" />
 
-        <circle cx="75" cy="225" r="5" fill="#f4c85d" />
-        <circle cx="245" cy="108" r="5" fill="#f4c85d" />
-        <circle cx="360" cy="120" r="5" fill="#f4c85d" />
-        <circle cx="385" cy="68" r="5" fill="#f4c85d" />
+        <circle className="yvi-point" cx="90" cy="235" r="5" fill="#ffd36c" filter="url(#goldGlow)" />
+        <circle className="yvi-point" cx="270" cy="110" r="5" fill="#ffd36c" filter="url(#goldGlow)" />
+        <circle className="yvi-point" cx="360" cy="95" r="5" fill="#ffd36c" filter="url(#goldGlow)" />
+        <circle className="yvi-point" cx="390" cy="135" r="5" fill="#ffd36c" filter="url(#goldGlow)" />
       </svg>
     </section>
   );
@@ -89,13 +128,7 @@ function Balance() {
       </div>
 
       <svg style={miniChart} viewBox="0 0 180 70">
-        <path
-          d="M5 55 C25 42, 40 45, 55 34 S80 42, 95 25 S120 35, 135 22 S155 34, 175 8"
-          fill="none"
-          stroke="#f4c85d"
-          strokeWidth="4"
-          strokeLinecap="round"
-        />
+        <path d="M5 55 C25 42, 40 45, 55 34 S80 42, 95 25 S120 35, 135 22 S155 34, 175 8" fill="none" stroke="#f4c85d" strokeWidth="4" strokeLinecap="round" />
         <circle cx="175" cy="8" r="5" fill="#fff4c8" />
       </svg>
     </section>
@@ -111,20 +144,17 @@ function Actions() {
     </section>
   );
 }
-
 function CardBlock() {
   return (
-    <section style={twoCols}>
-      <div style={cardPanel}>
-        <h3 style={sectionTitle}>Ma carte YVI PAY</h3>
-        <div style={cardFrame}>
-          <img src="/yvi-card.png" alt="Carte YVI PAY" style={cardImage} />
-        </div>
-        <div style={dots}>
-          <span style={dotActive}></span>
-          <span style={dot}></span>
-          <span style={dot}></span>
-        </div>
+    <section style={panel}>
+      <h3 style={sectionTitle}>Ma carte YVI PAY</h3>
+      <div style={cardFrame}>
+        <img src="/yvi-card.png" alt="Carte YVI PAY" style={cardImage} />
+      </div>
+      <div style={dots}>
+        <span style={dotActive}></span>
+        <span style={dot}></span>
+        <span style={dot}></span>
       </div>
     </section>
   );
@@ -132,12 +162,12 @@ function CardBlock() {
 
 function Network() {
   return (
-    <section style={network}>
+    <section style={panel}>
       <h3 style={sectionTitle}>Réseau actif</h3>
-      <Country flag="🇨🇬" name="Congo-Brazzaville" />
-      <Country flag="🇨🇩" name="RDC" />
-      <Country flag="🇨🇲" name="Cameroun" />
-      <Country flag="🇨🇮" name="Côte d’Ivoire" />
+      <Country flag="CG" name="Congo-Brazzaville" />
+      <Country flag="CD" name="RDC" />
+      <Country flag="CM" name="Cameroun" />
+      <Country flag="CI" name="Côte d’Ivoire" />
     </section>
   );
 }
@@ -145,7 +175,7 @@ function Network() {
 function Country({ flag, name }) {
   return (
     <div style={country}>
-      <span>{flag}</span>
+      <strong>{flag}</strong>
       <span>{name}</span>
       <span style={greenDot}></span>
     </div>
@@ -229,29 +259,27 @@ function BottomNav() {
     </nav>
   );
 }
-
 const page = {
+  width: "100%",
   minHeight: "100vh",
-  background: "radial-gradient(circle at top,#09234f 0%,#020918 48%,#00040d 100%)",
-  color: "#fff",
   display: "flex",
   justifyContent: "center",
-  fontFamily: "Arial, sans-serif",
+  background: "radial-gradient(circle at top,#09234f 0%,#020918 48%,#00040d 100%)",
+  color: "#fff",
 };
 
 const app = {
   width: "100%",
   maxWidth: "430px",
-  margin: "0 auto",
-  padding: "18px 16px 95px",
+  padding: "0 16px 110px",
 };
 
 const hero = {
   position: "relative",
-  height: "330px",
+  height: "355px",
   overflow: "hidden",
-  margin: "-18px -16px 14px",
-  padding: "22px 18px",
+  margin: "0 -16px 18px",
+  padding: "22px 20px",
   background: "linear-gradient(180deg,#071b3d 0%,#06142d 45%,#020918 100%)",
 };
 
@@ -260,36 +288,28 @@ const topBar = {
   zIndex: 3,
   display: "flex",
   justifyContent: "space-between",
-  alignItems: "flex-start",
+  alignItems: "center",
 };
 
 const brand = {
   color: "#f4c85d",
   fontSize: "28px",
   fontWeight: 900,
-  letterSpacing: "6px",
-};
-
-const privateText = {
-  color: "#f4c85d",
-  fontSize: "12px",
   letterSpacing: "7px",
-  textAlign: "center",
-  marginTop: "4px",
 };
 
 const topIcons = {
   display: "flex",
-  gap: "22px",
+  gap: "18px",
   color: "#f4c85d",
-  fontSize: "28px",
+  fontSize: "24px",
 };
 
 const sloganBox = {
   position: "relative",
   zIndex: 3,
   textAlign: "center",
-  marginTop: "24px",
+  marginTop: "44px",
 };
 
 const sloganWhite = {
@@ -307,10 +327,10 @@ const sloganGold = {
 
 const globeSvg = {
   position: "absolute",
-  left: "0",
-  bottom: "-38px",
-  width: "100%",
-  height: "245px",
+  left: "-6%",
+  bottom: "-42px",
+  width: "112%",
+  height: "285px",
 };
 
 const welcome = {
@@ -328,15 +348,13 @@ const welcome = {
 
 const welcomeTitle = {
   margin: 0,
-  fontSize: "26px",
-  letterSpacing: "-.5px",
+  fontSize: "25px",
 };
 
 const muted = {
   margin: "6px 0 0",
   color: "#cfd7e8",
 };
-
 const weather = {
   borderLeft: "1px solid rgba(255,255,255,.25)",
   paddingLeft: "18px",
@@ -344,7 +362,7 @@ const weather = {
 
 const balance = {
   display: "grid",
-  gridTemplateColumns: "1fr 160px",
+  gridTemplateColumns: "1fr 150px",
   gap: "12px",
   alignItems: "center",
   padding: "22px",
@@ -362,7 +380,7 @@ const goldLabel = {
 
 const amount = {
   margin: "12px 0",
-  fontSize: "45px",
+  fontSize: "42px",
   letterSpacing: "-2px",
 };
 
@@ -406,18 +424,16 @@ const darkButton = {
   border: "1px solid rgba(255,255,255,.12)",
 };
 
-const twoCols = {
-  marginBottom: "14px",
-};
-
-const cardPanel = {
-  padding: "16px",
+const panel = {
+  padding: "18px",
   borderRadius: "22px",
   background: "rgba(255,255,255,.06)",
   border: "1px solid rgba(255,255,255,.10)",
+  marginBottom: "14px",
 };
 
 const cardFrame = {
+  marginTop: "10px",
   borderRadius: "18px",
   overflow: "hidden",
   border: "1px solid rgba(244,200,93,.28)",
@@ -449,15 +465,6 @@ const dot = {
   borderRadius: "50%",
   background: "rgba(255,255,255,.25)",
 };
-
-const network = {
-  padding: "18px",
-  borderRadius: "22px",
-  background: "rgba(255,255,255,.06)",
-  border: "1px solid rgba(255,255,255,.10)",
-  marginBottom: "14px",
-};
-
 const country = {
   display: "grid",
   gridTemplateColumns: "34px 1fr auto",
@@ -473,12 +480,138 @@ const greenDot = {
   background: "#37d978",
 };
 
-const panel = {
-  padding: "18px",
+const sectionHeader = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginBottom: "12px",
+};
+
+const sectionTitle = {
+  margin: 0,
+  color: "#f4c85d",
+  fontSize: "18px",
+};
+
+const seeAll = {
+  color: "#f4c85d",
+  textDecoration: "none",
+  fontWeight: 800,
+};
+
+const people = {
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+  gap: "10px",
+};
+
+const person = {
+  display: "grid",
+  gridTemplateColumns: "45px 1fr",
+  gap: "10px",
+  alignItems: "center",
+  padding: "10px",
+  borderRadius: "16px",
+  background: "rgba(255,255,255,.05)",
+  border: "1px solid rgba(255,255,255,.08)",
+};
+
+const avatar = {
+  position: "relative",
+  width: "45px",
+  height: "45px",
+  borderRadius: "50%",
+  display: "grid",
+  placeItems: "center",
+  background: "rgba(244,200,93,.16)",
+  fontSize: "24px",
+};
+
+const statusDot = {
+  position: "absolute",
+  right: "0",
+  bottom: "2px",
+  width: "11px",
+  height: "11px",
+  borderRadius: "50%",
+  border: "2px solid #020918",
+};
+
+const smallMuted = {
+  margin: "3px 0 0",
+  color: "#aeb8cc",
+  fontSize: "12px",
+};
+
+const transfer = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  padding: "12px 0",
+  borderBottom: "1px solid rgba(255,255,255,.08)",
+};
+
+const transferLeft = {
+  display: "flex",
+  gap: "12px",
+  alignItems: "center",
+};
+
+const transferIcon = {
+  width: "38px",
+  height: "38px",
+  borderRadius: "50%",
+  display: "grid",
+  placeItems: "center",
+  background: "rgba(255,255,255,.08)",
+};
+
+const positiveAmount = {
+  color: "#37d978",
+};
+
+const nav = {
+  position: "fixed",
+  bottom: "12px",
+  left: "50%",
+  transform: "translateX(-50%)",
+  width: "min(410px,92vw)",
+  display: "grid",
+  gridTemplateColumns: "repeat(5,1fr)",
+  gap: "4px",
+  padding: "12px",
   borderRadius: "22px",
-  background: "rgba(255,255,255,.06)",
-  border: "1px solid rgba(255,255,255,.10)",
-  marginBottom: "14px",
+  background: "rgba(5,14,31,.96)",
+  border: "1px solid rgba(255,255,255,.12)",
+  zIndex: 10,
+};
+
+const navItem = {
+  textAlign: "center",
+  color: "#aeb8cc",
+  textDecoration: "none",
+  fontSize: "11px",
+  lineHeight: 1.4,
+};
+
+const navActive = {
+  ...navItem,
+  color: "#f4c85d",
+  fontWeight: 900,
+};
+const country = {
+  display: "grid",
+  gridTemplateColumns: "34px 1fr auto",
+  alignItems: "center",
+  padding: "10px 0",
+  borderBottom: "1px solid rgba(255,255,255,.08)",
+};
+
+const greenDot = {
+  width: "10px",
+  height: "10px",
+  borderRadius: "50%",
+  background: "#37d978",
 };
 
 const sectionHeader = {
