@@ -26,7 +26,6 @@ function Hero() {
       <div style={topBar}>
         <div>
           <div style={brand}>YVI PAY</div>
-          <div style={privateText}>PRIVATE</div>
         </div>
         <div style={topIcons}>
           <span>🔔</span>
