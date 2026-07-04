@@ -143,7 +143,7 @@ function Network() {
   );
 }
 
-function Country({ flag, name }: { flag: string; name: string }) {
+function Country({ flag, name }) {
   return (
     <div style={country}>
       <span>{flag}</span>
@@ -171,7 +171,7 @@ function CloseOnes() {
   );
 }
 
-function Person({ emoji, name, status, color }: { emoji: string; name: string; status: string; color: string }) {
+function Person({ emoji, name, status, color }) {
   return (
     <div style={person}>
       <div style={avatar}>
@@ -201,7 +201,7 @@ function Transfers() {
   );
 }
 
-function Transfer({ city, to, amount, date, positive }: { city: string; to: string; amount: string; date: string; positive?: boolean }) {
+function Transfer({ city, to, amount, date, positive }) {
   return (
     <div style={transfer}>
       <div style={transferLeft}>
@@ -275,7 +275,7 @@ const privateText = {
   color: "#f4c85d",
   fontSize: "12px",
   letterSpacing: "7px",
-  textAlign: "center" as const,
+  textAlign: "center",
   marginTop: "4px",
 };
 
@@ -289,7 +289,7 @@ const topIcons = {
 const sloganBox = {
   position: "relative",
   zIndex: 3,
-  textAlign: "center" as const,
+  textAlign: "center",
   marginTop: "24px",
 };
 
@@ -300,12 +300,14 @@ const sloganWhite = {
 };
 
 const sloganGold = {
-  ...sloganWhite,
+  fontSize: "28px",
+  lineHeight: 1.05,
+  margin: 0,
   color: "#f4c85d",
 };
 
 const globeSvg = {
-  position: "absolute" as const,
+  position: "absolute",
   left: "0",
   bottom: "-38px",
   width: "100%",
@@ -391,7 +393,7 @@ const goldButton = {
   color: "#120c02",
   fontWeight: 900,
   textDecoration: "none",
-  textAlign: "center" as const,
+  textAlign: "center",
 };
 
 const darkButton = {
@@ -401,7 +403,7 @@ const darkButton = {
   color: "#fff",
   fontWeight: 900,
   textDecoration: "none",
-  textAlign: "center" as const,
+  textAlign: "center",
   border: "1px solid rgba(255,255,255,.12)",
 };
 
@@ -443,7 +445,9 @@ const dotActive = {
 };
 
 const dot = {
-  ...dotActive,
+  width: "9px",
+  height: "9px",
+  borderRadius: "50%",
   background: "rgba(255,255,255,.25)",
 };
 
@@ -515,7 +519,7 @@ const person = {
 };
 
 const avatar = {
-  position: "relative" as const,
+  position: "relative",
   width: "45px",
   height: "45px",
   borderRadius: "50%",
@@ -526,7 +530,7 @@ const avatar = {
 };
 
 const statusDot = {
-  position: "absolute" as const,
+  position: "absolute",
   right: "0",
   bottom: "2px",
   width: "11px",
@@ -569,7 +573,7 @@ const positiveAmount = {
 };
 
 const nav = {
-  position: "fixed" as const,
+  position: "fixed",
   bottom: "12px",
   left: "50%",
   transform: "translateX(-50%)",
@@ -585,7 +589,7 @@ const nav = {
 };
 
 const navItem = {
-  textAlign: "center" as const,
+  textAlign: "center",
   color: "#aeb8cc",
   textDecoration: "none",
   fontSize: "11px",
