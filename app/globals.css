@@ -7,7 +7,6 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  min-width: 100%;
   min-height: 100%;
   background: #020918;
   color: #ffffff;
@@ -16,13 +15,12 @@ body {
 }
 
 body {
-  display: block;
+  min-height: 100vh;
 }
 
 a {
   color: inherit;
   text-decoration: none;
-  cursor: pointer;
 }
 
 button,
@@ -35,9 +33,4 @@ textarea {
 img {
   max-width: 100%;
   display: block;
-}
-
-main {
-  width: 100vw;
-  min-height: 100vh;
 }
