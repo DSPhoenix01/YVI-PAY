@@ -599,13 +599,6 @@ const navActive = {
   color: "#f4c85d",
   fontWeight: 900,
 };
-const country = {
-  display: "grid",
-  gridTemplateColumns: "34px 1fr auto",
-  alignItems: "center",
-  padding: "10px 0",
-  borderBottom: "1px solid rgba(255,255,255,.08)",
-};
 
 const greenDot = {
   width: "10px",
