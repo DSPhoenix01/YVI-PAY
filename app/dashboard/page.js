@@ -51,15 +51,10 @@ function Hero() {
 
         <circle cx="215" cy="255" r="210" fill="url(#earthGlow)" />
         <circle cx="215" cy="255" r="210" fill="none" stroke="rgba(80,160,255,.55)" strokeWidth="2" />
-        <path d="M28 215 C100 130, 185 150, 245 108" fill="none" stroke="#f4c85d" strokeWidth="2" strokeLinecap="round">
-          <animate attributeName="stroke-dasharray" values="0,500;500,0" dur="4s" repeatCount="indefinite" />
-        </path>
-        <path d="M75 225 C155 120, 270 120, 385 68" fill="none" stroke="#f4c85d" strokeWidth="2" opacity=".9" strokeLinecap="round">
-          <animate attributeName="stroke-dasharray" values="0,600;600,0" dur="5s" repeatCount="indefinite" />
-        </path>
-        <path d="M115 230 C175 160, 255 165, 360 120" fill="none" stroke="#f4c85d" strokeWidth="1.5" opacity=".75" strokeLinecap="round">
-          <animate attributeName="stroke-dasharray" values="0,500;500,0" dur="6s" repeatCount="indefinite" />
-        </path>
+
+        <path d="M28 215 C100 130, 185 150, 245 108" fill="none" stroke="#f4c85d" strokeWidth="2" strokeLinecap="round" />
+        <path d="M75 225 C155 120, 270 120, 385 68" fill="none" stroke="#f4c85d" strokeWidth="2" opacity=".9" strokeLinecap="round" />
+        <path d="M115 230 C175 160, 255 165, 360 120" fill="none" stroke="#f4c85d" strokeWidth="1.5" opacity=".75" strokeLinecap="round" />
 
         <circle cx="75" cy="225" r="5" fill="#f4c85d" />
         <circle cx="245" cy="108" r="5" fill="#f4c85d" />
@@ -74,7 +69,7 @@ function Welcome() {
   return (
     <section style={welcome}>
       <div>
-        <h1 style={welcomeTitle}>Bonjour Nathalie ❤️</h1>
+        <h1 style={welcomeTitle}>Bonjour Nathalie 💗</h1>
         <p style={muted}>Heureux de vous revoir.</p>
       </div>
       <div style={weather}>
@@ -89,14 +84,19 @@ function Balance() {
   return (
     <section style={balance}>
       <div>
-        <p style={goldLabel}>Solde disponible 👁</p>
+        <p style={goldLabel}>Solde disponible ◎</p>
         <h2 style={amount}>3 250,00 €</h2>
         <p style={positive}>+120,00 € ce mois-ci ↗</p>
       </div>
+
       <svg style={miniChart} viewBox="0 0 180 70">
-        <path d="M5 55 C25 42, 40 45, 55 34 S80 42, 95 25 S120 35, 135 22 S155 34, 175 8" fill="none" stroke="#f4c85d" strokeWidth="4" strokeLinecap="round">
-          <animate attributeName="stroke-dasharray" values="0,300;300,0" dur="2.8s" repeatCount="indefinite" />
-        </path>
+        <path
+          d="M5 55 C25 42, 40 45, 55 34 S80 42, 95 25 S120 35, 135 22 S155 34, 175 8"
+          fill="none"
+          stroke="#f4c85d"
+          strokeWidth="4"
+          strokeLinecap="round"
+        />
         <circle cx="175" cy="8" r="5" fill="#fff4c8" />
       </svg>
     </section>
@@ -106,7 +106,7 @@ function Balance() {
 function Actions() {
   return (
     <section style={actions}>
-      <Link href="/envoyer" style={goldButton}>➤ Envoyer</Link>
+      <Link href="/envoyer" style={goldButton}>✈ Envoyer</Link>
       <Link href="/beneficiaires" style={darkButton}>👥 Vos proches</Link>
       <Link href="/beneficiaires" style={darkButton}>＋ Ajouter</Link>
     </section>
@@ -143,7 +143,7 @@ function Network() {
   );
 }
 
-function Country({ flag, name }) {
+function Country({ flag, name }: { flag: string; name: string }) {
   return (
     <div style={country}>
       <span>{flag}</span>
@@ -160,9 +160,10 @@ function CloseOnes() {
         <h3 style={sectionTitle}>Vos proches</h3>
         <Link href="/beneficiaires" style={seeAll}>Voir tout ›</Link>
       </div>
+
       <div style={people}>
         <Person emoji="👨🏾" name="Papa" status="Reçu il y a 2 min" color="#56e58b" />
-        <Person emoji="👩🏾" name="Maman" status="Merci ❤️" color="#56e58b" />
+        <Person emoji="👩🏾" name="Maman" status="Merci 💗" color="#56e58b" />
         <Person emoji="👦🏾" name="Petit frère" status="En attente" color="#f4c85d" />
         <Person emoji="👩🏾" name="Tante" status="Vu il y a 1 h" color="#4fa3ff" />
       </div>
@@ -170,7 +171,7 @@ function CloseOnes() {
   );
 }
 
-function Person({ emoji, name, status, color }) {
+function Person({ emoji, name, status, color }: { emoji: string; name: string; status: string; color: string }) {
   return (
     <div style={person}>
       <div style={avatar}>
@@ -192,6 +193,7 @@ function Transfers() {
         <h3 style={sectionTitle}>Derniers transferts</h3>
         <Link href="/historique" style={seeAll}>Voir tout ›</Link>
       </div>
+
       <Transfer city="Kinshasa, RDC" to="Maman" amount="-250,00 €" date="Aujourd’hui" />
       <Transfer city="Brazzaville, Congo" to="Papa" amount="-120,00 €" date="Hier" />
       <Transfer city="Paris, France" to="Vous" amount="+900,00 €" date="10 Mai" positive />
@@ -199,7 +201,7 @@ function Transfers() {
   );
 }
 
-function Transfer({ city, to, amount, date, positive }) {
+function Transfer({ city, to, amount, date, positive }: { city: string; to: string; amount: string; date: string; positive?: boolean }) {
   return (
     <div style={transfer}>
       <div style={transferLeft}>
@@ -210,7 +212,7 @@ function Transfer({ city, to, amount, date, positive }) {
         </div>
       </div>
       <div style={{ textAlign: "right" }}>
-        <strong style={positive ? positiveAmount : null}>{amount}</strong>
+        <strong style={positive ? positiveAmount : undefined}>{amount}</strong>
         <p style={smallMuted}>{date}</p>
       </div>
     </div>
@@ -221,7 +223,7 @@ function BottomNav() {
   return (
     <nav style={nav}>
       <Link href="/dashboard" style={navActive}>⌂<br />Accueil</Link>
-      <Link href="/envoyer" style={navItem}>➤<br />Envoyer</Link>
+      <Link href="/envoyer" style={navItem}>✈<br />Envoyer</Link>
       <Link href="/beneficiaires" style={navItem}>👥<br />Vos proches</Link>
       <Link href="/historique" style={navItem}>⌁<br />Activité</Link>
       <Link href="/profil" style={navItem}>◎<br />Profil</Link>
@@ -241,6 +243,7 @@ const page = {
 const app = {
   width: "100%",
   maxWidth: "430px",
+  margin: "0 auto",
   padding: "18px 16px 95px",
 };
 
@@ -272,7 +275,7 @@ const privateText = {
   color: "#f4c85d",
   fontSize: "12px",
   letterSpacing: "7px",
-  textAlign: "center",
+  textAlign: "center" as const,
   marginTop: "4px",
 };
 
@@ -286,7 +289,7 @@ const topIcons = {
 const sloganBox = {
   position: "relative",
   zIndex: 3,
-  textAlign: "center",
+  textAlign: "center" as const,
   marginTop: "24px",
 };
 
@@ -297,17 +300,15 @@ const sloganWhite = {
 };
 
 const sloganGold = {
-  fontSize: "28px",
-  lineHeight: 1.05,
-  margin: 0,
+  ...sloganWhite,
   color: "#f4c85d",
 };
 
 const globeSvg = {
-  position: "absolute",
-  left: "-10%",
+  position: "absolute" as const,
+  left: "0",
   bottom: "-38px",
-  width: "120%",
+  width: "100%",
   height: "245px",
 };
 
@@ -390,7 +391,7 @@ const goldButton = {
   color: "#120c02",
   fontWeight: 900,
   textDecoration: "none",
-  textAlign: "center",
+  textAlign: "center" as const,
 };
 
 const darkButton = {
@@ -400,7 +401,7 @@ const darkButton = {
   color: "#fff",
   fontWeight: 900,
   textDecoration: "none",
-  textAlign: "center",
+  textAlign: "center" as const,
   border: "1px solid rgba(255,255,255,.12)",
 };
 
@@ -442,9 +443,7 @@ const dotActive = {
 };
 
 const dot = {
-  width: "9px",
-  height: "9px",
-  borderRadius: "50%",
+  ...dotActive,
   background: "rgba(255,255,255,.25)",
 };
 
@@ -516,7 +515,7 @@ const person = {
 };
 
 const avatar = {
-  position: "relative",
+  position: "relative" as const,
   width: "45px",
   height: "45px",
   borderRadius: "50%",
@@ -527,7 +526,7 @@ const avatar = {
 };
 
 const statusDot = {
-  position: "absolute",
+  position: "absolute" as const,
   right: "0",
   bottom: "2px",
   width: "11px",
@@ -570,7 +569,7 @@ const positiveAmount = {
 };
 
 const nav = {
-  position: "fixed",
+  position: "fixed" as const,
   bottom: "12px",
   left: "50%",
   transform: "translateX(-50%)",
@@ -586,7 +585,7 @@ const nav = {
 };
 
 const navItem = {
-  textAlign: "center",
+  textAlign: "center" as const,
   color: "#aeb8cc",
   textDecoration: "none",
   fontSize: "11px",
