@@ -4,41 +4,10 @@ import Link from "next/link";
 
 export default function Dashboard() {
   return (
-    <main style={page}>
-      <style>{`
-        @keyframes yviPulse {
-          0%, 100% { opacity: .6; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.35); }
-        }
+    <main className="page">
+      <style>{css}</style>
 
-        @keyframes yviLine {
-          0% { stroke-dashoffset: 520; opacity: .25; }
-          50% { opacity: 1; }
-          100% { stroke-dashoffset: 0; opacity: .9; }
-        }
-
-        @keyframes yviFloat {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-6px); }
-        }
-
-        .yvi-line {
-          stroke-dasharray: 520;
-          stroke-dashoffset: 520;
-          animation: yviLine 5s ease-in-out infinite alternate;
-        }
-
-        .yvi-point {
-          transform-origin: center;
-          animation: yviPulse 2.8s ease-in-out infinite;
-        }
-
-        .yvi-globe {
-          animation: yviFloat 6s ease-in-out infinite;
-        }
-      `}</style>
-
-      <section style={app}>
+      <section className="app">
         <Hero />
         <Welcome />
         <Balance />
@@ -53,16 +22,37 @@ export default function Dashboard() {
   );
 }
 
+function Hero() {
+  return (
+    <section className="hero">
+      <img src="/yvi-hero-dashboard.png" alt="YVI PAY globe" className="heroImage" />
+
+      <div className="heroTop">
+        <div className="brand">YVI PAY</div>
+        <div className="icons">
+          <span>🔔</span>
+          <span>◎</span>
+        </div>
+      </div>
+
+      <div className="slogan">
+        <p>Votre argent.</p>
+        <p>Vos proches.</p>
+        <p className="gold">Sans frontières.</p>
+      </div>
+    </section>
+  );
+}
 
 function Welcome() {
   return (
-    <section style={welcome}>
+    <section className="panel welcome">
       <div>
-        <h1 style={welcomeTitle}>Bonjour Nathalie 💗</h1>
-        <p style={muted}>Heureux de vous revoir.</p>
+        <h1>Bonjour Nathalie 💗</h1>
+        <p>Heureux de vous revoir.</p>
       </div>
-      <div style={weather}>
-        <p style={muted}>Mercredi 14 Mai</p>
+      <div className="weather">
+        <p>Mercredi 14 Mai</p>
         <strong>☀️ 16°C</strong>
       </div>
     </section>
@@ -71,15 +61,21 @@ function Welcome() {
 
 function Balance() {
   return (
-    <section style={balance}>
+    <section className="balance">
       <div>
-        <p style={goldLabel}>Solde disponible ◎</p>
-        <h2 style={amount}>3 250,00 €</h2>
-        <p style={positive}>+120,00 € ce mois-ci ↗</p>
+        <p className="label">Solde disponible ◎</p>
+        <h2>3 250,00 €</h2>
+        <p className="positive">+120,00 € ce mois-ci ↗</p>
       </div>
 
-      <svg style={miniChart} viewBox="0 0 180 70">
-        <path d="M5 55 C25 42, 40 45, 55 34 S80 42, 95 25 S120 35, 135 22 S155 34, 175 8" fill="none" stroke="#f4c85d" strokeWidth="4" strokeLinecap="round" />
+      <svg className="chart" viewBox="0 0 180 70">
+        <path
+          d="M5 55 C25 42, 40 45, 55 34 S80 42, 95 25 S120 35, 135 22 S155 34, 175 8"
+          fill="none"
+          stroke="#f4c85d"
+          strokeWidth="4"
+          strokeLinecap="round"
+        />
         <circle cx="175" cy="8" r="5" fill="#fff4c8" />
       </svg>
     </section>
@@ -88,24 +84,25 @@ function Balance() {
 
 function Actions() {
   return (
-    <section style={actions}>
-      <Link href="/envoyer" style={goldButton}>✈ Envoyer</Link>
-      <Link href="/beneficiaires" style={darkButton}>👥 Vos proches</Link>
-      <Link href="/beneficiaires" style={darkButton}>＋ Ajouter</Link>
+    <section className="actions">
+      <Link href="/envoyer" className="goldButton">✈ Envoyer</Link>
+      <Link href="/beneficiaires" className="darkButton">👥 Vos proches</Link>
+      <Link href="/beneficiaires" className="darkButton">＋ Ajouter</Link>
     </section>
   );
 }
+
 function CardBlock() {
   return (
-    <section style={panel}>
-      <h3 style={sectionTitle}>Ma carte YVI PAY</h3>
-      <div style={cardFrame}>
-        <img src="/yvi-card.png" alt="Carte YVI PAY" style={cardImage} />
+    <section className="panel">
+      <h3>Ma carte YVI PAY</h3>
+      <div className="cardFrame">
+        <img src="/yvi-card.png" alt="Carte YVI PAY" />
       </div>
-      <div style={dots}>
-        <span style={dotActive}></span>
-        <span style={dot}></span>
-        <span style={dot}></span>
+      <div className="dots">
+        <span className="dot active"></span>
+        <span className="dot"></span>
+        <span className="dot"></span>
       </div>
     </section>
   );
@@ -113,8 +110,8 @@ function CardBlock() {
 
 function Network() {
   return (
-    <section style={panel}>
-      <h3 style={sectionTitle}>Réseau actif</h3>
+    <section className="panel">
+      <h3>Réseau actif</h3>
       <Country flag="CG" name="Congo-Brazzaville" />
       <Country flag="CD" name="RDC" />
       <Country flag="CM" name="Cameroun" />
@@ -125,23 +122,23 @@ function Network() {
 
 function Country({ flag, name }) {
   return (
-    <div style={country}>
+    <div className="country">
       <strong>{flag}</strong>
       <span>{name}</span>
-      <span style={greenDot}></span>
+      <span className="greenDot"></span>
     </div>
   );
 }
 
 function CloseOnes() {
   return (
-    <section style={panel}>
-      <div style={sectionHeader}>
-        <h3 style={sectionTitle}>Vos proches</h3>
-        <Link href="/beneficiaires" style={seeAll}>Voir tout ›</Link>
+    <section className="panel">
+      <div className="sectionHeader">
+        <h3>Vos proches</h3>
+        <Link href="/beneficiaires">Voir tout ›</Link>
       </div>
 
-      <div style={people}>
+      <div className="people">
         <Person emoji="👨🏾" name="Papa" status="Reçu il y a 2 min" color="#56e58b" />
         <Person emoji="👩🏾" name="Maman" status="Merci 💗" color="#56e58b" />
         <Person emoji="👦🏾" name="Petit frère" status="En attente" color="#f4c85d" />
@@ -153,14 +150,14 @@ function CloseOnes() {
 
 function Person({ emoji, name, status, color }) {
   return (
-    <div style={person}>
-      <div style={avatar}>
+    <div className="person">
+      <div className="avatar">
         {emoji}
-        <span style={{ ...statusDot, background: color }}></span>
+        <span className="statusDot" style={{ background: color }}></span>
       </div>
       <div>
         <strong>{name}</strong>
-        <p style={smallMuted}>{status}</p>
+        <p>{status}</p>
       </div>
     </div>
   );
@@ -168,10 +165,10 @@ function Person({ emoji, name, status, color }) {
 
 function Transfers() {
   return (
-    <section style={panel}>
-      <div style={sectionHeader}>
-        <h3 style={sectionTitle}>Derniers transferts</h3>
-        <Link href="/historique" style={seeAll}>Voir tout ›</Link>
+    <section className="panel">
+      <div className="sectionHeader">
+        <h3>Derniers transferts</h3>
+        <Link href="/historique">Voir tout ›</Link>
       </div>
 
       <Transfer city="Kinshasa, RDC" to="Maman" amount="-250,00 €" date="Aujourd’hui" />
@@ -183,17 +180,17 @@ function Transfers() {
 
 function Transfer({ city, to, amount, date, positive }) {
   return (
-    <div style={transfer}>
-      <div style={transferLeft}>
-        <span style={transferIcon}>{positive ? "↓" : "↗"}</span>
+    <div className="transfer">
+      <div className="transferLeft">
+        <span className="transferIcon">{positive ? "↓" : "↗"}</span>
         <div>
           <strong>{city}</strong>
-          <p style={smallMuted}>{to}</p>
+          <p>{to}</p>
         </div>
       </div>
-      <div style={{ textAlign: "right" }}>
-        <strong style={positive ? positiveAmount : undefined}>{amount}</strong>
-        <p style={smallMuted}>{date}</p>
+      <div className="right">
+        <strong className={positive ? "positiveText" : ""}>{amount}</strong>
+        <p>{date}</p>
       </div>
     </div>
   );
@@ -201,466 +198,334 @@ function Transfer({ city, to, amount, date, positive }) {
 
 function BottomNav() {
   return (
-    <nav style={nav}>
-      <Link href="/dashboard" style={navActive}>⌂<br />Accueil</Link>
-      <Link href="/envoyer" style={navItem}>✈<br />Envoyer</Link>
-      <Link href="/beneficiaires" style={navItem}>👥<br />Vos proches</Link>
-      <Link href="/historique" style={navItem}>⌁<br />Activité</Link>
-      <Link href="/profil" style={navItem}>◎<br />Profil</Link>
+    <nav className="nav">
+      <Link href="/dashboard" className="active">⌂<br />Accueil</Link>
+      <Link href="/envoyer">✈<br />Envoyer</Link>
+      <Link href="/beneficiaires">👥<br />Vos proches</Link>
+      <Link href="/historique">⌁<br />Activité</Link>
+      <Link href="/profil">◎<br />Profil</Link>
     </nav>
   );
 }
-const page = {
-  width: "100%",
-  minHeight: "100vh",
-  display: "flex",
-  justifyContent: "center",
-  background: "radial-gradient(circle at top,#09234f 0%,#020918 48%,#00040d 100%)",
-  color: "#fff",
-};
 
-const app = {
-  width: "100%",
-  maxWidth: "430px",
-  padding: "0 16px 110px",
-};
+const css = `
+.page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background: radial-gradient(circle at top,#09234f 0%,#020918 48%,#00040d 100%);
+  color: white;
+}
 
-const hero = {
-  position: "relative",
-  height: "355px",
-  overflow: "hidden",
-  margin: "0 -16px 18px",
-  padding: "22px 20px",
-  background: "linear-gradient(180deg,#071b3d 0%,#06142d 45%,#020918 100%)",
-};
+.app {
+  width: 100%;
+  max-width: 430px;
+  padding: 0 16px 110px;
+}
 
-const topBar = {
-  position: "relative",
-  zIndex: 3,
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-};
+.hero {
+  position: relative;
+  height: 355px;
+  overflow: hidden;
+  margin: 0 -16px 18px;
+  padding: 30px 22px;
+  background: #020918;
+}
 
-const brand = {
-  color: "#f4c85d",
-  fontSize: "28px",
-  fontWeight: 900,
-  letterSpacing: "7px",
-};
+.heroImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
 
-const topIcons = {
-  display: "flex",
-  gap: "18px",
-  color: "#f4c85d",
-  fontSize: "24px",
-};
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(2,9,24,.05), rgba(2,9,24,.15), #020918 96%);
+  z-index: 2;
+}
 
-const sloganBox = {
-  position: "relative",
-  zIndex: 3,
-  textAlign: "center",
-  marginTop: "44px",
-};
+.heroTop {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-const sloganWhite = {
-  fontSize: "28px",
-  lineHeight: 1.05,
-  margin: 0,
-};
+.brand {
+  color: #f4c85d;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 7px;
+}
 
-const sloganGold = {
-  fontSize: "28px",
-  lineHeight: 1.05,
-  margin: 0,
-  color: "#f4c85d",
-};
+.icons {
+  display: flex;
+  gap: 18px;
+  color: #f4c85d;
+  font-size: 24px;
+}
 
-const globeSvg = {
-  position: "absolute",
-  left: "-6%",
-  bottom: "-42px",
-  width: "112%",
-  height: "285px",
-};
+.slogan {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  margin-top: 46px;
+}
 
-const welcome = {
-  display: "grid",
-  gridTemplateColumns: "1fr auto",
-  gap: "18px",
-  alignItems: "center",
-  padding: "18px",
-  borderRadius: "22px",
-  background: "rgba(255,255,255,.08)",
-  border: "1px solid rgba(255,255,255,.12)",
-  boxShadow: "0 20px 55px rgba(0,0,0,.35)",
-  marginBottom: "14px",
-};
+.slogan p {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.05;
+  font-weight: 700;
+}
 
-const welcomeTitle = {
-  margin: 0,
-  fontSize: "25px",
-};
+.gold, .label, h3, .sectionHeader a {
+  color: #f4c85d;
+}
 
-const muted = {
-  margin: "6px 0 0",
-  color: "#cfd7e8",
-};
-const weather = {
-  borderLeft: "1px solid rgba(255,255,255,.25)",
-  paddingLeft: "18px",
-};
+.panel, .balance {
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  margin-bottom: 14px;
+}
 
-const balance = {
-  display: "grid",
-  gridTemplateColumns: "1fr 150px",
-  gap: "12px",
-  alignItems: "center",
-  padding: "22px",
-  borderRadius: "24px",
-  background: "rgba(255,255,255,.075)",
-  border: "1px solid rgba(255,255,255,.10)",
-  marginBottom: "14px",
-};
+.welcome {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: center;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 20px 55px rgba(0,0,0,.35);
+}
 
-const goldLabel = {
-  margin: 0,
-  color: "#f4c85d",
-  fontWeight: 900,
-};
+.welcome h1 {
+  margin: 0;
+  font-size: 25px;
+}
 
-const amount = {
-  margin: "12px 0",
-  fontSize: "42px",
-  letterSpacing: "-2px",
-};
+.welcome p,
+.weather p,
+.person p,
+.transfer p {
+  margin: 6px 0 0;
+  color: #cfd7e8;
+  font-size: 13px;
+}
 
-const positive = {
-  margin: 0,
-  color: "#37d978",
-  fontWeight: 900,
-  fontSize: "17px",
-};
+.weather {
+  border-left: 1px solid rgba(255,255,255,.25);
+  padding-left: 18px;
+}
 
-const miniChart = {
-  width: "100%",
-  height: "70px",
-};
+.balance {
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  gap: 12px;
+  align-items: center;
+  background: rgba(255,255,255,.075);
+}
 
-const actions = {
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr 1fr",
-  gap: "10px",
-  marginBottom: "14px",
-};
+.balance h2 {
+  margin: 12px 0;
+  font-size: 42px;
+  letter-spacing: -2px;
+}
 
-const goldButton = {
-  padding: "18px 8px",
-  borderRadius: "18px",
-  background: "linear-gradient(180deg,#ffd36c,#c88c22)",
-  color: "#120c02",
-  fontWeight: 900,
-  textDecoration: "none",
-  textAlign: "center",
-};
+.positive,
+.positiveText {
+  color: #37d978;
+  font-weight: 900;
+}
 
-const darkButton = {
-  padding: "18px 8px",
-  borderRadius: "18px",
-  background: "rgba(255,255,255,.07)",
-  color: "#fff",
-  fontWeight: 900,
-  textDecoration: "none",
-  textAlign: "center",
-  border: "1px solid rgba(255,255,255,.12)",
-};
+.chart {
+  width: 100%;
+  height: 70px;
+}
 
-const panel = {
-  padding: "18px",
-  borderRadius: "22px",
-  background: "rgba(255,255,255,.06)",
-  border: "1px solid rgba(255,255,255,.10)",
-  marginBottom: "14px",
-};
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
 
-const cardFrame = {
-  marginTop: "10px",
-  borderRadius: "18px",
-  overflow: "hidden",
-  border: "1px solid rgba(244,200,93,.28)",
-  background: "#020918",
-};
+.goldButton,
+.darkButton {
+  padding: 18px 8px;
+  border-radius: 18px;
+  font-weight: 900;
+  text-align: center;
+}
 
-const cardImage = {
-  width: "100%",
-  display: "block",
-};
+.goldButton {
+  background: linear-gradient(180deg,#ffd36c,#c88c22);
+  color: #120c02;
+}
 
-const dots = {
-  display: "flex",
-  justifyContent: "center",
-  gap: "9px",
-  marginTop: "12px",
-};
+.darkButton {
+  background: rgba(255,255,255,.07);
+  color: white;
+  border: 1px solid rgba(255,255,255,.12);
+}
 
-const dotActive = {
-  width: "9px",
-  height: "9px",
-  borderRadius: "50%",
-  background: "#f4c85d",
-};
+.cardFrame {
+  margin-top: 10px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(244,200,93,.28);
+  background: #020918;
+}
 
-const dot = {
-  width: "9px",
-  height: "9px",
-  borderRadius: "50%",
-  background: "rgba(255,255,255,.25)",
-};
-const country = {
-  display: "grid",
-  gridTemplateColumns: "34px 1fr auto",
-  alignItems: "center",
-  padding: "10px 0",
-  borderBottom: "1px solid rgba(255,255,255,.08)",
-};
+.cardFrame img {
+  width: 100%;
+  display: block;
+}
 
-const greenDot = {
-  width: "10px",
-  height: "10px",
-  borderRadius: "50%",
-  background: "#37d978",
-};
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 12px;
+}
 
-const sectionHeader = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  marginBottom: "12px",
-};
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.25);
+}
 
-const sectionTitle = {
-  margin: 0,
-  color: "#f4c85d",
-  fontSize: "18px",
-};
+.dot.active {
+  background: #f4c85d;
+}
 
-const seeAll = {
-  color: "#f4c85d",
-  textDecoration: "none",
-  fontWeight: 800,
-};
+.country {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
 
-const people = {
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
-  gap: "10px",
-};
+.greenDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #37d978;
+}
 
-const person = {
-  display: "grid",
-  gridTemplateColumns: "45px 1fr",
-  gap: "10px",
-  alignItems: "center",
-  padding: "10px",
-  borderRadius: "16px",
-  background: "rgba(255,255,255,.05)",
-  border: "1px solid rgba(255,255,255,.08)",
-};
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
 
-const avatar = {
-  position: "relative",
-  width: "45px",
-  height: "45px",
-  borderRadius: "50%",
-  display: "grid",
-  placeItems: "center",
-  background: "rgba(244,200,93,.16)",
-  fontSize: "24px",
-};
+h3 {
+  margin: 0;
+  font-size: 18px;
+}
 
-const statusDot = {
-  position: "absolute",
-  right: "0",
-  bottom: "2px",
-  width: "11px",
-  height: "11px",
-  borderRadius: "50%",
-  border: "2px solid #020918",
-};
+.people {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
 
-const smallMuted = {
-  margin: "3px 0 0",
-  color: "#aeb8cc",
-  fontSize: "12px",
-};
+.person {
+  display: grid;
+  grid-template-columns: 45px 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+}
 
-const transfer = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: "12px 0",
-  borderBottom: "1px solid rgba(255,255,255,.08)",
-};
+.avatar {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(244,200,93,.16);
+  font-size: 24px;
+}
 
-const transferLeft = {
-  display: "flex",
-  gap: "12px",
-  alignItems: "center",
-};
+.statusDot {
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid #020918;
+}
 
-const transferIcon = {
-  width: "38px",
-  height: "38px",
-  borderRadius: "50%",
-  display: "grid",
-  placeItems: "center",
-  background: "rgba(255,255,255,.08)",
-};
+.transfer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
 
-const positiveAmount = {
-  color: "#37d978",
-};
+.transferLeft {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
 
-const nav = {
-  position: "fixed",
-  bottom: "12px",
-  left: "50%",
-  transform: "translateX(-50%)",
-  width: "min(410px,92vw)",
-  display: "grid",
-  gridTemplateColumns: "repeat(5,1fr)",
-  gap: "4px",
-  padding: "12px",
-  borderRadius: "22px",
-  background: "rgba(5,14,31,.96)",
-  border: "1px solid rgba(255,255,255,.12)",
-  zIndex: 10,
-};
+.transferIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,.08);
+}
 
-const navItem = {
-  textAlign: "center",
-  color: "#aeb8cc",
-  textDecoration: "none",
-  fontSize: "11px",
-  lineHeight: 1.4,
-};
+.right {
+  text-align: right;
+}
 
-const navActive = {
-  ...navItem,
-  color: "#f4c85d",
-  fontWeight: 900,
-};
+.nav {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(410px,92vw);
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: 4px;
+  padding: 12px;
+  border-radius: 22px;
+  background: rgba(5,14,31,.96);
+  border: 1px solid rgba(255,255,255,.12);
+  z-index: 10;
+}
 
-const greenDot = {
-  width: "10px",
-  height: "10px",
-  borderRadius: "50%",
-  background: "#37d978",
-};
+.nav a {
+  text-align: center;
+  color: #aeb8cc;
+  font-size: 11px;
+  line-height: 1.4;
+}
 
-const sectionHeader = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  marginBottom: "12px",
-};
-
-const sectionTitle = {
-  margin: 0,
-  color: "#f4c85d",
-  fontSize: "18px",
-};
-
-const seeAll = {
-  color: "#f4c85d",
-  textDecoration: "none",
-  fontWeight: 800,
-};
-
-const people = {
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
-  gap: "10px",
-};
-
-const person = {
-  display: "grid",
-  gridTemplateColumns: "45px 1fr",
-  gap: "10px",
-  alignItems: "center",
-  padding: "10px",
-  borderRadius: "16px",
-  background: "rgba(255,255,255,.05)",
-  border: "1px solid rgba(255,255,255,.08)",
-};
-
-const avatar = {
-  position: "relative",
-  width: "45px",
-  height: "45px",
-  borderRadius: "50%",
-  display: "grid",
-  placeItems: "center",
-  background: "rgba(244,200,93,.16)",
-  fontSize: "24px",
-};
-
-const statusDot = {
-  position: "absolute",
-  right: "0",
-  bottom: "2px",
-  width: "11px",
-  height: "11px",
-  borderRadius: "50%",
-  border: "2px solid #020918",
-};
-
-const smallMuted = {
-  margin: "3px 0 0",
-  color: "#aeb8cc",
-  fontSize: "12px",
-};
-
-const transfer = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: "12px 0",
-  borderBottom: "1px solid rgba(255,255,255,.08)",
-};
-
-const transferLeft = {
-  display: "flex",
-  gap: "12px",
-  alignItems: "center",
-};
-
-const transferIcon = {
-  width: "38px",
-  height: "38px",
-  borderRadius: "50%",
-  display: "grid",
-  placeItems: "center",
-  background: "rgba(255,255,255,.08)",
-};
-
-const positiveAmount = {
-  color: "#37d978",
-};
-
-const nav = {
-  position: "fixed",
-  bottom: "12px",
-  left: "50%",
-  transform: "translateX(-50%)",
-  width: "min(410px,92vw)",
-  display: "grid",
-  gridTemplateColumns: "repeat(5,1fr)",
-  gap: "4px",
-  padding: "12px",
-  borderRadius: "22px",
-  background: "rgba(5,14,31,.96)",
-  border: "1px solid rgba(255,255,255,.12)",
-  zIndex: 10,
-};
-
+.nav a.active {
+  color: #f4c85d;
+  font-weight: 900;
+}
+`;
