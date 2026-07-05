@@ -112,10 +112,10 @@ function Network() {
   return (
     <section className="panel">
       <h3>Réseau actif</h3>
-      <Country flag="/flags/cg.png" name="Congo-Brazzaville" />
-      <Country flag="/flags/cd.png" name="RDC" />
-      <Country flag="/flags/cm.png" name="Cameroun" />
-      <Country flag="/flags/ci.png" name="Côte d’Ivoire" />
+     <Country flag="🇨🇬" name="Congo-Brazzaville" />
+<Country flag="🇨🇩" name="RDC" />
+<Country flag="🇨🇲" name="Cameroun" />
+<Country flag="🇨🇮" name="Côte d’Ivoire" />
     </section>
   );
 }
