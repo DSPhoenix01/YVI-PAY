@@ -112,10 +112,10 @@ function Network() {
   return (
     <section className="panel">
       <h3>Réseau actif</h3>
-      <Country flag="🇨🇬" name="Congo-Brazzaville" />
-<Country flag="🇨🇩" name="RDC" />
-<Country flag="🇨🇲" name="Cameroun" />
-<Country flag="🇨🇮" name="Côte d’Ivoire" />
+      <Country flag="/flags/cg.png" name="Congo-Brazzaville" />
+      <Country flag="/flags/cd.png" name="RDC" />
+      <Country flag="/flags/cm.png" name="Cameroun" />
+      <Country flag="/flags/ci.png" name="Côte d’Ivoire" />
     </section>
   );
 }
@@ -123,7 +123,7 @@ function Network() {
 function Country({ flag, name }) {
   return (
     <div className="country">
-     <span style={{ fontSize: "22px" }}>{flag}</span>
+      <img src={flag} alt={name} style={{ width: "26px", borderRadius: "4px" }} />
       <span>{name}</span>
       <span className="greenDot"></span>
     </div>
