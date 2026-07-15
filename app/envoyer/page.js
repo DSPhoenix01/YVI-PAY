@@ -2,46 +2,50 @@
 
 import { useState } from "react";
 
-function FranceFlag({ className = "" }) {
+function FranceFlag({ width = 30, height = 20 }) {
   return (
     <svg
-      className={className}
       viewBox="0 0 3 2"
-      role="img"
+      width={width}
+      height={height}
       aria-label="Drapeau de la France"
+      style={{
+        display: "block",
+        flexShrink: 0,
+        borderRadius: "3px",
+        boxShadow: "0 3px 10px rgba(0,0,0,.35)",
+      }}
     >
-      <rect width="1" height="2" x="0" fill="#002395" />
-      <rect width="1" height="2" x="1" fill="#ffffff" />
-      <rect width="1" height="2" x="2" fill="#ed2939" />
+      <rect x="0" y="0" width="1" height="2" fill="#002395" />
+      <rect x="1" y="0" width="1" height="2" fill="#ffffff" />
+      <rect x="2" y="0" width="1" height="2" fill="#ed2939" />
     </svg>
   );
 }
 
-function CongoFlag({ className = "" }) {
+function CongoFlag({ width = 30, height = 20 }) {
   return (
     <svg
-      className={className}
       viewBox="0 0 3 2"
-      role="img"
+      width={width}
+      height={height}
       aria-label="Drapeau de la République du Congo"
+      style={{
+        display: "block",
+        flexShrink: 0,
+        borderRadius: "3px",
+        boxShadow: "0 3px 10px rgba(0,0,0,.35)",
+      }}
     >
-      <defs>
-        <clipPath id="congoClip">
-          <rect width="3" height="2" rx="0.08" />
-        </clipPath>
-      </defs>
-
-      <g clipPath="url(#congoClip)">
-        <rect width="3" height="2" fill="#009543" />
-        <polygon
-          points="0.65,2 1.35,2 2.35,0 1.65,0"
-          fill="#fbde4a"
-        />
-        <polygon
-          points="1.35,2 3,2 3,0 2.35,0"
-          fill="#dc241f"
-        />
-      </g>
+      <rect x="0" y="0" width="3" height="2" fill="#009543" />
+      <polygon
+        points="0.65,2 1.35,2 2.35,0 1.65,0"
+        fill="#fbde4a"
+      />
+      <polygon
+        points="1.35,2 3,2 3,0 2.35,0"
+        fill="#dc241f"
+      />
     </svg>
   );
 }
@@ -84,12 +88,8 @@ export default function EnvoyerPage() {
       <section className="send-shell">
         <header className="top-line">
           <div>
-            <span className="eyebrow">
-              TRANSFERT INTERNATIONAL
-            </span>
-
+            <span className="eyebrow">TRANSFERT INTERNATIONAL</span>
             <h1>Envoyer de l’argent</h1>
-
             <p className="intro">
               De Paris vers vos proches, en toute simplicité.
             </p>
@@ -105,66 +105,50 @@ export default function EnvoyerPage() {
           <section className="transfer-panel">
             <div className="route-title">
               <div>
-                <span className="section-label">
-                  VOTRE TRANSFERT
-                </span>
-
+                <span className="section-label">VOTRE TRANSFERT</span>
                 <h2>Paris vers Brazzaville</h2>
               </div>
 
-              <span className="instant-badge">
-                Instantané
-              </span>
+              <span className="instant-badge">Instantané</span>
             </div>
 
             <div className="route-card">
               <div className="country-block">
                 <div className="flag-circle">
-                  <FranceFlag className="flag-image" />
+                  <FranceFlag width={31} height={21} />
                 </div>
 
-                <div>
-                  <span className="country-caption">
-                    Départ
-                  </span>
-
+                <div className="country-text">
+                  <span>Départ</span>
                   <strong>Paris</strong>
                   <small>France</small>
                 </div>
               </div>
 
               <div className="route-visual">
-                <span className="route-point route-point-left" />
-
+                <span className="route-point left" />
                 <span className="route-line">
                   <span className="route-light" />
                 </span>
-
-                <span className="route-plane">✦</span>
-
-                <span className="route-point route-point-right" />
+                <span className="route-star">✦</span>
+                <span className="route-point right" />
               </div>
 
               <div className="country-block destination">
-                <div>
-                  <span className="country-caption">
-                    Destination
-                  </span>
-
+                <div className="country-text">
+                  <span>Destination</span>
                   <strong>Brazzaville</strong>
                   <small>Congo</small>
                 </div>
 
                 <div className="flag-circle">
-                  <CongoFlag className="flag-image" />
+                  <CongoFlag width={31} height={21} />
                 </div>
               </div>
             </div>
 
             <div className="amount-section">
-              <label htmlFor="amount">
-                Vous envoyez
-              </label>
+              <label htmlFor="amount">Vous envoyez</label>
 
               <div className="amount-box">
                 <input
@@ -183,13 +167,9 @@ export default function EnvoyerPage() {
                 />
 
                 <div className="currency-select">
-                  <FranceFlag className="currency-flag" />
-
+                  <FranceFlag width={25} height={17} />
                   <strong>EUR</strong>
-
-                  <span className="currency-arrow">
-                    ⌄
-                  </span>
+                  <span>⌄</span>
                 </div>
               </div>
             </div>
@@ -197,46 +177,26 @@ export default function EnvoyerPage() {
             <div className="conversion-row">
               <div>
                 <span>Votre proche reçoit</span>
-
-                <strong>
-                  {formatNumber(received)} FCFA
-                </strong>
+                <strong>{formatNumber(received)} FCFA</strong>
               </div>
 
               <div className="exchange-info">
                 <span>1 EUR</span>
-
-                <span className="exchange-dash">
-                  =
-                </span>
-
-                <span>
-                  {rate.toFixed(3)} FCFA
-                </span>
+                <span>=</span>
+                <span>{rate.toFixed(3)} FCFA</span>
               </div>
             </div>
 
             <div className="beneficiary-card">
-              <div className="beneficiary-avatar">
-                ME
-              </div>
+              <div className="beneficiary-avatar">ME</div>
 
               <div className="beneficiary-info">
                 <span>Bénéficiaire</span>
-
-                <strong>
-                  Marie-Espérance
-                </strong>
-
-                <small>
-                  Mobile Money • Brazzaville
-                </small>
+                <strong>Marie-Espérance</strong>
+                <small>Mobile Money • Brazzaville</small>
               </div>
 
-              <button
-                type="button"
-                className="change-button"
-              >
+              <button type="button" className="change-button">
                 Modifier
               </button>
             </div>
@@ -244,89 +204,57 @@ export default function EnvoyerPage() {
             <div className="summary">
               <div>
                 <span>Montant envoyé</span>
-
-                <strong>
-                  {numericAmount.toFixed(2)} €
-                </strong>
+                <strong>{numericAmount.toFixed(2)} €</strong>
               </div>
 
               <div>
                 <span>Frais YVI PAY</span>
-
-                <strong>
-                  {fees.toFixed(2)} €
-                </strong>
+                <strong>{fees.toFixed(2)} €</strong>
               </div>
 
               <div className="summary-total">
                 <span>Total</span>
-
-                <strong>
-                  {(numericAmount + fees).toFixed(2)} €
-                </strong>
+                <strong>{(numericAmount + fees).toFixed(2)} €</strong>
               </div>
             </div>
 
             <button
               type="button"
               className={`transfer-button ${status}`}
-              onClick={
-                status === "success"
-                  ? resetTransfer
-                  : startTransfer
-              }
-              disabled={
-                numericAmount <= 0 ||
-                status === "loading"
-              }
+              onClick={status === "success" ? resetTransfer : startTransfer}
+              disabled={numericAmount <= 0 || status === "loading"}
             >
               {status === "ready" && (
                 <>
-                  <span>
-                    Confirmer le transfert
-                  </span>
-
-                  <span className="button-arrow">
-                    →
-                  </span>
+                  <span>Confirmer le transfert</span>
+                  <span>→</span>
                 </>
               )}
 
               {status === "loading" && (
                 <>
-                  <span className="button-loader" />
-
-                  <span>
-                    Transfert en cours…
-                  </span>
+                  <span className="loader" />
+                  <span>Transfert en cours…</span>
                 </>
               )}
 
               {status === "success" && (
                 <>
-                  <span className="success-check">
-                    ✓
-                  </span>
-
-                  <span>
-                    Transfert envoyé avec succès
-                  </span>
+                  <span className="success-check">✓</span>
+                  <span>Transfert envoyé avec succès</span>
                 </>
               )}
             </button>
 
             <p className="security-note">
               <span>◆</span>
-
               Vos données sont protégées par un chiffrement sécurisé.
             </p>
           </section>
 
           <aside className="visual-panel">
             <div className="visual-top">
-              <span className="section-label">
-                YVI PAY SIGNATURE
-              </span>
+              <span className="section-label">YVI PAY SIGNATURE</span>
 
               <span className="live-status">
                 <span />
@@ -335,12 +263,12 @@ export default function EnvoyerPage() {
             </div>
 
             <div className="globe-stage">
-              <div className="globe-halo globe-halo-one" />
-              <div className="globe-halo globe-halo-two" />
+              <div className="halo halo-one" />
+              <div className="halo halo-two" />
 
               <div className="globe">
-                <div className="globe-grid globe-grid-one" />
-                <div className="globe-grid globe-grid-two" />
+                <div className="globe-grid grid-one" />
+                <div className="globe-grid grid-two" />
 
                 <div className="continent continent-one" />
                 <div className="continent continent-two" />
@@ -350,12 +278,12 @@ export default function EnvoyerPage() {
                 <span className="city-dot brazza-dot" />
 
                 <div className="globe-route">
-                  <span className="globe-route-light" />
+                  <span />
                 </div>
               </div>
 
               <div className="floating-city paris-label">
-                <FranceFlag className="floating-flag" />
+                <FranceFlag width={30} height={20} />
 
                 <div>
                   <small>Départ</small>
@@ -364,7 +292,7 @@ export default function EnvoyerPage() {
               </div>
 
               <div className="floating-city brazza-label">
-                <CongoFlag className="floating-flag" />
+                <CongoFlag width={30} height={20} />
 
                 <div>
                   <small>Arrivée</small>
@@ -375,7 +303,7 @@ export default function EnvoyerPage() {
 
             <div className="signature-route">
               <div className="signature-city">
-                <FranceFlag className="signature-flag" />
+                <FranceFlag width={30} height={20} />
 
                 <div>
                   <small>France</small>
@@ -384,16 +312,16 @@ export default function EnvoyerPage() {
               </div>
 
               <div className="signature-line">
-                <span className="signature-traveller" />
+                <span />
               </div>
 
-              <div className="signature-city right">
+              <div className="signature-city right-city">
                 <div>
                   <small>Congo</small>
                   <strong>Brazzaville</strong>
                 </div>
 
-                <CongoFlag className="signature-flag" />
+                <CongoFlag width={30} height={20} />
               </div>
             </div>
 
@@ -422,17 +350,13 @@ export default function EnvoyerPage() {
                 ×
               </button>
 
-              <div className="confirmation-icon">
-                <span>✓</span>
-              </div>
+              <div className="confirmation-icon">✓</div>
 
               <span className="confirmation-eyebrow">
                 TRANSFERT CONFIRMÉ
               </span>
 
-              <h2>
-                Votre argent est en route.
-              </h2>
+              <h2>Votre argent est en route.</h2>
 
               <p>
                 Marie-Espérance recevra son transfert directement sur son
@@ -441,7 +365,7 @@ export default function EnvoyerPage() {
 
               <div className="confirmation-route">
                 <div>
-                  <FranceFlag className="confirmation-flag" />
+                  <FranceFlag width={36} height={24} />
                   <small>Paris</small>
                 </div>
 
@@ -452,7 +376,7 @@ export default function EnvoyerPage() {
                 </div>
 
                 <div>
-                  <CongoFlag className="confirmation-flag" />
+                  <CongoFlag width={36} height={24} />
                   <small>Brazzaville</small>
                 </div>
               </div>
@@ -460,26 +384,17 @@ export default function EnvoyerPage() {
               <div className="confirmation-details">
                 <div>
                   <span>Montant envoyé</span>
-
-                  <strong>
-                    {numericAmount.toFixed(2)} €
-                  </strong>
+                  <strong>{numericAmount.toFixed(2)} €</strong>
                 </div>
 
                 <div>
                   <span>Montant reçu</span>
-
-                  <strong>
-                    {formatNumber(received)} FCFA
-                  </strong>
+                  <strong>{formatNumber(received)} FCFA</strong>
                 </div>
 
                 <div>
                   <span>Référence</span>
-
-                  <strong>
-                    YVI-{new Date().getFullYear()}-0725
-                  </strong>
+                  <strong>YVI-{new Date().getFullYear()}-0725</strong>
                 </div>
               </div>
 
@@ -491,9 +406,7 @@ export default function EnvoyerPage() {
                 Terminer
               </button>
 
-              <span className="confirmation-brand">
-                YVI PAY
-              </span>
+              <span className="confirmation-brand">YVI PAY</span>
             </div>
           </div>
         )}
@@ -530,12 +443,7 @@ export default function EnvoyerPage() {
               rgba(194, 149, 65, 0.12),
               transparent 28%
             ),
-            linear-gradient(
-              145deg,
-              #020711 0%,
-              #07101e 48%,
-              #02050b 100%
-            );
+            linear-gradient(145deg, #020711, #07101e 48%, #02050b);
           isolation: isolate;
         }
 
@@ -629,9 +537,7 @@ export default function EnvoyerPage() {
 
         .main-grid {
           display: grid;
-          grid-template-columns:
-            minmax(0, 1.04fr)
-            minmax(390px, 0.96fr);
+          grid-template-columns: minmax(0, 1.04fr) minmax(390px, 0.96fr);
           gap: 24px;
         }
 
@@ -671,6 +577,7 @@ export default function EnvoyerPage() {
         }
 
         .instant-badge {
+          height: max-content;
           padding: 8px 12px;
           border: 1px solid rgba(216, 183, 113, 0.2);
           border-radius: 999px;
@@ -682,10 +589,7 @@ export default function EnvoyerPage() {
 
         .route-card {
           display: grid;
-          grid-template-columns:
-            1fr
-            minmax(100px, 0.8fr)
-            1fr;
+          grid-template-columns: 1fr minmax(100px, 0.8fr) 1fr;
           align-items: center;
           gap: 18px;
           margin-bottom: 27px;
@@ -702,43 +606,35 @@ export default function EnvoyerPage() {
           min-width: 0;
         }
 
-        .country-block.destination {
+        .destination {
           justify-content: flex-end;
           text-align: right;
         }
 
         .flag-circle {
           display: grid;
-          flex: 0 0 auto;
+          flex: 0 0 45px;
           width: 45px;
           height: 45px;
           place-items: center;
-          overflow: hidden;
           border: 1px solid rgba(255, 255, 255, 0.12);
           border-radius: 50%;
           background: rgba(255, 255, 255, 0.04);
         }
 
-        .flag-image {
-          width: 31px;
-          height: 21px;
-          border-radius: 3px;
-          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
-        }
-
-        .country-block div:not(.flag-circle) {
+        .country-text {
           display: flex;
           min-width: 0;
           flex-direction: column;
         }
 
-        .country-caption,
-        .country-block small {
+        .country-text span,
+        .country-text small {
           color: #747f91;
           font-size: 0.7rem;
         }
 
-        .country-block strong {
+        .country-text strong {
           margin: 2px 0;
           color: #f5f0e5;
           font-size: 0.91rem;
@@ -763,20 +659,16 @@ export default function EnvoyerPage() {
           );
         }
 
-        .route-light,
-        .signature-traveller {
+        .route-light {
           position: absolute;
+          top: -1px;
           left: -30%;
           width: 34%;
+          height: 3px;
           border-radius: 999px;
           background: #f5d592;
           box-shadow: 0 0 13px #e8bd6e;
           animation: travel 2.5s linear infinite;
-        }
-
-        .route-light {
-          top: -1px;
-          height: 3px;
         }
 
         .route-point {
@@ -790,15 +682,15 @@ export default function EnvoyerPage() {
           box-shadow: 0 0 11px rgba(233, 196, 119, 0.9);
         }
 
-        .route-point-left {
+        .route-point.left {
           left: -1px;
         }
 
-        .route-point-right {
+        .route-point.right {
           right: -1px;
         }
 
-        .route-plane {
+        .route-star {
           position: absolute;
           left: 50%;
           color: #f3d491;
@@ -847,13 +739,7 @@ export default function EnvoyerPage() {
           font-size: 0.82rem;
         }
 
-        .currency-flag {
-          width: 25px;
-          height: 17px;
-          border-radius: 3px;
-        }
-
-        .currency-arrow {
+        .currency-select span {
           margin-left: auto;
           color: #8c96a6;
         }
@@ -1006,7 +892,7 @@ export default function EnvoyerPage() {
           );
         }
 
-        .button-loader {
+        .loader {
           width: 17px;
           height: 17px;
           border: 2px solid rgba(233, 201, 133, 0.25);
@@ -1097,9 +983,9 @@ export default function EnvoyerPage() {
             ),
             radial-gradient(
               circle at 50% 50%,
-              #0c213b 0%,
+              #0c213b,
               #071526 53%,
-              #020814 100%
+              #020814
             );
           box-shadow:
             0 0 70px rgba(36, 90, 148, 0.28),
@@ -1114,7 +1000,7 @@ export default function EnvoyerPage() {
           opacity: 0.36;
         }
 
-        .globe-grid-one {
+        .grid-one {
           background: repeating-linear-gradient(
             0deg,
             transparent 0,
@@ -1124,7 +1010,7 @@ export default function EnvoyerPage() {
           );
         }
 
-        .globe-grid-two {
+        .grid-two {
           background: repeating-linear-gradient(
             90deg,
             transparent 0,
@@ -1150,9 +1036,7 @@ export default function EnvoyerPage() {
           left: 28%;
           width: 72px;
           height: 107px;
-          border-radius:
-            48% 40% 52% 37% /
-            30% 48% 49% 64%;
+          border-radius: 48% 40% 52% 37% / 30% 48% 49% 64%;
         }
 
         .continent-two {
@@ -1160,9 +1044,7 @@ export default function EnvoyerPage() {
           left: 49%;
           width: 101px;
           height: 149px;
-          border-radius:
-            45% 56% 42% 57% /
-            38% 37% 63% 61%;
+          border-radius: 45% 56% 42% 57% / 38% 37% 63% 61%;
           transform: rotate(12deg);
         }
 
@@ -1171,9 +1053,7 @@ export default function EnvoyerPage() {
           right: 14%;
           width: 73px;
           height: 66px;
-          border-radius:
-            57% 44% 53% 35% /
-            47% 39% 62% 51%;
+          border-radius: 57% 44% 53% 35% / 47% 39% 62% 51%;
         }
 
         .city-dot {
@@ -1211,7 +1091,7 @@ export default function EnvoyerPage() {
           transform: rotate(19deg);
         }
 
-        .globe-route-light {
+        .globe-route span {
           position: absolute;
           top: -3px;
           left: -20%;
@@ -1223,20 +1103,20 @@ export default function EnvoyerPage() {
           animation: globeTravel 2.7s ease-in-out infinite;
         }
 
-        .globe-halo {
+        .halo {
           position: absolute;
           z-index: 1;
           border: 1px solid rgba(201, 163, 91, 0.11);
           border-radius: 50%;
         }
 
-        .globe-halo-one {
+        .halo-one {
           width: min(390px, 89vw);
           aspect-ratio: 1;
           animation: haloSpin 18s linear infinite;
         }
 
-        .globe-halo-two {
+        .halo-two {
           width: min(445px, 98vw);
           aspect-ratio: 1;
           border-style: dashed;
@@ -1253,12 +1133,6 @@ export default function EnvoyerPage() {
           border: 1px solid rgba(255, 255, 255, 0.07);
           border-radius: 13px;
           background: rgba(3, 10, 19, 0.78);
-        }
-
-        .floating-flag {
-          width: 30px;
-          height: 20px;
-          border-radius: 3px;
         }
 
         .floating-city div {
@@ -1288,10 +1162,7 @@ export default function EnvoyerPage() {
 
         .signature-route {
           display: grid;
-          grid-template-columns:
-            auto
-            1fr
-            auto;
+          grid-template-columns: auto 1fr auto;
           align-items: center;
           gap: 16px;
           padding: 17px 18px;
@@ -1306,7 +1177,7 @@ export default function EnvoyerPage() {
           gap: 9px;
         }
 
-        .signature-city.right {
+        .right-city {
           text-align: right;
         }
 
@@ -1325,12 +1196,6 @@ export default function EnvoyerPage() {
           font-size: 0.72rem;
         }
 
-        .signature-flag {
-          width: 30px;
-          height: 20px;
-          border-radius: 3px;
-        }
-
         .signature-line {
           position: relative;
           height: 1px;
@@ -1343,9 +1208,16 @@ export default function EnvoyerPage() {
           );
         }
 
-        .signature-traveller {
+        .signature-line span {
+          position: absolute;
           top: -2px;
+          left: -30%;
+          width: 34%;
           height: 5px;
+          border-radius: 999px;
+          background: #f5d592;
+          box-shadow: 0 0 13px #e8bd6e;
+          animation: travel 2.5s linear infinite;
         }
 
         .visual-stats {
@@ -1391,11 +1263,7 @@ export default function EnvoyerPage() {
           padding: 43px 35px 29px;
           border: 1px solid rgba(224, 190, 123, 0.26);
           border-radius: 29px;
-          background: linear-gradient(
-            155deg,
-            #0c1726 0%,
-            #030913 100%
-          );
+          background: linear-gradient(155deg, #0c1726, #030913);
           text-align: center;
         }
 
@@ -1421,6 +1289,7 @@ export default function EnvoyerPage() {
           border: 1px solid rgba(229, 196, 128, 0.52);
           border-radius: 50%;
           color: #ebce91;
+          font-size: 1.4rem;
         }
 
         .confirmation-eyebrow {
@@ -1449,10 +1318,7 @@ export default function EnvoyerPage() {
 
         .confirmation-route {
           display: grid;
-          grid-template-columns:
-            auto
-            1fr
-            auto;
+          grid-template-columns: auto 1fr auto;
           align-items: center;
           gap: 15px;
           margin-bottom: 20px;
@@ -1462,17 +1328,16 @@ export default function EnvoyerPage() {
           background: rgba(0, 5, 12, 0.48);
         }
 
-        .confirmation-route
-          > div:not(.confirmation-journey) {
+        .confirmation-route > div:not(.confirmation-journey) {
           display: flex;
+          align-items: center;
           flex-direction: column;
           gap: 5px;
         }
 
-        .confirmation-flag {
-          width: 36px;
-          height: 24px;
-          border-radius: 3px;
+        .confirmation-route small {
+          color: #aab4c2;
+          font-size: 0.65rem;
         }
 
         .confirmation-journey {
@@ -1500,8 +1365,7 @@ export default function EnvoyerPage() {
           display: flex;
           justify-content: space-between;
           padding: 12px 15px;
-          border-bottom:
-            1px solid rgba(255, 255, 255, 0.045);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.045);
         }
 
         .confirmation-details > div:last-child {
@@ -1632,15 +1496,15 @@ export default function EnvoyerPage() {
             grid-template-columns: 1fr;
           }
 
-          .country-block.destination {
+          .destination {
             justify-content: flex-start;
             flex-direction: row-reverse;
             text-align: left;
           }
 
           .conversion-row {
-            flex-direction: column;
             align-items: flex-start;
+            flex-direction: column;
           }
 
           .visual-stats {
