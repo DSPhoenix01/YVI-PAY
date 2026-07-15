@@ -52,52 +52,59 @@ function CongoFlag({ width = 30, height = 20 }) {
 
 function PremiumGlobe() {
   return (
-    <div className="real-globe">
+    <div
+      style={{
+        position: "relative",
+        zIndex: 2,
+        width: "350px",
+        maxWidth: "76vw",
+        aspectRatio: "1",
+        filter:
+          "drop-shadow(0 0 34px rgba(40, 96, 154, 0.35)) drop-shadow(0 0 18px rgba(214, 174, 97, 0.14))",
+        animation: "globeFloat 5.5s ease-in-out infinite",
+      }}
+    >
       <svg
-        className="earth-svg"
         viewBox="0 0 400 400"
         role="img"
         aria-label="Globe terrestre montrant l’Europe et l’Afrique"
+        style={{
+          display: "block",
+          width: "100%",
+          height: "100%",
+        }}
       >
         <defs>
-          <radialGradient id="oceanGradient" cx="32%" cy="27%" r="76%">
-            <stop offset="0%" stopColor="#173d68" />
-            <stop offset="47%" stopColor="#0a2544" />
+          <radialGradient id="ocean" cx="32%" cy="25%" r="78%">
+            <stop offset="0%" stopColor="#1d4e7d" />
+            <stop offset="48%" stopColor="#0a294c" />
             <stop offset="100%" stopColor="#020916" />
           </radialGradient>
 
-          <linearGradient id="landGradient" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#7099ba" stopOpacity="0.88" />
-            <stop offset="55%" stopColor="#345f83" stopOpacity="0.78" />
-            <stop offset="100%" stopColor="#183a59" stopOpacity="0.7" />
+          <linearGradient id="land" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#8aacc5" />
+            <stop offset="55%" stopColor="#436f91" />
+            <stop offset="100%" stopColor="#244966" />
           </linearGradient>
 
-          <linearGradient id="goldRoute" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#9b6c27" />
-            <stop offset="50%" stopColor="#f1cf83" />
+          <linearGradient id="routeGold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#b17a2e" />
+            <stop offset="50%" stopColor="#f7d88f" />
             <stop offset="100%" stopColor="#b77d2d" />
           </linearGradient>
 
-          <radialGradient id="earthLight" cx="28%" cy="22%" r="72%">
-            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.18" />
-            <stop offset="35%" stopColor="#ffffff" stopOpacity="0.04" />
+          <radialGradient id="shine" cx="30%" cy="24%" r="75%">
+            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.2" />
+            <stop offset="38%" stopColor="#ffffff" stopOpacity="0.04" />
             <stop offset="100%" stopColor="#000000" stopOpacity="0.42" />
           </radialGradient>
 
-          <clipPath id="earthClip">
+          <clipPath id="earthCircle">
             <circle cx="200" cy="200" r="174" />
           </clipPath>
 
-          <filter id="softGlow">
+          <filter id="glow">
             <feGaussianBlur stdDeviation="4" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-
-          <filter id="pointGlow">
-            <feGaussianBlur stdDeviation="3.5" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
@@ -109,274 +116,211 @@ function PremiumGlobe() {
           cx="200"
           cy="200"
           r="174"
-          fill="url(#oceanGradient)"
-          stroke="rgba(225,190,120,.42)"
-          strokeWidth="1.5"
+          fill="url(#ocean)"
+          stroke="#d9b36b"
+          strokeOpacity="0.55"
+          strokeWidth="2"
         />
 
-        <g clipPath="url(#earthClip)">
-          <g className="latitude-lines">
-            <ellipse
-              cx="200"
-              cy="200"
-              rx="171"
-              ry="49"
-              fill="none"
-              stroke="#9bc0de"
-              strokeOpacity="0.14"
-            />
-            <ellipse
-              cx="200"
-              cy="146"
-              rx="158"
-              ry="36"
-              fill="none"
-              stroke="#9bc0de"
-              strokeOpacity="0.11"
-            />
-            <ellipse
-              cx="200"
-              cy="254"
-              rx="158"
-              ry="36"
-              fill="none"
-              stroke="#9bc0de"
-              strokeOpacity="0.11"
-            />
-            <ellipse
-              cx="200"
-              cy="99"
-              rx="119"
-              ry="21"
-              fill="none"
-              stroke="#9bc0de"
-              strokeOpacity="0.09"
-            />
-            <ellipse
-              cx="200"
-              cy="301"
-              rx="119"
-              ry="21"
-              fill="none"
-              stroke="#9bc0de"
-              strokeOpacity="0.09"
-            />
-          </g>
+        <g clipPath="url(#earthCircle)">
+          <ellipse
+            cx="200"
+            cy="200"
+            rx="170"
+            ry="50"
+            fill="none"
+            stroke="#a8c7dd"
+            strokeOpacity="0.18"
+          />
 
-          <g className="longitude-lines">
-            <ellipse
-              cx="200"
-              cy="200"
-              rx="55"
-              ry="171"
-              fill="none"
-              stroke="#9bc0de"
-              strokeOpacity="0.14"
-            />
-            <ellipse
-              cx="200"
-              cy="200"
-              rx="112"
-              ry="171"
-              fill="none"
-              stroke="#9bc0de"
-              strokeOpacity="0.1"
-            />
-            <path
-              d="M200 27 C128 78 128 322 200 373"
-              fill="none"
-              stroke="#9bc0de"
-              strokeOpacity="0.1"
-            />
-            <path
-              d="M200 27 C272 78 272 322 200 373"
-              fill="none"
-              stroke="#9bc0de"
-              strokeOpacity="0.1"
-            />
-          </g>
+          <ellipse
+            cx="200"
+            cy="145"
+            rx="155"
+            ry="36"
+            fill="none"
+            stroke="#a8c7dd"
+            strokeOpacity="0.13"
+          />
+
+          <ellipse
+            cx="200"
+            cy="255"
+            rx="155"
+            ry="36"
+            fill="none"
+            stroke="#a8c7dd"
+            strokeOpacity="0.13"
+          />
+
+          <ellipse
+            cx="200"
+            cy="200"
+            rx="58"
+            ry="171"
+            fill="none"
+            stroke="#a8c7dd"
+            strokeOpacity="0.16"
+          />
+
+          <ellipse
+            cx="200"
+            cy="200"
+            rx="112"
+            ry="171"
+            fill="none"
+            stroke="#a8c7dd"
+            strokeOpacity="0.11"
+          />
 
           <g
-            fill="url(#landGradient)"
-            stroke="#b8d3e5"
-            strokeOpacity="0.26"
-            strokeWidth="1"
+            fill="url(#land)"
+            stroke="#c2d7e6"
+            strokeOpacity="0.35"
+            strokeWidth="1.2"
           >
             <path
               d="
-                M120 108
-                L135 94
-                L153 89
-                L164 78
-                L177 84
-                L185 96
-                L202 95
-                L214 105
-                L229 103
-                L238 111
-                L251 113
-                L259 124
-                L253 137
-                L238 141
-                L227 135
+                M111 107
+                L128 96
+                L145 91
+                L157 79
+                L170 83
+                L180 94
+                L194 93
+                L205 101
+                L220 100
+                L232 108
+                L247 110
+                L257 121
+                L253 134
+                L240 140
+                L228 135
                 L218 143
-                L206 140
-                L196 148
-                L182 145
-                L172 153
+                L207 141
+                L197 149
+                L183 146
+                L173 153
                 L159 149
-                L150 139
-                L137 136
-                L129 125
+                L149 139
+                L135 136
+                L124 125
                 Z
               "
             />
 
             <path
               d="
-                M182 145
-                L199 149
-                L216 160
+                M177 145
+                L197 149
+                L215 160
                 L228 176
-                L238 196
-                L244 217
-                L238 239
-                L229 258
-                L220 281
-                L207 302
-                L193 322
-                L179 317
-                L168 298
-                L158 278
-                L149 257
+                L239 197
+                L245 218
+                L240 240
+                L230 261
+                L220 283
+                L208 304
+                L194 323
+                L180 318
+                L168 300
+                L157 279
+                L149 258
                 L143 237
-                L144 215
+                L144 216
                 L150 196
-                L157 180
-                L167 164
+                L158 179
+                L167 163
                 Z
               "
             />
 
             <path
               d="
-                M236 119
-                L253 111
-                L269 111
-                L282 119
-                L296 123
-                L306 137
-                L301 149
-                L286 152
-                L274 146
-                L260 151
-                L248 143
+                M237 117
+                L254 109
+                L271 111
+                L284 119
+                L299 123
+                L309 136
+                L303 149
+                L288 153
+                L274 147
+                L261 152
+                L249 143
                 Z
               "
             />
 
             <path
               d="
-                M255 159
-                L270 155
+                M252 158
+                L269 154
                 L284 161
-                L288 172
-                L278 180
-                L264 176
+                L289 173
+                L278 181
+                L263 176
                 Z
               "
             />
 
             <path
               d="
-                M126 154
-                L137 148
-                L145 154
-                L143 165
-                L132 169
-                L124 163
-                Z
-              "
-            />
-
-            <path
-              d="
-                M249 256
-                L259 262
+                M248 257
+                L259 263
                 L263 279
-                L257 298
-                L248 306
+                L258 298
+                L249 307
                 L243 291
                 L245 273
-                Z
-              "
-            />
-
-            <path
-              d="
-                M160 95
-                L153 78
-                L159 65
-                L168 75
-                L170 91
-                Z
-              "
-            />
-
-            <path
-              d="
-                M177 85
-                L181 67
-                L188 58
-                L192 76
-                L188 91
                 Z
               "
             />
           </g>
 
           <path
-            className="animated-route"
-            d="M170 135 C184 150 207 171 217 219"
+            d="M170 135 C187 151 208 174 218 220"
             fill="none"
-            stroke="url(#goldRoute)"
-            strokeWidth="3"
+            stroke="url(#routeGold)"
+            strokeWidth="3.5"
             strokeLinecap="round"
-            filter="url(#softGlow)"
-          />
-
-          <circle
-            cx="170"
-            cy="135"
-            r="5"
-            fill="#f2d08a"
-            stroke="#fff4cd"
-            strokeWidth="2"
-            filter="url(#pointGlow)"
-          />
-
-          <circle
-            cx="217"
-            cy="219"
-            r="5"
-            fill="#f2d08a"
-            stroke="#fff4cd"
-            strokeWidth="2"
-            filter="url(#pointGlow)"
-          />
-
-          <circle
-            className="route-traveller"
-            cx="170"
-            cy="135"
-            r="4"
-            fill="#fff0b6"
-            filter="url(#pointGlow)"
+            strokeDasharray="8 7"
+            filter="url(#glow)"
           >
+            <animate
+              attributeName="stroke-dashoffset"
+              from="0"
+              to="-30"
+              dur="2s"
+              repeatCount="indefinite"
+            />
+          </path>
+
+          <circle
+            cx="170"
+            cy="135"
+            r="5.5"
+            fill="#f4d48d"
+            stroke="#fff3c6"
+            strokeWidth="2"
+            filter="url(#glow)"
+          />
+
+          <circle
+            cx="218"
+            cy="220"
+            r="5.5"
+            fill="#f4d48d"
+            stroke="#fff3c6"
+            strokeWidth="2"
+            filter="url(#glow)"
+          />
+
+          <circle r="4.5" fill="#fff1bc" filter="url(#glow)">
             <animateMotion
               dur="2.7s"
               repeatCount="indefinite"
-              path="M0 0 C14 15 37 36 47 84"
+              path="M170 135 C187 151 208 174 218 220"
             />
           </circle>
 
@@ -384,7 +328,7 @@ function PremiumGlobe() {
             cx="200"
             cy="200"
             r="174"
-            fill="url(#earthLight)"
+            fill="url(#shine)"
             pointerEvents="none"
           />
         </g>
@@ -394,15 +338,14 @@ function PremiumGlobe() {
           cy="200"
           r="174"
           fill="none"
-          stroke="#dab46d"
-          strokeOpacity="0.24"
+          stroke="#e0ba70"
+          strokeOpacity="0.4"
           strokeWidth="2"
         />
       </svg>
     </div>
   );
 }
-
 export default function EnvoyerPage() {
   const [amount, setAmount] = useState("250");
   const [status, setStatus] = useState("ready");
