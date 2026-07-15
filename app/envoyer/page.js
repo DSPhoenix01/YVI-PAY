@@ -50,6 +50,359 @@ function CongoFlag({ width = 30, height = 20 }) {
   );
 }
 
+function PremiumGlobe() {
+  return (
+    <div className="real-globe">
+      <svg
+        className="earth-svg"
+        viewBox="0 0 400 400"
+        role="img"
+        aria-label="Globe terrestre montrant l’Europe et l’Afrique"
+      >
+        <defs>
+          <radialGradient id="oceanGradient" cx="32%" cy="27%" r="76%">
+            <stop offset="0%" stopColor="#173d68" />
+            <stop offset="47%" stopColor="#0a2544" />
+            <stop offset="100%" stopColor="#020916" />
+          </radialGradient>
+
+          <linearGradient id="landGradient" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#7099ba" stopOpacity="0.88" />
+            <stop offset="55%" stopColor="#345f83" stopOpacity="0.78" />
+            <stop offset="100%" stopColor="#183a59" stopOpacity="0.7" />
+          </linearGradient>
+
+          <linearGradient id="goldRoute" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#9b6c27" />
+            <stop offset="50%" stopColor="#f1cf83" />
+            <stop offset="100%" stopColor="#b77d2d" />
+          </linearGradient>
+
+          <radialGradient id="earthLight" cx="28%" cy="22%" r="72%">
+            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.18" />
+            <stop offset="35%" stopColor="#ffffff" stopOpacity="0.04" />
+            <stop offset="100%" stopColor="#000000" stopOpacity="0.42" />
+          </radialGradient>
+
+          <clipPath id="earthClip">
+            <circle cx="200" cy="200" r="174" />
+          </clipPath>
+
+          <filter id="softGlow">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+
+          <filter id="pointGlow">
+            <feGaussianBlur stdDeviation="3.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <circle
+          cx="200"
+          cy="200"
+          r="174"
+          fill="url(#oceanGradient)"
+          stroke="rgba(225,190,120,.42)"
+          strokeWidth="1.5"
+        />
+
+        <g clipPath="url(#earthClip)">
+          <g className="latitude-lines">
+            <ellipse
+              cx="200"
+              cy="200"
+              rx="171"
+              ry="49"
+              fill="none"
+              stroke="#9bc0de"
+              strokeOpacity="0.14"
+            />
+            <ellipse
+              cx="200"
+              cy="146"
+              rx="158"
+              ry="36"
+              fill="none"
+              stroke="#9bc0de"
+              strokeOpacity="0.11"
+            />
+            <ellipse
+              cx="200"
+              cy="254"
+              rx="158"
+              ry="36"
+              fill="none"
+              stroke="#9bc0de"
+              strokeOpacity="0.11"
+            />
+            <ellipse
+              cx="200"
+              cy="99"
+              rx="119"
+              ry="21"
+              fill="none"
+              stroke="#9bc0de"
+              strokeOpacity="0.09"
+            />
+            <ellipse
+              cx="200"
+              cy="301"
+              rx="119"
+              ry="21"
+              fill="none"
+              stroke="#9bc0de"
+              strokeOpacity="0.09"
+            />
+          </g>
+
+          <g className="longitude-lines">
+            <ellipse
+              cx="200"
+              cy="200"
+              rx="55"
+              ry="171"
+              fill="none"
+              stroke="#9bc0de"
+              strokeOpacity="0.14"
+            />
+            <ellipse
+              cx="200"
+              cy="200"
+              rx="112"
+              ry="171"
+              fill="none"
+              stroke="#9bc0de"
+              strokeOpacity="0.1"
+            />
+            <path
+              d="M200 27 C128 78 128 322 200 373"
+              fill="none"
+              stroke="#9bc0de"
+              strokeOpacity="0.1"
+            />
+            <path
+              d="M200 27 C272 78 272 322 200 373"
+              fill="none"
+              stroke="#9bc0de"
+              strokeOpacity="0.1"
+            />
+          </g>
+
+          <g
+            fill="url(#landGradient)"
+            stroke="#b8d3e5"
+            strokeOpacity="0.26"
+            strokeWidth="1"
+          >
+            <path
+              d="
+                M120 108
+                L135 94
+                L153 89
+                L164 78
+                L177 84
+                L185 96
+                L202 95
+                L214 105
+                L229 103
+                L238 111
+                L251 113
+                L259 124
+                L253 137
+                L238 141
+                L227 135
+                L218 143
+                L206 140
+                L196 148
+                L182 145
+                L172 153
+                L159 149
+                L150 139
+                L137 136
+                L129 125
+                Z
+              "
+            />
+
+            <path
+              d="
+                M182 145
+                L199 149
+                L216 160
+                L228 176
+                L238 196
+                L244 217
+                L238 239
+                L229 258
+                L220 281
+                L207 302
+                L193 322
+                L179 317
+                L168 298
+                L158 278
+                L149 257
+                L143 237
+                L144 215
+                L150 196
+                L157 180
+                L167 164
+                Z
+              "
+            />
+
+            <path
+              d="
+                M236 119
+                L253 111
+                L269 111
+                L282 119
+                L296 123
+                L306 137
+                L301 149
+                L286 152
+                L274 146
+                L260 151
+                L248 143
+                Z
+              "
+            />
+
+            <path
+              d="
+                M255 159
+                L270 155
+                L284 161
+                L288 172
+                L278 180
+                L264 176
+                Z
+              "
+            />
+
+            <path
+              d="
+                M126 154
+                L137 148
+                L145 154
+                L143 165
+                L132 169
+                L124 163
+                Z
+              "
+            />
+
+            <path
+              d="
+                M249 256
+                L259 262
+                L263 279
+                L257 298
+                L248 306
+                L243 291
+                L245 273
+                Z
+              "
+            />
+
+            <path
+              d="
+                M160 95
+                L153 78
+                L159 65
+                L168 75
+                L170 91
+                Z
+              "
+            />
+
+            <path
+              d="
+                M177 85
+                L181 67
+                L188 58
+                L192 76
+                L188 91
+                Z
+              "
+            />
+          </g>
+
+          <path
+            className="animated-route"
+            d="M170 135 C184 150 207 171 217 219"
+            fill="none"
+            stroke="url(#goldRoute)"
+            strokeWidth="3"
+            strokeLinecap="round"
+            filter="url(#softGlow)"
+          />
+
+          <circle
+            cx="170"
+            cy="135"
+            r="5"
+            fill="#f2d08a"
+            stroke="#fff4cd"
+            strokeWidth="2"
+            filter="url(#pointGlow)"
+          />
+
+          <circle
+            cx="217"
+            cy="219"
+            r="5"
+            fill="#f2d08a"
+            stroke="#fff4cd"
+            strokeWidth="2"
+            filter="url(#pointGlow)"
+          />
+
+          <circle
+            className="route-traveller"
+            cx="170"
+            cy="135"
+            r="4"
+            fill="#fff0b6"
+            filter="url(#pointGlow)"
+          >
+            <animateMotion
+              dur="2.7s"
+              repeatCount="indefinite"
+              path="M0 0 C14 15 37 36 47 84"
+            />
+          </circle>
+
+          <circle
+            cx="200"
+            cy="200"
+            r="174"
+            fill="url(#earthLight)"
+            pointerEvents="none"
+          />
+        </g>
+
+        <circle
+          cx="200"
+          cy="200"
+          r="174"
+          fill="none"
+          stroke="#dab46d"
+          strokeOpacity="0.24"
+          strokeWidth="2"
+        />
+      </svg>
+    </div>
+  );
+}
+
 export default function EnvoyerPage() {
   const [amount, setAmount] = useState("250");
   const [status, setStatus] = useState("ready");
@@ -266,21 +619,7 @@ export default function EnvoyerPage() {
               <div className="halo halo-one" />
               <div className="halo halo-two" />
 
-              <div className="globe">
-                <div className="globe-grid grid-one" />
-                <div className="globe-grid grid-two" />
-
-                <div className="continent continent-one" />
-                <div className="continent continent-two" />
-                <div className="continent continent-three" />
-
-                <span className="city-dot paris-dot" />
-                <span className="city-dot brazza-dot" />
-
-                <div className="globe-route">
-                  <span />
-                </div>
-              </div>
+              <PremiumGlobe />
 
               <div className="floating-city paris-label">
                 <FranceFlag width={30} height={20} />
@@ -967,140 +1306,26 @@ export default function EnvoyerPage() {
           place-items: center;
         }
 
-        .globe {
+        .real-globe {
           position: relative;
           z-index: 2;
-          width: min(335px, 76vw);
+          width: min(350px, 76vw);
           aspect-ratio: 1;
-          overflow: hidden;
-          border: 1px solid rgba(219, 188, 126, 0.28);
-          border-radius: 50%;
-          background:
-            radial-gradient(
-              circle at 34% 28%,
-              rgba(57, 105, 159, 0.3),
-              transparent 30%
-            ),
-            radial-gradient(
-              circle at 50% 50%,
-              #0c213b,
-              #071526 53%,
-              #020814
-            );
-          box-shadow:
-            0 0 70px rgba(36, 90, 148, 0.28),
-            inset -32px -20px 60px rgba(0, 0, 0, 0.55);
+          filter:
+            drop-shadow(0 0 34px rgba(40, 96, 154, 0.28))
+            drop-shadow(0 0 16px rgba(214, 174, 97, 0.09));
           animation: globeFloat 5.5s ease-in-out infinite;
         }
 
-        .globe-grid {
-          position: absolute;
-          inset: 0;
-          border-radius: 50%;
-          opacity: 0.36;
+        .earth-svg {
+          display: block;
+          width: 100%;
+          height: 100%;
         }
 
-        .grid-one {
-          background: repeating-linear-gradient(
-            0deg,
-            transparent 0,
-            transparent 26px,
-            rgba(165, 192, 222, 0.15) 27px,
-            transparent 28px
-          );
-        }
-
-        .grid-two {
-          background: repeating-linear-gradient(
-            90deg,
-            transparent 0,
-            transparent 34px,
-            rgba(165, 192, 222, 0.12) 35px,
-            transparent 36px
-          );
-          transform: scaleX(0.72);
-        }
-
-        .continent {
-          position: absolute;
-          border: 1px solid rgba(212, 180, 113, 0.19);
-          background: linear-gradient(
-            145deg,
-            rgba(75, 119, 156, 0.3),
-            rgba(28, 66, 104, 0.17)
-          );
-        }
-
-        .continent-one {
-          top: 24%;
-          left: 28%;
-          width: 72px;
-          height: 107px;
-          border-radius: 48% 40% 52% 37% / 30% 48% 49% 64%;
-        }
-
-        .continent-two {
-          top: 31%;
-          left: 49%;
-          width: 101px;
-          height: 149px;
-          border-radius: 45% 56% 42% 57% / 38% 37% 63% 61%;
-          transform: rotate(12deg);
-        }
-
-        .continent-three {
-          top: 18%;
-          right: 14%;
-          width: 73px;
-          height: 66px;
-          border-radius: 57% 44% 53% 35% / 47% 39% 62% 51%;
-        }
-
-        .city-dot {
-          position: absolute;
-          z-index: 6;
-          width: 9px;
-          height: 9px;
-          border: 2px solid #f1d08b;
-          border-radius: 50%;
-          background: #ad7b30;
-          box-shadow: 0 0 19px rgba(238, 202, 127, 0.95);
-        }
-
-        .paris-dot {
-          top: 34%;
-          left: 40%;
-        }
-
-        .brazza-dot {
-          top: 65%;
-          left: 55%;
-        }
-
-        .globe-route {
-          position: absolute;
-          top: 38%;
-          left: 41%;
-          z-index: 5;
-          width: 32%;
-          height: 31%;
-          overflow: hidden;
-          border-top: 2px solid rgba(235, 198, 121, 0.82);
-          border-right: 2px solid rgba(235, 198, 121, 0.25);
-          border-radius: 0 100% 0 0;
-          transform: rotate(19deg);
-        }
-
-        .globe-route span {
-          position: absolute;
-          top: -3px;
-          left: -20%;
-          width: 34%;
-          height: 4px;
-          border-radius: 999px;
-          background: #fff0bd;
-          box-shadow: 0 0 14px rgba(255, 220, 146, 1);
-          animation: globeTravel 2.7s ease-in-out infinite;
+        .animated-route {
+          stroke-dasharray: 8 8;
+          animation: routeDash 2.5s linear infinite;
         }
 
         .halo {
@@ -1418,20 +1643,9 @@ export default function EnvoyerPage() {
           }
         }
 
-        @keyframes globeTravel {
-          from {
-            left: -20%;
-            opacity: 0;
-          }
-
-          20%,
-          80% {
-            opacity: 1;
-          }
-
+        @keyframes routeDash {
           to {
-            left: 100%;
-            opacity: 0;
+            stroke-dashoffset: -32;
           }
         }
 
