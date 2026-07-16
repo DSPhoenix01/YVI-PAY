@@ -2,9 +2,6 @@
 
 import { useState } from "react";
 
-const EARTH_IMAGE =
-  "https://upload.wikimedia.org/wikipedia/commons/0/0d/Africa_and_Europe_from_a_Million_Miles_Away.png";
-
 function FranceFlag({ width = 30, height = 20 }) {
   return (
     <svg
@@ -16,12 +13,12 @@ function FranceFlag({ width = 30, height = 20 }) {
       style={{
         display: "block",
         flexShrink: 0,
-        borderRadius: 3,
+        borderRadius: "3px",
         boxShadow: "0 3px 10px rgba(0,0,0,.35)",
       }}
     >
       <rect x="0" width="1" height="2" fill="#002395" />
-      <rect x="1" width="1" height="2" fill="#fff" />
+      <rect x="1" width="1" height="2" fill="#ffffff" />
       <rect x="2" width="1" height="2" fill="#ed2939" />
     </svg>
   );
@@ -38,15 +35,17 @@ function CongoFlag({ width = 30, height = 20 }) {
       style={{
         display: "block",
         flexShrink: 0,
-        borderRadius: 3,
+        borderRadius: "3px",
         boxShadow: "0 3px 10px rgba(0,0,0,.35)",
       }}
     >
       <rect width="3" height="2" fill="#009543" />
+
       <polygon
         points="0.65,2 1.35,2 2.35,0 1.65,0"
         fill="#fbde4a"
       />
+
       <polygon
         points="1.35,2 3,2 3,0 2.35,0"
         fill="#dc241f"
@@ -55,32 +54,38 @@ function CongoFlag({ width = 30, height = 20 }) {
   );
 }
 
-function PremiumGlobe() {
+function DashboardGlobe() {
   return (
-    <div className="earth">
+    <div className="dashboard-globe">
       <img
-        src={EARTH_IMAGE}
-        alt="Globe terrestre montrant l’Europe et l’Afrique"
-        className="earth-image"
+        src="/yvi-hero-dashboard.png"
+        alt="Globe YVI PAY"
+        className="dashboard-globe-image"
       />
 
-      <div className="earth-blue-overlay" />
-      <div className="earth-gold-edge" />
+      <div className="dashboard-globe-shade" />
 
       <svg
-        className="earth-route"
+        className="dashboard-globe-route"
         viewBox="0 0 400 400"
         aria-hidden="true"
       >
         <defs>
-          <linearGradient id="routeGold" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#b47d30" />
-            <stop offset="48%" stopColor="#ffe4a1" />
-            <stop offset="100%" stopColor="#b47d30" />
+          <linearGradient
+            id="sendRouteGold"
+            x1="0"
+            y1="0"
+            x2="1"
+            y2="1"
+          >
+            <stop offset="0%" stopColor="#ad7628" />
+            <stop offset="45%" stopColor="#ffe1a0" />
+            <stop offset="100%" stopColor="#b57c2c" />
           </linearGradient>
 
-          <filter id="routeGlow">
+          <filter id="sendRouteGlow">
             <feGaussianBlur stdDeviation="4" result="blur" />
+
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
@@ -89,43 +94,58 @@ function PremiumGlobe() {
         </defs>
 
         <path
-          id="moneyRoute"
-          d="M171 112 C195 143 232 191 239 257"
+          id="parisBrazzavilleRoute"
+          d="M174 126 C205 153 232 197 240 255"
           fill="none"
-          stroke="url(#routeGold)"
-          strokeWidth="3.6"
+          stroke="url(#sendRouteGold)"
+          strokeWidth="3.5"
           strokeLinecap="round"
-          filter="url(#routeGlow)"
+          strokeDasharray="8 7"
+          filter="url(#sendRouteGlow)"
+        >
+          <animate
+            attributeName="stroke-dashoffset"
+            from="0"
+            to="-30"
+            dur="2.1s"
+            repeatCount="indefinite"
+          />
+        </path>
+
+        <circle
+          cx="174"
+          cy="126"
+          r="6"
+          fill="#f2c96e"
+          stroke="#fff0bd"
+          strokeWidth="2"
+          filter="url(#sendRouteGlow)"
         />
 
         <circle
-          cx="171"
-          cy="112"
+          cx="240"
+          cy="255"
           r="6"
-          fill="#f5cf7b"
-          stroke="#fff2bd"
+          fill="#f2c96e"
+          stroke="#fff0bd"
           strokeWidth="2"
-          filter="url(#routeGlow)"
+          filter="url(#sendRouteGlow)"
         />
 
         <circle
-          cx="239"
-          cy="257"
-          r="6"
-          fill="#f5cf7b"
-          stroke="#fff2bd"
-          strokeWidth="2"
-          filter="url(#routeGlow)"
-        />
-
-        <circle r="4.5" fill="#fff2bd" filter="url(#routeGlow)">
+          r="4.5"
+          fill="#fff0bd"
+          filter="url(#sendRouteGlow)"
+        >
           <animateMotion
             dur="2.8s"
             repeatCount="indefinite"
-            path="M171 112 C195 143 232 191 239 257"
+            path="M174 126 C205 153 232 197 240 255"
           />
         </circle>
       </svg>
+
+      <div className="dashboard-globe-ring" />
     </div>
   );
 }
@@ -168,8 +188,12 @@ export default function EnvoyerPage() {
       <section className="send-shell">
         <header className="top-line">
           <div>
-            <span className="eyebrow">TRANSFERT INTERNATIONAL</span>
+            <span className="eyebrow">
+              TRANSFERT INTERNATIONAL
+            </span>
+
             <h1>Envoyer de l’argent</h1>
+
             <p className="intro">
               De Paris vers vos proches, en toute simplicité.
             </p>
@@ -185,11 +209,16 @@ export default function EnvoyerPage() {
           <section className="transfer-panel">
             <div className="route-title">
               <div>
-                <span className="section-label">VOTRE TRANSFERT</span>
+                <span className="section-label">
+                  VOTRE TRANSFERT
+                </span>
+
                 <h2>Paris vers Brazzaville</h2>
               </div>
 
-              <span className="instant-badge">Instantané</span>
+              <span className="instant-badge">
+                Instantané
+              </span>
             </div>
 
             <div className="route-card">
@@ -213,6 +242,7 @@ export default function EnvoyerPage() {
                 </span>
 
                 <span className="route-star">✦</span>
+
                 <span className="route-point route-right" />
               </div>
 
@@ -230,7 +260,9 @@ export default function EnvoyerPage() {
             </div>
 
             <div className="amount-section">
-              <label htmlFor="amount">Vous envoyez</label>
+              <label htmlFor="amount">
+                Vous envoyez
+              </label>
 
               <div className="amount-box">
                 <input
@@ -259,7 +291,10 @@ export default function EnvoyerPage() {
             <div className="conversion-row">
               <div>
                 <span>Votre proche reçoit</span>
-                <strong>{formatNumber(received)} FCFA</strong>
+
+                <strong>
+                  {formatNumber(received)} FCFA
+                </strong>
               </div>
 
               <div className="exchange-info">
@@ -270,7 +305,9 @@ export default function EnvoyerPage() {
             </div>
 
             <div className="beneficiary-card">
-              <div className="beneficiary-avatar">ME</div>
+              <div className="beneficiary-avatar">
+                ME
+              </div>
 
               <div className="beneficiary-info">
                 <span>Bénéficiaire</span>
@@ -278,7 +315,10 @@ export default function EnvoyerPage() {
                 <small>Mobile Money • Brazzaville</small>
               </div>
 
-              <button type="button" className="change-button">
+              <button
+                type="button"
+                className="change-button"
+              >
                 Modifier
               </button>
             </div>
@@ -296,15 +336,25 @@ export default function EnvoyerPage() {
 
               <div className="summary-total">
                 <span>Total</span>
-                <strong>{(numericAmount + fees).toFixed(2)} €</strong>
+
+                <strong>
+                  {(numericAmount + fees).toFixed(2)} €
+                </strong>
               </div>
             </div>
 
             <button
               type="button"
               className={`transfer-button ${status}`}
-              onClick={status === "success" ? resetTransfer : startTransfer}
-              disabled={numericAmount <= 0 || status === "loading"}
+              onClick={
+                status === "success"
+                  ? resetTransfer
+                  : startTransfer
+              }
+              disabled={
+                numericAmount <= 0 ||
+                status === "loading"
+              }
             >
               {status === "ready" && (
                 <>
@@ -323,7 +373,10 @@ export default function EnvoyerPage() {
               {status === "success" && (
                 <>
                   <span className="success-check">✓</span>
-                  <span>Transfert envoyé avec succès</span>
+
+                  <span>
+                    Transfert envoyé avec succès
+                  </span>
                 </>
               )}
             </button>
@@ -336,7 +389,9 @@ export default function EnvoyerPage() {
 
           <aside className="visual-panel">
             <div className="visual-top">
-              <span className="section-label">YVI PAY SIGNATURE</span>
+              <span className="section-label">
+                YVI PAY SIGNATURE
+              </span>
 
               <span className="live-status">
                 <span />
@@ -348,7 +403,7 @@ export default function EnvoyerPage() {
               <div className="halo halo-one" />
               <div className="halo halo-two" />
 
-              <PremiumGlobe />
+              <DashboardGlobe />
 
               <div className="floating-city paris-label">
                 <FranceFlag width={30} height={20} />
@@ -418,7 +473,9 @@ export default function EnvoyerPage() {
                 ×
               </button>
 
-              <div className="confirmation-icon">✓</div>
+              <div className="confirmation-icon">
+                ✓
+              </div>
 
               <span className="confirmation-eyebrow">
                 TRANSFERT CONFIRMÉ
@@ -462,7 +519,9 @@ export default function EnvoyerPage() {
 
                 <div>
                   <span>Référence</span>
-                  <strong>YVI-{new Date().getFullYear()}-0725</strong>
+                  <strong>
+                    YVI-{new Date().getFullYear()}-0725
+                  </strong>
                 </div>
               </div>
 
@@ -474,7 +533,9 @@ export default function EnvoyerPage() {
                 Terminer
               </button>
 
-              <span className="confirmation-brand">YVI PAY</span>
+              <span className="confirmation-brand">
+                YVI PAY
+              </span>
             </div>
           </div>
         )}
@@ -511,7 +572,12 @@ export default function EnvoyerPage() {
               rgba(194, 149, 65, 0.12),
               transparent 28%
             ),
-            linear-gradient(145deg, #020711, #07101e 48%, #02050b);
+            linear-gradient(
+              145deg,
+              #020711,
+              #07101e 48%,
+              #02050b
+            );
           isolation: isolate;
         }
 
@@ -605,7 +671,9 @@ export default function EnvoyerPage() {
 
         .main-grid {
           display: grid;
-          grid-template-columns: minmax(0, 1.04fr) minmax(390px, 0.96fr);
+          grid-template-columns:
+            minmax(0, 1.04fr)
+            minmax(390px, 0.96fr);
           gap: 24px;
         }
 
@@ -657,7 +725,10 @@ export default function EnvoyerPage() {
 
         .route-card {
           display: grid;
-          grid-template-columns: 1fr minmax(100px, 0.8fr) 1fr;
+          grid-template-columns:
+            1fr
+            minmax(100px, 0.8fr)
+            1fr;
           align-items: center;
           gap: 18px;
           margin-bottom: 27px;
@@ -1035,75 +1106,64 @@ export default function EnvoyerPage() {
           place-items: center;
         }
 
-        .earth {
+        .dashboard-globe {
           position: relative;
           z-index: 2;
           width: min(370px, 76vw);
           aspect-ratio: 1;
           overflow: hidden;
           border-radius: 50%;
-          background: #020916;
+          background: #020918;
           box-shadow:
-            0 0 0 1px rgba(226, 185, 105, 0.46),
-            0 0 0 11px rgba(42, 92, 145, 0.07),
-            0 0 58px rgba(48, 113, 181, 0.35),
-            0 0 28px rgba(218, 174, 91, 0.11);
+            0 0 0 1px rgba(225, 185, 106, 0.4),
+            0 0 0 10px rgba(38, 86, 140, 0.06),
+            0 0 55px rgba(46, 107, 174, 0.35);
           animation: globeFloat 5.5s ease-in-out infinite;
         }
 
-        .earth-image {
-          position: absolute;
-          inset: -1%;
-          width: 102%;
-          height: 102%;
-          object-fit: cover;
-          border-radius: 50%;
-          filter:
-            brightness(0.43)
-            contrast(1.28)
-            saturate(0.76)
-            sepia(0.12)
-            hue-rotate(174deg);
-          transform: scale(1.015);
-        }
-
-        .earth-blue-overlay {
-          position: absolute;
-          inset: 0;
-          border-radius: 50%;
-          background:
-            radial-gradient(
-              circle at 31% 23%,
-              rgba(79, 143, 207, 0.08),
-              transparent 34%
-            ),
-            linear-gradient(
-              145deg,
-              rgba(4, 29, 59, 0.2),
-              rgba(0, 5, 15, 0.58)
-            );
-          box-shadow:
-            inset 25px 18px 42px rgba(89, 153, 215, 0.12),
-            inset -42px -25px 65px rgba(0, 0, 0, 0.64);
-          pointer-events: none;
-        }
-
-        .earth-gold-edge {
-          position: absolute;
-          inset: 0;
-          border: 1.5px solid rgba(227, 188, 111, 0.57);
-          border-radius: 50%;
-          box-shadow:
-            inset 0 0 17px rgba(216, 176, 99, 0.09),
-            0 0 13px rgba(216, 176, 99, 0.12);
-          pointer-events: none;
-        }
-
-        .earth-route {
+        .dashboard-globe-image {
           position: absolute;
           inset: 0;
           width: 100%;
           height: 100%;
+          object-fit: cover;
+          object-position: center;
+          transform: scale(1.08);
+        }
+
+        .dashboard-globe-shade {
+          position: absolute;
+          inset: 0;
+          background:
+            radial-gradient(
+              circle at 33% 25%,
+              rgba(61, 121, 186, 0.03),
+              transparent 32%
+            ),
+            linear-gradient(
+              145deg,
+              rgba(2, 16, 40, 0.08),
+              rgba(0, 4, 13, 0.42)
+            );
+          pointer-events: none;
+        }
+
+        .dashboard-globe-route {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+        }
+
+        .dashboard-globe-ring {
+          position: absolute;
+          inset: 0;
+          border: 1.5px solid rgba(228, 190, 115, 0.46);
+          border-radius: 50%;
+          box-shadow:
+            inset 0 0 18px rgba(217, 176, 98, 0.08),
+            0 0 14px rgba(217, 176, 98, 0.12);
           pointer-events: none;
         }
 
@@ -1168,7 +1228,10 @@ export default function EnvoyerPage() {
 
         .signature-route {
           display: grid;
-          grid-template-columns: auto 1fr auto;
+          grid-template-columns:
+            auto
+            1fr
+            auto;
           align-items: center;
           gap: 16px;
           padding: 17px 18px;
@@ -1269,7 +1332,11 @@ export default function EnvoyerPage() {
           padding: 43px 35px 29px;
           border: 1px solid rgba(224, 190, 123, 0.26);
           border-radius: 29px;
-          background: linear-gradient(155deg, #0c1726, #030913);
+          background: linear-gradient(
+            155deg,
+            #0c1726,
+            #030913
+          );
           box-shadow: 0 36px 100px rgba(0, 0, 0, 0.65);
           text-align: center;
         }
@@ -1326,7 +1393,10 @@ export default function EnvoyerPage() {
 
         .confirmation-route {
           display: grid;
-          grid-template-columns: auto 1fr auto;
+          grid-template-columns:
+            auto
+            1fr
+            auto;
           align-items: center;
           gap: 15px;
           margin-bottom: 20px;
@@ -1336,7 +1406,8 @@ export default function EnvoyerPage() {
           background: rgba(0, 5, 12, 0.48);
         }
 
-        .confirmation-route > div:not(.confirmation-journey) {
+        .confirmation-route
+          > div:not(.confirmation-journey) {
           display: flex;
           align-items: center;
           flex-direction: column;
@@ -1373,7 +1444,8 @@ export default function EnvoyerPage() {
           display: flex;
           justify-content: space-between;
           padding: 12px 15px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+          border-bottom:
+            1px solid rgba(255, 255, 255, 0.045);
         }
 
         .confirmation-details > div:last-child {
