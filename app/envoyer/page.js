@@ -2,42 +2,33 @@
 
 import { useState } from "react";
 
-function FranceFlag({ width = 30, height = 20 }) {
-  return (
-    <svg
-      viewBox="0 0 3 2"
-      width={width}
-      height={height}
-      role="img"
-      aria-label="Drapeau de la France"
-      style={{
-        display: "block",
-        flexShrink: 0,
-        borderRadius: "3px",
-        boxShadow: "0 3px 10px rgba(0,0,0,.35)",
-      }}
-    >
-      <rect x="0" width="1" height="2" fill="#002395" />
-      <rect x="1" width="1" height="2" fill="#ffffff" />
-      <rect x="2" width="1" height="2" fill="#ed2939" />
-    </svg>
-  );
-}
+const WORLD_MAP =
+  "https://commons.wikimedia.org/wiki/Special:Redirect/file/BlankMap-World-v2.svg";
 
-function CongoFlag({ width = 30, height = 20 }) {
+function Flag({ country, width = 30, height = 20 }) {
+  if (country === "france") {
+    return (
+      <svg
+        viewBox="0 0 3 2"
+        width={width}
+        height={height}
+        aria-label="Drapeau français"
+        style={flagStyle}
+      >
+        <rect width="1" height="2" fill="#002395" />
+        <rect x="1" width="1" height="2" fill="#fff" />
+        <rect x="2" width="1" height="2" fill="#ed2939" />
+      </svg>
+    );
+  }
+
   return (
     <svg
       viewBox="0 0 3 2"
       width={width}
       height={height}
-      role="img"
-      aria-label="Drapeau de la République du Congo"
-      style={{
-        display: "block",
-        flexShrink: 0,
-        borderRadius: "3px",
-        boxShadow: "0 3px 10px rgba(0,0,0,.35)",
-      }}
+      aria-label="Drapeau du Congo"
+      style={flagStyle}
     >
       <rect width="3" height="2" fill="#009543" />
       <polygon
@@ -52,106 +43,120 @@ function CongoFlag({ width = 30, height = 20 }) {
   );
 }
 
-function DashboardGlobe() {
+const flagStyle = {
+  display: "block",
+  flexShrink: 0,
+  borderRadius: "3px",
+  boxShadow: "0 3px 10px rgba(0,0,0,.4)",
+};
+
+function PremiumGlobe() {
   return (
-    <div className="dashboard-visual">
-      <img
-        src="/yvi-hero-dashboard.png"
-        alt="Globe YVI PAY reliant Paris à Brazzaville"
-        className="dashboard-image"
-      />
+    <div className="globe-area">
+      <div className="orbit orbit-one" />
+      <div className="orbit orbit-two" />
 
-      <div className="dashboard-overlay" />
+      <div className="globe">
+        <div className="globe-ocean" />
 
-      <svg
-        className="transfer-map"
-        viewBox="0 0 600 410"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <defs>
-          <linearGradient
-            id="goldPath"
-            x1="0"
-            y1="0"
-            x2="1"
-            y2="1"
+        <img
+          src={WORLD_MAP}
+          alt=""
+          aria-hidden="true"
+          className="world-map"
+        />
+
+        <div className="globe-grid horizontal-grid" />
+        <div className="globe-grid vertical-grid" />
+        <div className="globe-light" />
+        <div className="globe-shadow" />
+
+        <svg
+          className="globe-route"
+          viewBox="0 0 400 400"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient id="routeGold" x1="0" x2="1">
+              <stop offset="0%" stopColor="#ad7628" />
+              <stop offset="48%" stopColor="#ffe4a0" />
+              <stop offset="100%" stopColor="#ad7628" />
+            </linearGradient>
+
+            <filter id="routeGlow">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          <path
+            id="parisToBrazzaville"
+            d="M184 126 C205 154 231 194 236 249"
+            fill="none"
+            stroke="url(#routeGold)"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            strokeDasharray="8 7"
+            filter="url(#routeGlow)"
           >
-            <stop offset="0%" stopColor="#b87d2d" />
-            <stop offset="45%" stopColor="#ffe3a1" />
-            <stop offset="100%" stopColor="#b87d2d" />
-          </linearGradient>
+            <animate
+              attributeName="stroke-dashoffset"
+              from="0"
+              to="-30"
+              dur="2.1s"
+              repeatCount="indefinite"
+            />
+          </path>
 
-          <filter id="goldGlow">
-            <feGaussianBlur stdDeviation="5" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-
-        <path
-          d="M255 112 C310 145 355 220 384 300"
-          fill="none"
-          stroke="url(#goldPath)"
-          strokeWidth="4"
-          strokeLinecap="round"
-          strokeDasharray="10 8"
-          filter="url(#goldGlow)"
-        >
-          <animate
-            attributeName="stroke-dashoffset"
-            from="0"
-            to="-36"
-            dur="2.4s"
-            repeatCount="indefinite"
+          <circle
+            cx="184"
+            cy="126"
+            r="6"
+            fill="#f2ca76"
+            stroke="#fff0be"
+            strokeWidth="2"
+            filter="url(#routeGlow)"
           />
-        </path>
 
-        <circle
-          cx="255"
-          cy="112"
-          r="7"
-          fill="#f2ca72"
-          stroke="#fff1c2"
-          strokeWidth="2"
-          filter="url(#goldGlow)"
-        />
-
-        <circle
-          cx="384"
-          cy="300"
-          r="7"
-          fill="#f2ca72"
-          stroke="#fff1c2"
-          strokeWidth="2"
-          filter="url(#goldGlow)"
-        />
-
-        <circle
-          r="5"
-          fill="#fff2bd"
-          filter="url(#goldGlow)"
-        >
-          <animateMotion
-            dur="2.8s"
-            repeatCount="indefinite"
-            path="M255 112 C310 145 355 220 384 300"
+          <circle
+            cx="236"
+            cy="249"
+            r="6"
+            fill="#f2ca76"
+            stroke="#fff0be"
+            strokeWidth="2"
+            filter="url(#routeGlow)"
           />
-        </circle>
-      </svg>
 
-      <div className="city-label city-paris">
-        <FranceFlag width={30} height={20} />
+          <circle
+            r="4.5"
+            fill="#fff2bd"
+            filter="url(#routeGlow)"
+          >
+            <animateMotion
+              dur="2.8s"
+              repeatCount="indefinite"
+              path="M184 126 C205 154 231 194 236 249"
+            />
+          </circle>
+        </svg>
+
+        <div className="globe-border" />
+      </div>
+
+      <div className="city-card paris-card">
+        <Flag country="france" />
         <div>
           <small>Départ</small>
           <strong>Paris</strong>
         </div>
       </div>
 
-      <div className="city-label city-brazzaville">
-        <CongoFlag width={30} height={20} />
+      <div className="city-card brazzaville-card">
+        <Flag country="congo" />
         <div>
           <small>Arrivée</small>
           <strong>Brazzaville</strong>
@@ -164,40 +169,39 @@ function DashboardGlobe() {
 export default function EnvoyerPage() {
   const [amount, setAmount] = useState("250");
   const [status, setStatus] = useState("ready");
-  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [confirmation, setConfirmation] = useState(false);
 
-  const fees = 3.9;
   const rate = 655.957;
-  const numericAmount = Number(amount) || 0;
-  const received = Math.round(numericAmount * rate);
+  const fees = 3.9;
+  const amountNumber = Number(amount) || 0;
+  const received = Math.round(amountNumber * rate);
 
   const formatNumber = (value) =>
     new Intl.NumberFormat("fr-FR").format(value);
 
-  const resetTransfer = () => {
+  const reset = () => {
     setStatus("ready");
-    setShowConfirmation(false);
+    setConfirmation(false);
   };
 
-  const startTransfer = () => {
-    if (numericAmount <= 0 || status === "loading") return;
+  const transfer = () => {
+    if (amountNumber <= 0 || status === "loading") return;
 
     setStatus("loading");
-    setShowConfirmation(false);
 
     window.setTimeout(() => {
       setStatus("success");
-      setShowConfirmation(true);
+      setConfirmation(true);
     }, 2200);
   };
 
   return (
-    <main className="send-page">
-      <div className="ambient ambient-one" />
-      <div className="ambient ambient-two" />
+    <main className="page">
+      <div className="ambient ambient-left" />
+      <div className="ambient ambient-right" />
 
-      <section className="send-shell">
-        <header className="top-line">
+      <section className="shell">
+        <header className="header">
           <div>
             <span className="eyebrow">
               TRANSFERT INTERNATIONAL
@@ -205,20 +209,20 @@ export default function EnvoyerPage() {
 
             <h1>Envoyer de l’argent</h1>
 
-            <p className="intro">
+            <p>
               De Paris vers vos proches, en toute simplicité.
             </p>
           </div>
 
-          <div className="secure-pill">
-            <span className="secure-dot" />
+          <div className="secure">
+            <span />
             Transfert sécurisé
           </div>
         </header>
 
-        <div className="main-grid">
-          <section className="transfer-panel">
-            <div className="route-title">
+        <div className="layout">
+          <section className="panel transfer-panel">
+            <div className="title-row">
               <div>
                 <span className="section-label">
                   VOTRE TRANSFERT
@@ -227,101 +231,113 @@ export default function EnvoyerPage() {
                 <h2>Paris vers Brazzaville</h2>
               </div>
 
-              <span className="instant-badge">
+              <span className="instant">
                 Instantané
               </span>
             </div>
 
             <div className="route-card">
-              <div className="country-block">
+              <div className="country">
                 <div className="flag-circle">
-                  <FranceFlag width={31} height={21} />
+                  <Flag
+                    country="france"
+                    width={31}
+                    height={21}
+                  />
                 </div>
 
-                <div className="country-text">
-                  <span>Départ</span>
+                <div>
+                  <small>Départ</small>
                   <strong>Paris</strong>
-                  <small>France</small>
+                  <span>France</span>
                 </div>
               </div>
 
-              <div className="route-visual">
-                <span className="route-point route-left" />
+              <div className="route">
+                <i className="point point-left" />
 
-                <span className="route-line">
-                  <span className="route-light" />
-                </span>
+                <div className="route-line">
+                  <i />
+                </div>
 
-                <span className="route-star">✦</span>
-                <span className="route-point route-right" />
+                <b>✦</b>
+                <i className="point point-right" />
               </div>
 
-              <div className="country-block destination">
-                <div className="country-text">
-                  <span>Destination</span>
+              <div className="country country-right">
+                <div>
+                  <small>Destination</small>
                   <strong>Brazzaville</strong>
-                  <small>Congo</small>
+                  <span>Congo</span>
                 </div>
 
                 <div className="flag-circle">
-                  <CongoFlag width={31} height={21} />
+                  <Flag
+                    country="congo"
+                    width={31}
+                    height={21}
+                  />
                 </div>
               </div>
             </div>
 
-            <div className="amount-section">
-              <label htmlFor="amount">Vous envoyez</label>
+            <label className="input-label" htmlFor="amount">
+              Vous envoyez
+            </label>
 
-              <div className="amount-box">
-                <input
-                  id="amount"
-                  type="number"
-                  min="1"
-                  value={amount}
-                  disabled={status === "loading"}
-                  onChange={(event) => {
-                    setAmount(event.target.value);
+            <div className="amount-box">
+              <input
+                id="amount"
+                type="number"
+                min="1"
+                value={amount}
+                disabled={status === "loading"}
+                onChange={(event) => {
+                  setAmount(event.target.value);
 
-                    if (status === "success") {
-                      resetTransfer();
-                    }
-                  }}
+                  if (status === "success") {
+                    reset();
+                  }
+                }}
+              />
+
+              <div className="currency">
+                <Flag
+                  country="france"
+                  width={25}
+                  height={17}
                 />
 
-                <div className="currency-select">
-                  <FranceFlag width={25} height={17} />
-                  <strong>EUR</strong>
-                  <span>⌄</span>
-                </div>
+                <strong>EUR</strong>
+                <span>⌄</span>
               </div>
             </div>
 
-            <div className="conversion-row">
+            <div className="conversion">
               <div>
                 <span>Votre proche reçoit</span>
-                <strong>{formatNumber(received)} FCFA</strong>
+                <strong>
+                  {formatNumber(received)} FCFA
+                </strong>
               </div>
 
-              <div className="exchange-info">
-                <span>1 EUR</span>
-                <span>=</span>
-                <span>{rate.toFixed(3)} FCFA</span>
-              </div>
+              <small>
+                1 EUR = {rate.toFixed(3)} FCFA
+              </small>
             </div>
 
-            <div className="beneficiary-card">
-              <div className="beneficiary-avatar">ME</div>
+            <div className="beneficiary">
+              <div className="avatar">ME</div>
 
-              <div className="beneficiary-info">
+              <div className="beneficiary-text">
                 <span>Bénéficiaire</span>
                 <strong>Marie-Espérance</strong>
-                <small>Mobile Money • Brazzaville</small>
+                <small>
+                  Mobile Money • Brazzaville
+                </small>
               </div>
 
-              <button
-                type="button"
-                className="change-button"
-              >
+              <button type="button">
                 Modifier
               </button>
             </div>
@@ -329,7 +345,9 @@ export default function EnvoyerPage() {
             <div className="summary">
               <div>
                 <span>Montant envoyé</span>
-                <strong>{numericAmount.toFixed(2)} €</strong>
+                <strong>
+                  {amountNumber.toFixed(2)} €
+                </strong>
               </div>
 
               <div>
@@ -337,10 +355,10 @@ export default function EnvoyerPage() {
                 <strong>{fees.toFixed(2)} €</strong>
               </div>
 
-              <div className="summary-total">
+              <div className="total">
                 <span>Total</span>
                 <strong>
-                  {(numericAmount + fees).toFixed(2)} €
+                  {(amountNumber + fees).toFixed(2)} €
                 </strong>
               </div>
             </div>
@@ -348,19 +366,17 @@ export default function EnvoyerPage() {
             <button
               type="button"
               className={`transfer-button ${status}`}
-              onClick={
-                status === "success"
-                  ? resetTransfer
-                  : startTransfer
-              }
               disabled={
-                numericAmount <= 0 ||
+                amountNumber <= 0 ||
                 status === "loading"
+              }
+              onClick={
+                status === "success" ? reset : transfer
               }
             >
               {status === "ready" && (
                 <>
-                  <span>Confirmer le transfert</span>
+                  Confirmer le transfert
                   <span>→</span>
                 </>
               )}
@@ -368,43 +384,41 @@ export default function EnvoyerPage() {
               {status === "loading" && (
                 <>
                   <span className="loader" />
-                  <span>Transfert en cours…</span>
+                  Transfert en cours…
                 </>
               )}
 
               {status === "success" && (
                 <>
-                  <span className="success-check">✓</span>
-                  <span>Transfert envoyé avec succès</span>
+                  <span className="check">✓</span>
+                  Transfert envoyé avec succès
                 </>
               )}
             </button>
 
             <p className="security-note">
-              <span>◆</span>
-              Vos données sont protégées par un chiffrement sécurisé.
+              ◆ Vos données sont protégées par un
+              chiffrement sécurisé.
             </p>
           </section>
 
-          <aside className="visual-panel">
-            <div className="visual-top">
+          <aside className="panel visual-panel">
+            <div className="visual-header">
               <span className="section-label">
                 YVI PAY SIGNATURE
               </span>
 
-              <span className="live-status">
-                <span />
+              <span className="network">
+                <i />
                 Réseau actif
               </span>
             </div>
 
-            <div className="visual-stage">
-              <DashboardGlobe />
-            </div>
+            <PremiumGlobe />
 
             <div className="signature-route">
               <div className="signature-city">
-                <FranceFlag width={30} height={20} />
+                <Flag country="france" />
 
                 <div>
                   <small>France</small>
@@ -413,20 +427,20 @@ export default function EnvoyerPage() {
               </div>
 
               <div className="signature-line">
-                <span />
+                <i />
               </div>
 
-              <div className="signature-city right-city">
+              <div className="signature-city signature-right">
                 <div>
                   <small>Congo</small>
                   <strong>Brazzaville</strong>
                 </div>
 
-                <CongoFlag width={30} height={20} />
+                <Flag country="congo" />
               </div>
             </div>
 
-            <div className="visual-stats">
+            <div className="stats">
               <div>
                 <span>Temps estimé</span>
                 <strong>Moins de 2 min</strong>
@@ -439,84 +453,91 @@ export default function EnvoyerPage() {
             </div>
           </aside>
         </div>
-
-        {showConfirmation && (
-          <div className="confirmation-overlay">
-            <div className="confirmation-card">
-              <button
-                type="button"
-                className="confirmation-close"
-                onClick={resetTransfer}
-                aria-label="Fermer"
-              >
-                ×
-              </button>
-
-              <div className="confirmation-icon">✓</div>
-
-              <span className="confirmation-eyebrow">
-                TRANSFERT CONFIRMÉ
-              </span>
-
-              <h2>Votre argent est en route.</h2>
-
-              <p>
-                Marie-Espérance recevra son transfert directement sur son
-                portefeuille Mobile Money.
-              </p>
-
-              <div className="confirmation-route">
-                <div>
-                  <FranceFlag width={36} height={24} />
-                  <small>Paris</small>
-                </div>
-
-                <div className="confirmation-journey">
-                  <span />
-                  <strong>✦</strong>
-                  <span />
-                </div>
-
-                <div>
-                  <CongoFlag width={36} height={24} />
-                  <small>Brazzaville</small>
-                </div>
-              </div>
-
-              <div className="confirmation-details">
-                <div>
-                  <span>Montant envoyé</span>
-                  <strong>{numericAmount.toFixed(2)} €</strong>
-                </div>
-
-                <div>
-                  <span>Montant reçu</span>
-                  <strong>{formatNumber(received)} FCFA</strong>
-                </div>
-
-                <div>
-                  <span>Référence</span>
-                  <strong>
-                    YVI-{new Date().getFullYear()}-0725
-                  </strong>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                className="confirmation-button"
-                onClick={resetTransfer}
-              >
-                Terminer
-              </button>
-
-              <span className="confirmation-brand">
-                YVI PAY
-              </span>
-            </div>
-          </div>
-        )}
       </section>
+
+      {confirmation && (
+        <div className="confirmation-overlay">
+          <div className="confirmation-card">
+            <button
+              type="button"
+              className="close"
+              onClick={reset}
+            >
+              ×
+            </button>
+
+            <div className="confirmation-check">
+              ✓
+            </div>
+
+            <span className="confirmation-label">
+              TRANSFERT CONFIRMÉ
+            </span>
+
+            <h2>Votre argent est en route.</h2>
+
+            <p>
+              Marie-Espérance recevra son transfert
+              directement sur son portefeuille Mobile Money.
+            </p>
+
+            <div className="confirmation-route">
+              <div>
+                <Flag
+                  country="france"
+                  width={36}
+                  height={24}
+                />
+                <small>Paris</small>
+              </div>
+
+              <span>━━━━ ✦ ━━━━</span>
+
+              <div>
+                <Flag
+                  country="congo"
+                  width={36}
+                  height={24}
+                />
+                <small>Brazzaville</small>
+              </div>
+            </div>
+
+            <div className="confirmation-details">
+              <div>
+                <span>Montant envoyé</span>
+                <strong>
+                  {amountNumber.toFixed(2)} €
+                </strong>
+              </div>
+
+              <div>
+                <span>Montant reçu</span>
+                <strong>
+                  {formatNumber(received)} FCFA
+                </strong>
+              </div>
+
+              <div>
+                <span>Référence</span>
+                <strong>
+                  YVI-{new Date().getFullYear()}-0725
+                </strong>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className="finish"
+              onClick={reset}
+            >
+              Terminer
+            </button>
+
+            <span className="brand">YVI PAY</span>
+          </div>
+        </div>
+      )}
 
       <style jsx>{`
         :global(*) {
@@ -525,6 +546,7 @@ export default function EnvoyerPage() {
 
         :global(body) {
           margin: 0;
+          background: #020711;
         }
 
         button,
@@ -532,7 +554,7 @@ export default function EnvoyerPage() {
           font: inherit;
         }
 
-        .send-page {
+        .page {
           position: relative;
           min-height: 100vh;
           overflow: hidden;
@@ -563,10 +585,9 @@ export default function EnvoyerPage() {
           z-index: -1;
           border-radius: 999px;
           filter: blur(90px);
-          pointer-events: none;
         }
 
-        .ambient-one {
+        .ambient-left {
           top: 8%;
           left: -8%;
           width: 320px;
@@ -574,7 +595,7 @@ export default function EnvoyerPage() {
           background: rgba(34, 72, 123, 0.22);
         }
 
-        .ambient-two {
+        .ambient-right {
           right: -8%;
           bottom: 0;
           width: 380px;
@@ -582,12 +603,12 @@ export default function EnvoyerPage() {
           background: rgba(183, 136, 52, 0.1);
         }
 
-        .send-shell {
+        .shell {
           width: min(1320px, 100%);
-          margin: 0 auto;
+          margin: auto;
         }
 
-        .top-line {
+        .header {
           display: flex;
           align-items: flex-start;
           justify-content: space-between;
@@ -613,21 +634,20 @@ export default function EnvoyerPage() {
 
         h1 {
           margin-bottom: 9px;
-          font-family: Georgia, "Times New Roman", serif;
+          font-family: Georgia, serif;
           font-size: clamp(2.35rem, 5vw, 4.5rem);
           font-weight: 400;
           letter-spacing: -0.045em;
           line-height: 0.98;
         }
 
-        .intro {
+        .header p {
           margin-bottom: 0;
           color: #8994a6;
-          font-size: 0.98rem;
         }
 
-        .secure-pill {
-          display: inline-flex;
+        .secure {
+          display: flex;
           align-items: center;
           gap: 10px;
           padding: 11px 16px;
@@ -638,15 +658,15 @@ export default function EnvoyerPage() {
           font-size: 0.76rem;
         }
 
-        .secure-dot {
+        .secure span {
           width: 7px;
           height: 7px;
           border-radius: 50%;
           background: #d5ad62;
-          box-shadow: 0 0 14px rgba(213, 173, 98, 0.9);
+          box-shadow: 0 0 14px #d5ad62;
         }
 
-        .main-grid {
+        .layout {
           display: grid;
           grid-template-columns:
             minmax(0, 1.04fr)
@@ -654,9 +674,7 @@ export default function EnvoyerPage() {
           gap: 24px;
         }
 
-        .transfer-panel,
-        .visual-panel {
-          position: relative;
+        .panel {
           overflow: hidden;
           border: 1px solid rgba(255, 255, 255, 0.075);
           border-radius: 28px;
@@ -667,45 +685,39 @@ export default function EnvoyerPage() {
           );
           box-shadow:
             0 26px 70px rgba(0, 0, 0, 0.32),
-            inset 0 1px 0 rgba(255, 255, 255, 0.045);
-          backdrop-filter: blur(22px);
+            inset 0 1px rgba(255, 255, 255, 0.045);
         }
 
         .transfer-panel {
           padding: clamp(24px, 4vw, 42px);
         }
 
-        .route-title {
+        .title-row {
           display: flex;
           justify-content: space-between;
           gap: 20px;
           margin-bottom: 24px;
         }
 
-        .route-title h2 {
-          margin-bottom: 0;
-          font-family: Georgia, "Times New Roman", serif;
+        .title-row h2 {
+          margin: 0;
+          font-family: Georgia, serif;
           font-size: clamp(1.55rem, 3vw, 2.25rem);
           font-weight: 400;
         }
 
-        .instant-badge {
+        .instant {
           height: max-content;
           padding: 8px 12px;
           border: 1px solid rgba(216, 183, 113, 0.2);
           border-radius: 999px;
-          background: rgba(216, 183, 113, 0.07);
           color: #d8b771;
           font-size: 0.68rem;
-          font-weight: 700;
         }
 
         .route-card {
           display: grid;
-          grid-template-columns:
-            1fr
-            minmax(100px, 0.8fr)
-            1fr;
+          grid-template-columns: 1fr 0.8fr 1fr;
           align-items: center;
           gap: 18px;
           margin-bottom: 27px;
@@ -715,16 +727,31 @@ export default function EnvoyerPage() {
           background: rgba(1, 6, 13, 0.48);
         }
 
-        .country-block {
+        .country {
           display: flex;
           align-items: center;
           gap: 13px;
-          min-width: 0;
         }
 
-        .destination {
+        .country-right {
           justify-content: flex-end;
           text-align: right;
+        }
+
+        .country > div:not(.flag-circle) {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .country small,
+        .country span {
+          color: #747f91;
+          font-size: 0.7rem;
+        }
+
+        .country strong {
+          margin: 2px 0;
+          font-size: 0.91rem;
         }
 
         .flag-circle {
@@ -738,25 +765,7 @@ export default function EnvoyerPage() {
           background: rgba(255, 255, 255, 0.04);
         }
 
-        .country-text {
-          display: flex;
-          min-width: 0;
-          flex-direction: column;
-        }
-
-        .country-text span,
-        .country-text small {
-          color: #747f91;
-          font-size: 0.7rem;
-        }
-
-        .country-text strong {
-          margin: 2px 0;
-          color: #f5f0e5;
-          font-size: 0.91rem;
-        }
-
-        .route-visual {
+        .route {
           position: relative;
           display: flex;
           align-items: center;
@@ -767,27 +776,30 @@ export default function EnvoyerPage() {
           width: 100%;
           height: 1px;
           overflow: hidden;
-          background: linear-gradient(
-            90deg,
-            rgba(202, 157, 76, 0.22),
-            #cfa75e,
-            rgba(202, 157, 76, 0.22)
-          );
+          background: #cfa75e;
         }
 
-        .route-light {
+        .route-line i,
+        .signature-line i {
           position: absolute;
-          top: -1px;
+          top: -2px;
           left: -30%;
           width: 34%;
-          height: 3px;
+          height: 5px;
           border-radius: 999px;
           background: #f5d592;
           box-shadow: 0 0 13px #e8bd6e;
           animation: travel 2.5s linear infinite;
         }
 
-        .route-point {
+        .route b {
+          position: absolute;
+          left: 50%;
+          color: #f3d491;
+          transform: translateX(-50%);
+        }
+
+        .point {
           position: absolute;
           z-index: 2;
           width: 7px;
@@ -795,29 +807,18 @@ export default function EnvoyerPage() {
           border: 1px solid #e9c477;
           border-radius: 50%;
           background: #0b1320;
-          box-shadow: 0 0 11px rgba(233, 196, 119, 0.9);
+          box-shadow: 0 0 11px #e9c477;
         }
 
-        .route-left {
+        .point-left {
           left: -1px;
         }
 
-        .route-right {
+        .point-right {
           right: -1px;
         }
 
-        .route-star {
-          position: absolute;
-          left: 50%;
-          color: #f3d491;
-          transform: translateX(-50%);
-        }
-
-        .amount-section {
-          margin-bottom: 17px;
-        }
-
-        .amount-section label {
+        .input-label {
           display: block;
           margin-bottom: 9px;
           color: #919baa;
@@ -827,6 +828,7 @@ export default function EnvoyerPage() {
         .amount-box {
           display: flex;
           overflow: hidden;
+          margin-bottom: 17px;
           border: 1px solid rgba(213, 173, 98, 0.18);
           border-radius: 18px;
           background: rgba(1, 6, 13, 0.62);
@@ -840,57 +842,49 @@ export default function EnvoyerPage() {
           outline: none;
           background: transparent;
           color: #fffaf0;
-          font-family: Georgia, "Times New Roman", serif;
-          font-size: clamp(1.65rem, 4vw, 2.25rem);
+          font-family: Georgia, serif;
+          font-size: 2rem;
         }
 
-        .currency-select {
+        .currency {
           display: flex;
           align-items: center;
           gap: 8px;
           min-width: 118px;
           padding: 0 18px;
           border-left: 1px solid rgba(255, 255, 255, 0.06);
-          color: #ebe4d5;
-          font-size: 0.82rem;
         }
 
-        .currency-select span {
+        .currency span {
           margin-left: auto;
           color: #8c96a6;
         }
 
-        .conversion-row {
+        .conversion {
           display: flex;
           align-items: flex-end;
           justify-content: space-between;
           gap: 18px;
           margin-bottom: 24px;
-          padding: 0 3px;
         }
 
-        .conversion-row > div:first-child {
+        .conversion > div {
           display: flex;
           flex-direction: column;
           gap: 3px;
         }
 
-        .conversion-row span {
+        .conversion span,
+        .conversion small {
           color: #7f8999;
           font-size: 0.7rem;
         }
 
-        .conversion-row strong {
+        .conversion strong {
           color: #dcb96f;
-          font-size: 1rem;
         }
 
-        .exchange-info {
-          display: flex;
-          gap: 7px;
-        }
-
-        .beneficiary-card {
+        .beneficiary {
           display: flex;
           align-items: center;
           gap: 14px;
@@ -901,7 +895,7 @@ export default function EnvoyerPage() {
           background: rgba(255, 255, 255, 0.025);
         }
 
-        .beneficiary-avatar {
+        .avatar {
           display: grid;
           width: 42px;
           height: 42px;
@@ -910,28 +904,26 @@ export default function EnvoyerPage() {
           border-radius: 50%;
           color: #e2bd74;
           font-size: 0.7rem;
-          font-weight: 700;
         }
 
-        .beneficiary-info {
+        .beneficiary-text {
           display: flex;
           flex: 1;
           flex-direction: column;
         }
 
-        .beneficiary-info span,
-        .beneficiary-info small {
+        .beneficiary-text span,
+        .beneficiary-text small {
           color: #737e90;
           font-size: 0.68rem;
         }
 
-        .beneficiary-info strong {
+        .beneficiary-text strong {
           margin: 3px 0;
-          color: #f1ecdf;
           font-size: 0.86rem;
         }
 
-        .change-button {
+        .beneficiary button {
           border: 0;
           background: transparent;
           color: #d9b66d;
@@ -946,7 +938,7 @@ export default function EnvoyerPage() {
           margin-bottom: 22px;
         }
 
-        .summary > div {
+        .summary div {
           display: flex;
           justify-content: space-between;
         }
@@ -957,29 +949,23 @@ export default function EnvoyerPage() {
         }
 
         .summary strong {
-          color: #dfe4ec;
           font-size: 0.8rem;
         }
 
-        .summary-total {
+        .summary .total {
           margin-top: 4px;
           padding-top: 13px;
           border-top: 1px solid rgba(255, 255, 255, 0.065);
         }
 
-        .summary-total span,
-        .summary-total strong {
-          color: #f5efe1;
-        }
-
-        .transfer-button {
+        .transfer-button,
+        .finish {
           display: flex;
           width: 100%;
           min-height: 57px;
           align-items: center;
           justify-content: center;
           gap: 12px;
-          padding: 15px 19px;
           border: 1px solid rgba(255, 231, 181, 0.52);
           border-radius: 17px;
           background: linear-gradient(
@@ -990,7 +976,6 @@ export default function EnvoyerPage() {
           );
           color: #08101d;
           cursor: pointer;
-          font-size: 0.82rem;
           font-weight: 800;
         }
 
@@ -1001,11 +986,7 @@ export default function EnvoyerPage() {
 
         .transfer-button.success {
           color: #d8bb7c;
-          background: linear-gradient(
-            110deg,
-            rgba(109, 86, 44, 0.33),
-            rgba(191, 148, 72, 0.17)
-          );
+          background: rgba(191, 148, 72, 0.17);
         }
 
         .loader {
@@ -1017,21 +998,19 @@ export default function EnvoyerPage() {
           animation: spin 0.75s linear infinite;
         }
 
-        .success-check {
+        .check {
           display: grid;
           width: 21px;
           height: 21px;
           place-items: center;
-          border: 1px solid rgba(219, 189, 127, 0.65);
+          border: 1px solid #d8bb7c;
           border-radius: 50%;
         }
 
         .security-note {
-          display: flex;
-          justify-content: center;
-          gap: 8px;
           margin: 13px 0 0;
           color: #687487;
+          text-align: center;
           font-size: 0.64rem;
         }
 
@@ -1053,125 +1032,204 @@ export default function EnvoyerPage() {
             );
         }
 
-        .visual-top {
+        .visual-header {
           display: flex;
           justify-content: space-between;
         }
 
-        .live-status {
-          display: inline-flex;
+        .network {
+          display: flex;
           align-items: center;
           gap: 7px;
           color: #9da8b7;
           font-size: 0.67rem;
         }
 
-        .live-status > span {
+        .network i {
           width: 6px;
           height: 6px;
           border-radius: 50%;
           background: #b99a59;
-          box-shadow: 0 0 12px rgba(185, 154, 89, 0.95);
-          animation: pulse 1.8s ease-in-out infinite;
+          box-shadow: 0 0 12px #b99a59;
         }
 
-        .visual-stage {
+        .globe-area {
+          position: relative;
           display: grid;
-          min-height: 430px;
+          min-height: 455px;
           flex: 1;
           place-items: center;
-          padding: 12px 0 18px;
         }
 
-        .dashboard-visual {
+        .globe {
           position: relative;
-          width: 100%;
-          height: 410px;
+          z-index: 2;
+          width: min(355px, 75vw);
+          aspect-ratio: 1;
           overflow: hidden;
-          border: 1px solid rgba(220, 180, 104, 0.2);
-          border-radius: 22px;
-          background: #020918;
+          border-radius: 50%;
+          background: #031023;
           box-shadow:
-            0 22px 50px rgba(0, 0, 0, 0.34),
-            0 0 45px rgba(41, 94, 153, 0.16);
+            0 0 0 1px rgba(224, 186, 112, 0.44),
+            0 0 60px rgba(44, 105, 173, 0.38);
+          animation: float 5.5s ease-in-out infinite;
         }
 
-        .dashboard-image {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-          animation: dashboardGlow 7s ease-in-out infinite;
-        }
-
-        .dashboard-overlay {
+        .globe-ocean {
           position: absolute;
           inset: 0;
           background:
-            linear-gradient(
-              180deg,
-              rgba(2, 9, 24, 0.12),
-              rgba(2, 9, 24, 0.04) 45%,
-              rgba(2, 9, 24, 0.56)
+            radial-gradient(
+              circle at 30% 24%,
+              #204f7c,
+              #0a294b 45%,
+              #020918 78%
             );
-          pointer-events: none;
         }
 
-        .transfer-map {
+        .world-map {
+          position: absolute;
+          top: 20%;
+          left: -17%;
+          width: 138%;
+          height: 61%;
+          object-fit: fill;
+          opacity: 0.68;
+          filter:
+            invert(82%)
+            sepia(18%)
+            saturate(530%)
+            hue-rotate(165deg)
+            brightness(76%)
+            contrast(105%);
+          transform:
+            scaleX(0.79)
+            perspective(480px)
+            rotateY(-7deg);
+          mix-blend-mode: screen;
+        }
+
+        .globe-grid {
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          opacity: 0.23;
+        }
+
+        .horizontal-grid {
+          background: repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 35px,
+            rgba(177, 205, 229, 0.25) 36px,
+            transparent 37px
+          );
+        }
+
+        .vertical-grid {
+          background: repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 45px,
+            rgba(177, 205, 229, 0.2) 46px,
+            transparent 47px
+          );
+          transform: scaleX(0.7);
+        }
+
+        .globe-light {
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          background: radial-gradient(
+            circle at 28% 22%,
+            rgba(255, 255, 255, 0.18),
+            transparent 35%
+          );
+        }
+
+        .globe-shadow {
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          box-shadow:
+            inset -48px -25px 75px rgba(0, 0, 0, 0.68),
+            inset 22px 15px 38px rgba(75, 138, 202, 0.12);
+        }
+
+        .globe-route {
           position: absolute;
           inset: 0;
           width: 100%;
           height: 100%;
-          pointer-events: none;
         }
 
-        .city-label {
+        .globe-border {
+          position: absolute;
+          inset: 0;
+          border: 1.5px solid rgba(228, 190, 115, 0.48);
+          border-radius: 50%;
+        }
+
+        .orbit {
+          position: absolute;
+          z-index: 1;
+          border: 1px solid rgba(201, 163, 91, 0.11);
+          border-radius: 50%;
+        }
+
+        .orbit-one {
+          width: min(405px, 88vw);
+          aspect-ratio: 1;
+          animation: orbit 18s linear infinite;
+        }
+
+        .orbit-two {
+          width: min(455px, 96vw);
+          aspect-ratio: 1;
+          border-style: dashed;
+          animation: reverseOrbit 25s linear infinite;
+        }
+
+        .city-card {
           position: absolute;
           z-index: 4;
           display: flex;
           align-items: center;
           gap: 9px;
           padding: 9px 12px;
-          border: 1px solid rgba(255, 255, 255, 0.09);
+          border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 13px;
-          background: rgba(3, 10, 19, 0.84);
-          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
-          backdrop-filter: blur(12px);
+          background: rgba(3, 10, 19, 0.88);
         }
 
-        .city-label div {
+        .city-card div {
           display: flex;
           flex-direction: column;
         }
 
-        .city-label small {
+        .city-card small {
           color: #707d90;
           font-size: 0.57rem;
         }
 
-        .city-label strong {
-          color: #eee8da;
+        .city-card strong {
           font-size: 0.72rem;
         }
 
-        .city-paris {
-          top: 38px;
-          left: 20px;
+        .paris-card {
+          top: 23%;
+          left: 0;
         }
 
-        .city-brazzaville {
-          right: 20px;
-          bottom: 48px;
+        .brazzaville-card {
+          right: 0;
+          bottom: 18%;
         }
 
         .signature-route {
           display: grid;
-          grid-template-columns:
-            auto
-            1fr
-            auto;
+          grid-template-columns: auto 1fr auto;
           align-items: center;
           gap: 16px;
           padding: 17px 18px;
@@ -1186,11 +1244,7 @@ export default function EnvoyerPage() {
           gap: 9px;
         }
 
-        .right-city {
-          text-align: right;
-        }
-
-        .signature-city > div {
+        .signature-city div {
           display: flex;
           flex-direction: column;
         }
@@ -1201,8 +1255,11 @@ export default function EnvoyerPage() {
         }
 
         .signature-city strong {
-          color: #e9e3d6;
           font-size: 0.72rem;
+        }
+
+        .signature-right {
+          text-align: right;
         }
 
         .signature-line {
@@ -1212,31 +1269,19 @@ export default function EnvoyerPage() {
           background: linear-gradient(
             90deg,
             transparent,
-            rgba(220, 181, 107, 0.9),
+            #dcb56b,
             transparent
           );
         }
 
-        .signature-line span {
-          position: absolute;
-          top: -2px;
-          left: -30%;
-          width: 34%;
-          height: 5px;
-          border-radius: 999px;
-          background: #f5d592;
-          box-shadow: 0 0 13px #e8bd6e;
-          animation: travel 2.5s linear infinite;
-        }
-
-        .visual-stats {
+        .stats {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 10px;
           margin-top: 10px;
         }
 
-        .visual-stats > div {
+        .stats div {
           display: flex;
           flex-direction: column;
           gap: 3px;
@@ -1245,12 +1290,12 @@ export default function EnvoyerPage() {
           border-radius: 14px;
         }
 
-        .visual-stats span {
+        .stats span {
           color: #667387;
           font-size: 0.6rem;
         }
 
-        .visual-stats strong {
+        .stats strong {
           color: #c7ced8;
           font-size: 0.7rem;
         }
@@ -1262,7 +1307,7 @@ export default function EnvoyerPage() {
           display: grid;
           place-items: center;
           padding: 24px;
-          background: rgba(0, 4, 10, 0.79);
+          background: rgba(0, 4, 10, 0.82);
           backdrop-filter: blur(14px);
         }
 
@@ -1277,11 +1322,10 @@ export default function EnvoyerPage() {
             #0c1726,
             #030913
           );
-          box-shadow: 0 36px 100px rgba(0, 0, 0, 0.65);
           text-align: center;
         }
 
-        .confirmation-close {
+        .close {
           position: absolute;
           top: 15px;
           right: 17px;
@@ -1289,12 +1333,12 @@ export default function EnvoyerPage() {
           height: 32px;
           border: 1px solid rgba(255, 255, 255, 0.06);
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.025);
+          background: transparent;
           color: #7f8a9a;
           cursor: pointer;
         }
 
-        .confirmation-icon {
+        .confirmation-check {
           display: grid;
           width: 67px;
           height: 67px;
@@ -1304,10 +1348,9 @@ export default function EnvoyerPage() {
           border-radius: 50%;
           color: #ebce91;
           font-size: 1.4rem;
-          box-shadow: 0 0 32px rgba(217, 178, 104, 0.15);
         }
 
-        .confirmation-eyebrow {
+        .confirmation-label {
           display: block;
           margin-bottom: 10px;
           color: #d7b66f;
@@ -1318,14 +1361,12 @@ export default function EnvoyerPage() {
 
         .confirmation-card h2 {
           margin-bottom: 11px;
-          font-family: Georgia, "Times New Roman", serif;
-          font-size: clamp(1.85rem, 5vw, 2.5rem);
+          font-family: Georgia, serif;
+          font-size: 2.2rem;
           font-weight: 400;
         }
 
         .confirmation-card > p {
-          max-width: 360px;
-          margin: 0 auto 24px;
           color: #8995a6;
           font-size: 0.78rem;
           line-height: 1.65;
@@ -1333,45 +1374,25 @@ export default function EnvoyerPage() {
 
         .confirmation-route {
           display: grid;
-          grid-template-columns:
-            auto
-            1fr
-            auto;
+          grid-template-columns: auto 1fr auto;
           align-items: center;
           gap: 15px;
-          margin-bottom: 20px;
+          margin: 24px 0 20px;
           padding: 17px 19px;
           border: 1px solid rgba(255, 255, 255, 0.06);
           border-radius: 18px;
-          background: rgba(0, 5, 12, 0.48);
         }
 
-        .confirmation-route
-          > div:not(.confirmation-journey) {
+        .confirmation-route div {
           display: flex;
           align-items: center;
           flex-direction: column;
           gap: 5px;
         }
 
-        .confirmation-route small {
-          color: #aab4c2;
-          font-size: 0.65rem;
-        }
-
-        .confirmation-journey {
-          display: flex;
-          align-items: center;
-        }
-
-        .confirmation-journey span {
-          flex: 1;
-          height: 1px;
-          background: rgba(221, 184, 111, 0.74);
-        }
-
-        .confirmation-journey strong {
+        .confirmation-route span {
           color: #e7c984;
+          font-size: 0.75rem;
         }
 
         .confirmation-details {
@@ -1380,15 +1401,14 @@ export default function EnvoyerPage() {
           border-radius: 17px;
         }
 
-        .confirmation-details > div {
+        .confirmation-details div {
           display: flex;
           justify-content: space-between;
           padding: 12px 15px;
-          border-bottom:
-            1px solid rgba(255, 255, 255, 0.045);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.045);
         }
 
-        .confirmation-details > div:last-child {
+        .confirmation-details div:last-child {
           border-bottom: 0;
         }
 
@@ -1398,28 +1418,14 @@ export default function EnvoyerPage() {
         }
 
         .confirmation-details strong {
-          color: #e7e1d5;
           font-size: 0.72rem;
         }
 
-        .confirmation-button {
-          width: 100%;
+        .finish {
           min-height: 49px;
-          border: 1px solid rgba(255, 238, 200, 0.46);
-          border-radius: 15px;
-          background: linear-gradient(
-            110deg,
-            #b8883c,
-            #dfbd78,
-            #b48334
-          );
-          color: #08101b;
-          cursor: pointer;
-          font-size: 0.77rem;
-          font-weight: 800;
         }
 
-        .confirmation-brand {
+        .brand {
           display: block;
           margin-top: 19px;
           color: #5d687a;
@@ -1444,44 +1450,41 @@ export default function EnvoyerPage() {
           }
         }
 
-        @keyframes pulse {
+        @keyframes float {
           0%,
           100% {
-            opacity: 0.55;
-            transform: scale(0.9);
+            transform: translateY(0);
           }
 
           50% {
-            opacity: 1;
-            transform: scale(1.18);
+            transform: translateY(-8px);
           }
         }
 
-        @keyframes dashboardGlow {
-          0%,
-          100% {
-            opacity: 0.78;
-            transform: scale(1);
+        @keyframes orbit {
+          to {
+            transform: rotate(360deg);
           }
+        }
 
-          50% {
-            opacity: 1;
-            transform: scale(1.015);
+        @keyframes reverseOrbit {
+          to {
+            transform: rotate(-360deg);
           }
         }
 
         @media (max-width: 1050px) {
-          .main-grid {
+          .layout {
             grid-template-columns: 1fr;
           }
         }
 
         @media (max-width: 690px) {
-          .send-page {
+          .page {
             padding: 25px 14px 50px;
           }
 
-          .top-line {
+          .header {
             flex-direction: column;
           }
 
@@ -1489,37 +1492,19 @@ export default function EnvoyerPage() {
             grid-template-columns: 1fr;
           }
 
-          .destination {
+          .country-right {
             justify-content: flex-start;
             flex-direction: row-reverse;
             text-align: left;
           }
 
-          .conversion-row {
+          .conversion {
             align-items: flex-start;
             flex-direction: column;
           }
 
-          .dashboard-visual {
-            height: 360px;
-          }
-
-          .city-paris {
-            top: 24px;
-            left: 12px;
-          }
-
-          .city-brazzaville {
-            right: 12px;
-            bottom: 32px;
-          }
-
-          .visual-stats {
+          .stats {
             grid-template-columns: 1fr;
-          }
-
-          .confirmation-card {
-            padding: 38px 20px 25px;
           }
         }
       `}</style>
