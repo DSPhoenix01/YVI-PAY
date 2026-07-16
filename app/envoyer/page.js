@@ -2,23 +2,27 @@
 
 import { useState } from "react";
 
+const EARTH_IMAGE =
+  "https://upload.wikimedia.org/wikipedia/commons/0/0d/Africa_and_Europe_from_a_Million_Miles_Away.png";
+
 function FranceFlag({ width = 30, height = 20 }) {
   return (
     <svg
       viewBox="0 0 3 2"
       width={width}
       height={height}
+      role="img"
       aria-label="Drapeau de la France"
       style={{
         display: "block",
         flexShrink: 0,
-        borderRadius: "3px",
+        borderRadius: 3,
         boxShadow: "0 3px 10px rgba(0,0,0,.35)",
       }}
     >
-      <rect x="0" y="0" width="1" height="2" fill="#002395" />
-      <rect x="1" y="0" width="1" height="2" fill="#ffffff" />
-      <rect x="2" y="0" width="1" height="2" fill="#ed2939" />
+      <rect x="0" width="1" height="2" fill="#002395" />
+      <rect x="1" width="1" height="2" fill="#fff" />
+      <rect x="2" width="1" height="2" fill="#ed2939" />
     </svg>
   );
 }
@@ -29,15 +33,16 @@ function CongoFlag({ width = 30, height = 20 }) {
       viewBox="0 0 3 2"
       width={width}
       height={height}
+      role="img"
       aria-label="Drapeau de la République du Congo"
       style={{
         display: "block",
         flexShrink: 0,
-        borderRadius: "3px",
+        borderRadius: 3,
         boxShadow: "0 3px 10px rgba(0,0,0,.35)",
       }}
     >
-      <rect x="0" y="0" width="3" height="2" fill="#009543" />
+      <rect width="3" height="2" fill="#009543" />
       <polygon
         points="0.65,2 1.35,2 2.35,0 1.65,0"
         fill="#fbde4a"
@@ -52,58 +57,29 @@ function CongoFlag({ width = 30, height = 20 }) {
 
 function PremiumGlobe() {
   return (
-    <div
-      style={{
-        position: "relative",
-        zIndex: 2,
-        width: "350px",
-        maxWidth: "76vw",
-        aspectRatio: "1",
-        filter:
-          "drop-shadow(0 0 34px rgba(40, 96, 154, 0.35)) drop-shadow(0 0 18px rgba(214, 174, 97, 0.14))",
-        animation: "globeFloat 5.5s ease-in-out infinite",
-      }}
-    >
+    <div className="earth">
+      <img
+        src={EARTH_IMAGE}
+        alt="Globe terrestre montrant l’Europe et l’Afrique"
+        className="earth-image"
+      />
+
+      <div className="earth-blue-overlay" />
+      <div className="earth-gold-edge" />
+
       <svg
+        className="earth-route"
         viewBox="0 0 400 400"
-        role="img"
-        aria-label="Globe terrestre montrant l’Europe et l’Afrique"
-        style={{
-          display: "block",
-          width: "100%",
-          height: "100%",
-        }}
+        aria-hidden="true"
       >
         <defs>
-          <radialGradient id="ocean" cx="32%" cy="25%" r="78%">
-            <stop offset="0%" stopColor="#1d4e7d" />
-            <stop offset="48%" stopColor="#0a294c" />
-            <stop offset="100%" stopColor="#020916" />
-          </radialGradient>
-
-          <linearGradient id="land" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#8aacc5" />
-            <stop offset="55%" stopColor="#436f91" />
-            <stop offset="100%" stopColor="#244966" />
-          </linearGradient>
-
           <linearGradient id="routeGold" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#b17a2e" />
-            <stop offset="50%" stopColor="#f7d88f" />
-            <stop offset="100%" stopColor="#b77d2d" />
+            <stop offset="0%" stopColor="#b47d30" />
+            <stop offset="48%" stopColor="#ffe4a1" />
+            <stop offset="100%" stopColor="#b47d30" />
           </linearGradient>
 
-          <radialGradient id="shine" cx="30%" cy="24%" r="75%">
-            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.2" />
-            <stop offset="38%" stopColor="#ffffff" stopOpacity="0.04" />
-            <stop offset="100%" stopColor="#000000" stopOpacity="0.42" />
-          </radialGradient>
-
-          <clipPath id="earthCircle">
-            <circle cx="200" cy="200" r="174" />
-          </clipPath>
-
-          <filter id="glow">
+          <filter id="routeGlow">
             <feGaussianBlur stdDeviation="4" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
@@ -112,240 +88,48 @@ function PremiumGlobe() {
           </filter>
         </defs>
 
-        <circle
-          cx="200"
-          cy="200"
-          r="174"
-          fill="url(#ocean)"
-          stroke="#d9b36b"
-          strokeOpacity="0.55"
-          strokeWidth="2"
-        />
-
-        <g clipPath="url(#earthCircle)">
-          <ellipse
-            cx="200"
-            cy="200"
-            rx="170"
-            ry="50"
-            fill="none"
-            stroke="#a8c7dd"
-            strokeOpacity="0.18"
-          />
-
-          <ellipse
-            cx="200"
-            cy="145"
-            rx="155"
-            ry="36"
-            fill="none"
-            stroke="#a8c7dd"
-            strokeOpacity="0.13"
-          />
-
-          <ellipse
-            cx="200"
-            cy="255"
-            rx="155"
-            ry="36"
-            fill="none"
-            stroke="#a8c7dd"
-            strokeOpacity="0.13"
-          />
-
-          <ellipse
-            cx="200"
-            cy="200"
-            rx="58"
-            ry="171"
-            fill="none"
-            stroke="#a8c7dd"
-            strokeOpacity="0.16"
-          />
-
-          <ellipse
-            cx="200"
-            cy="200"
-            rx="112"
-            ry="171"
-            fill="none"
-            stroke="#a8c7dd"
-            strokeOpacity="0.11"
-          />
-
-          <g
-            fill="url(#land)"
-            stroke="#c2d7e6"
-            strokeOpacity="0.35"
-            strokeWidth="1.2"
-          >
-            <path
-              d="
-                M111 107
-                L128 96
-                L145 91
-                L157 79
-                L170 83
-                L180 94
-                L194 93
-                L205 101
-                L220 100
-                L232 108
-                L247 110
-                L257 121
-                L253 134
-                L240 140
-                L228 135
-                L218 143
-                L207 141
-                L197 149
-                L183 146
-                L173 153
-                L159 149
-                L149 139
-                L135 136
-                L124 125
-                Z
-              "
-            />
-
-            <path
-              d="
-                M177 145
-                L197 149
-                L215 160
-                L228 176
-                L239 197
-                L245 218
-                L240 240
-                L230 261
-                L220 283
-                L208 304
-                L194 323
-                L180 318
-                L168 300
-                L157 279
-                L149 258
-                L143 237
-                L144 216
-                L150 196
-                L158 179
-                L167 163
-                Z
-              "
-            />
-
-            <path
-              d="
-                M237 117
-                L254 109
-                L271 111
-                L284 119
-                L299 123
-                L309 136
-                L303 149
-                L288 153
-                L274 147
-                L261 152
-                L249 143
-                Z
-              "
-            />
-
-            <path
-              d="
-                M252 158
-                L269 154
-                L284 161
-                L289 173
-                L278 181
-                L263 176
-                Z
-              "
-            />
-
-            <path
-              d="
-                M248 257
-                L259 263
-                L263 279
-                L258 298
-                L249 307
-                L243 291
-                L245 273
-                Z
-              "
-            />
-          </g>
-
-          <path
-            d="M170 135 C187 151 208 174 218 220"
-            fill="none"
-            stroke="url(#routeGold)"
-            strokeWidth="3.5"
-            strokeLinecap="round"
-            strokeDasharray="8 7"
-            filter="url(#glow)"
-          >
-            <animate
-              attributeName="stroke-dashoffset"
-              from="0"
-              to="-30"
-              dur="2s"
-              repeatCount="indefinite"
-            />
-          </path>
-
-          <circle
-            cx="170"
-            cy="135"
-            r="5.5"
-            fill="#f4d48d"
-            stroke="#fff3c6"
-            strokeWidth="2"
-            filter="url(#glow)"
-          />
-
-          <circle
-            cx="218"
-            cy="220"
-            r="5.5"
-            fill="#f4d48d"
-            stroke="#fff3c6"
-            strokeWidth="2"
-            filter="url(#glow)"
-          />
-
-          <circle r="4.5" fill="#fff1bc" filter="url(#glow)">
-            <animateMotion
-              dur="2.7s"
-              repeatCount="indefinite"
-              path="M170 135 C187 151 208 174 218 220"
-            />
-          </circle>
-
-          <circle
-            cx="200"
-            cy="200"
-            r="174"
-            fill="url(#shine)"
-            pointerEvents="none"
-          />
-        </g>
-
-        <circle
-          cx="200"
-          cy="200"
-          r="174"
+        <path
+          id="moneyRoute"
+          d="M171 112 C195 143 232 191 239 257"
           fill="none"
-          stroke="#e0ba70"
-          strokeOpacity="0.4"
-          strokeWidth="2"
+          stroke="url(#routeGold)"
+          strokeWidth="3.6"
+          strokeLinecap="round"
+          filter="url(#routeGlow)"
         />
+
+        <circle
+          cx="171"
+          cy="112"
+          r="6"
+          fill="#f5cf7b"
+          stroke="#fff2bd"
+          strokeWidth="2"
+          filter="url(#routeGlow)"
+        />
+
+        <circle
+          cx="239"
+          cy="257"
+          r="6"
+          fill="#f5cf7b"
+          stroke="#fff2bd"
+          strokeWidth="2"
+          filter="url(#routeGlow)"
+        />
+
+        <circle r="4.5" fill="#fff2bd" filter="url(#routeGlow)">
+          <animateMotion
+            dur="2.8s"
+            repeatCount="indefinite"
+            path="M171 112 C195 143 232 191 239 257"
+          />
+        </circle>
       </svg>
     </div>
   );
 }
+
 export default function EnvoyerPage() {
   const [amount, setAmount] = useState("250");
   const [status, setStatus] = useState("ready");
@@ -359,6 +143,11 @@ export default function EnvoyerPage() {
   const formatNumber = (value) =>
     new Intl.NumberFormat("fr-FR").format(value);
 
+  const resetTransfer = () => {
+    setStatus("ready");
+    setShowConfirmation(false);
+  };
+
   const startTransfer = () => {
     if (numericAmount <= 0 || status === "loading") return;
 
@@ -369,11 +158,6 @@ export default function EnvoyerPage() {
       setStatus("success");
       setShowConfirmation(true);
     }, 2200);
-  };
-
-  const resetTransfer = () => {
-    setStatus("ready");
-    setShowConfirmation(false);
   };
 
   return (
@@ -422,12 +206,14 @@ export default function EnvoyerPage() {
               </div>
 
               <div className="route-visual">
-                <span className="route-point left" />
+                <span className="route-point route-left" />
+
                 <span className="route-line">
                   <span className="route-light" />
                 </span>
+
                 <span className="route-star">✦</span>
-                <span className="route-point right" />
+                <span className="route-point route-right" />
               </div>
 
               <div className="country-block destination">
@@ -731,10 +517,10 @@ export default function EnvoyerPage() {
 
         .ambient {
           position: absolute;
+          z-index: -1;
           border-radius: 999px;
           filter: blur(90px);
           pointer-events: none;
-          z-index: -1;
         }
 
         .ambient-one {
@@ -964,11 +750,11 @@ export default function EnvoyerPage() {
           box-shadow: 0 0 11px rgba(233, 196, 119, 0.9);
         }
 
-        .route-point.left {
+        .route-left {
           left: -1px;
         }
 
-        .route-point.right {
+        .route-right {
           right: -1px;
         }
 
@@ -1249,26 +1035,76 @@ export default function EnvoyerPage() {
           place-items: center;
         }
 
-        .real-globe {
+        .earth {
           position: relative;
           z-index: 2;
-          width: min(350px, 76vw);
+          width: min(370px, 76vw);
           aspect-ratio: 1;
-          filter:
-            drop-shadow(0 0 34px rgba(40, 96, 154, 0.28))
-            drop-shadow(0 0 16px rgba(214, 174, 97, 0.09));
+          overflow: hidden;
+          border-radius: 50%;
+          background: #020916;
+          box-shadow:
+            0 0 0 1px rgba(226, 185, 105, 0.46),
+            0 0 0 11px rgba(42, 92, 145, 0.07),
+            0 0 58px rgba(48, 113, 181, 0.35),
+            0 0 28px rgba(218, 174, 91, 0.11);
           animation: globeFloat 5.5s ease-in-out infinite;
         }
 
-        .earth-svg {
-          display: block;
-          width: 100%;
-          height: 100%;
+        .earth-image {
+          position: absolute;
+          inset: -1%;
+          width: 102%;
+          height: 102%;
+          object-fit: cover;
+          border-radius: 50%;
+          filter:
+            brightness(0.43)
+            contrast(1.28)
+            saturate(0.76)
+            sepia(0.12)
+            hue-rotate(174deg);
+          transform: scale(1.015);
         }
 
-        .animated-route {
-          stroke-dasharray: 8 8;
-          animation: routeDash 2.5s linear infinite;
+        .earth-blue-overlay {
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          background:
+            radial-gradient(
+              circle at 31% 23%,
+              rgba(79, 143, 207, 0.08),
+              transparent 34%
+            ),
+            linear-gradient(
+              145deg,
+              rgba(4, 29, 59, 0.2),
+              rgba(0, 5, 15, 0.58)
+            );
+          box-shadow:
+            inset 25px 18px 42px rgba(89, 153, 215, 0.12),
+            inset -42px -25px 65px rgba(0, 0, 0, 0.64);
+          pointer-events: none;
+        }
+
+        .earth-gold-edge {
+          position: absolute;
+          inset: 0;
+          border: 1.5px solid rgba(227, 188, 111, 0.57);
+          border-radius: 50%;
+          box-shadow:
+            inset 0 0 17px rgba(216, 176, 99, 0.09),
+            0 0 13px rgba(216, 176, 99, 0.12);
+          pointer-events: none;
+        }
+
+        .earth-route {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
         }
 
         .halo {
@@ -1279,13 +1115,13 @@ export default function EnvoyerPage() {
         }
 
         .halo-one {
-          width: min(390px, 89vw);
+          width: min(410px, 89vw);
           aspect-ratio: 1;
           animation: haloSpin 18s linear infinite;
         }
 
         .halo-two {
-          width: min(445px, 98vw);
+          width: min(465px, 98vw);
           aspect-ratio: 1;
           border-style: dashed;
           animation: haloSpinReverse 26s linear infinite;
@@ -1300,7 +1136,9 @@ export default function EnvoyerPage() {
           padding: 9px 12px;
           border: 1px solid rgba(255, 255, 255, 0.07);
           border-radius: 13px;
-          background: rgba(3, 10, 19, 0.78);
+          background: rgba(3, 10, 19, 0.86);
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+          backdrop-filter: blur(12px);
         }
 
         .floating-city div {
@@ -1432,6 +1270,7 @@ export default function EnvoyerPage() {
           border: 1px solid rgba(224, 190, 123, 0.26);
           border-radius: 29px;
           background: linear-gradient(155deg, #0c1726, #030913);
+          box-shadow: 0 36px 100px rgba(0, 0, 0, 0.65);
           text-align: center;
         }
 
@@ -1458,6 +1297,7 @@ export default function EnvoyerPage() {
           border-radius: 50%;
           color: #ebce91;
           font-size: 1.4rem;
+          box-shadow: 0 0 32px rgba(217, 178, 104, 0.15);
         }
 
         .confirmation-eyebrow {
@@ -1583,12 +1423,6 @@ export default function EnvoyerPage() {
 
           to {
             left: 105%;
-          }
-        }
-
-        @keyframes routeDash {
-          to {
-            stroke-dashoffset: -32;
           }
         }
 
