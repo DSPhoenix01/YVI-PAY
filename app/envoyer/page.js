@@ -48,7 +48,9 @@ export default function EnvoyerPage() {
         <div className="top-line">
           <div>
             <span className="eyebrow">TRANSFERT INTERNATIONAL</span>
+
             <h1>Envoyer de l’argent</h1>
+
             <p className="intro">
               De Paris vers vos proches, en toute simplicité.
             </p>
@@ -74,6 +76,7 @@ export default function EnvoyerPage() {
             <div className="route-card">
               <div className="country-block">
                 <div className="flag-circle">🇫🇷</div>
+
                 <div>
                   <span className="country-caption">Départ</span>
                   <strong>Paris</strong>
@@ -83,9 +86,11 @@ export default function EnvoyerPage() {
 
               <div className="route-visual">
                 <span className="route-point route-point-left" />
+
                 <span className="route-line">
                   <span className="route-light" />
                 </span>
+
                 <span className="route-plane">✦</span>
                 <span className="route-point route-point-right" />
               </div>
@@ -96,6 +101,7 @@ export default function EnvoyerPage() {
                   <strong>Brazzaville</strong>
                   <small>Congo</small>
                 </div>
+
                 <div className="flag-circle">🇨🇬</div>
               </div>
             </div>
@@ -112,6 +118,7 @@ export default function EnvoyerPage() {
                   disabled={step === "loading"}
                   onChange={(event) => {
                     setAmount(event.target.value);
+
                     if (step === "success") {
                       setStep("ready");
                       setShowConfirmation(false);
@@ -131,7 +138,10 @@ export default function EnvoyerPage() {
             <div className="conversion-row">
               <div>
                 <span>Votre proche reçoit</span>
-                <strong>{formatNumber(receivedAmount)} FCFA</strong>
+
+                <strong>
+                  {formatNumber(receivedAmount)} FCFA
+                </strong>
               </div>
 
               <div className="exchange-info">
@@ -172,6 +182,7 @@ export default function EnvoyerPage() {
 
               <div className="summary-total">
                 <span>Total</span>
+
                 <strong>
                   {(numericAmount + transferFee).toFixed(2)} €
                 </strong>
@@ -181,8 +192,15 @@ export default function EnvoyerPage() {
             <button
               type="button"
               className={`transfer-button ${step}`}
-              onClick={step === "success" ? resetTransfer : startTransfer}
-              disabled={numericAmount <= 0 || step === "loading"}
+              onClick={
+                step === "success"
+                  ? resetTransfer
+                  : startTransfer
+              }
+              disabled={
+                numericAmount <= 0 ||
+                step === "loading"
+              }
             >
               {step === "ready" && (
                 <>
@@ -214,7 +232,8 @@ export default function EnvoyerPage() {
 
           <aside className="visual-panel">
             <div className="visual-top">
-              <span className="section-label">YVI PAY SIGNATURE</span>
+              <span className="section-label">YVI PAY</span>
+
               <span className="live-status">
                 <span />
                 Réseau actif
@@ -229,20 +248,128 @@ export default function EnvoyerPage() {
                 <div className="globe-grid globe-grid-one" />
                 <div className="globe-grid globe-grid-two" />
 
-                <div className="continent continent-one" />
-                <div className="continent continent-two" />
-                <div className="continent continent-three" />
+                <svg
+                  className="continent-map"
+                  viewBox="0 0 400 400"
+                  aria-hidden="true"
+                >
+                  <path
+                    className="land land-europe"
+                    d="M122 121 L132 108 L146 103 L155 95 L166 97 L174 91 L184 96 L192 91 L203 97 L213 95 L224 101 L237 99 L247 106 L260 107 L269 116 L265 126 L254 129 L247 138 L236 137 L229 145 L216 144 L207 153 L197 149 L187 157 L177 151 L169 141 L158 138 L151 130 L137 130 Z"
+                  />
+
+                  <path
+                    className="land land-africa"
+                    d="M160 143 L177 136 L195 139 L211 148 L225 164 L236 184 L239 205 L232 224 L226 246 L216 267 L207 288 L194 309 L184 300 L179 281 L168 267 L161 247 L151 228 L146 207 L147 187 L153 167 Z"
+                  />
+
+                  <path
+                    className="land land-asia"
+                    d="M233 101 L251 92 L273 88 L294 92 L311 99 L329 111 L344 126 L350 143 L341 154 L324 156 L310 166 L292 166 L280 157 L263 154 L248 145 L237 137 L246 125 L259 122 L269 116 L260 107 Z"
+                  />
+
+                  <path
+                    className="land land-arabia"
+                    d="M217 161 L234 157 L249 167 L255 181 L248 193 L232 193 L220 183 Z"
+                  />
+
+                  <path
+                    className="land land-madagascar"
+                    d="M232 274 L240 284 L241 300 L235 313 L229 304 L228 288 Z"
+                  />
+                </svg>
 
                 <span className="city-dot paris-dot" />
                 <span className="city-dot brazza-dot" />
 
-                <div className="globe-route">
-                  <span className="globe-route-light" />
-                </div>
+                <svg
+                  className="route-svg"
+                  viewBox="0 0 400 400"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <linearGradient
+                      id="routeGold"
+                      x1="0"
+                      y1="0"
+                      x2="1"
+                      y2="1"
+                    >
+                      <stop
+                        offset="0%"
+                        stopColor="#b98535"
+                      />
+
+                      <stop
+                        offset="50%"
+                        stopColor="#ffe5a0"
+                      />
+
+                      <stop
+                        offset="100%"
+                        stopColor="#c6923f"
+                      />
+                    </linearGradient>
+
+                    <filter
+                      id="routeGlow"
+                      x="-50%"
+                      y="-50%"
+                      width="200%"
+                      height="200%"
+                    >
+                      <feGaussianBlur
+                        stdDeviation="4"
+                        result="blur"
+                      />
+
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  <path
+                    d="M176 128 C225 157 256 218 248 286"
+                    fill="none"
+                    stroke="url(#routeGold)"
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    filter="url(#routeGlow)"
+                  />
+
+                  <circle
+                    cx="176"
+                    cy="128"
+                    r="6"
+                    className="route-node"
+                  />
+
+                  <circle
+                    cx="248"
+                    cy="286"
+                    r="6"
+                    className="route-node"
+                  />
+
+                  <circle
+                    r="4.5"
+                    fill="#fff4c8"
+                    filter="url(#routeGlow)"
+                  >
+                    <animateMotion
+                      dur="2.8s"
+                      repeatCount="indefinite"
+                      path="M176 128 C225 157 256 218 248 286"
+                    />
+                  </circle>
+                </svg>
               </div>
 
               <div className="floating-city paris-label">
                 <span>🇫🇷</span>
+
                 <div>
                   <small>Départ</small>
                   <strong>Paris</strong>
@@ -251,6 +378,7 @@ export default function EnvoyerPage() {
 
               <div className="floating-city brazza-label">
                 <span>🇨🇬</span>
+
                 <div>
                   <small>Arrivée</small>
                   <strong>Brazzaville</strong>
@@ -261,6 +389,7 @@ export default function EnvoyerPage() {
             <div className="signature-route">
               <div className="signature-city">
                 <span>🇫🇷</span>
+
                 <div>
                   <small>France</small>
                   <strong>Paris</strong>
@@ -276,6 +405,7 @@ export default function EnvoyerPage() {
                   <small>Congo</small>
                   <strong>Brazzaville</strong>
                 </div>
+
                 <span>🇨🇬</span>
               </div>
             </div>
@@ -340,8 +470,7 @@ export default function EnvoyerPage() {
                   <small>Brazzaville</small>
                 </div>
               </div>
-
-              <div className="confirmation-details">
+                       <div className="confirmation-details">
                 <div>
                   <span>Montant envoyé</span>
                   <strong>{numericAmount.toFixed(2)} €</strong>
@@ -407,16 +536,21 @@ export default function EnvoyerPage() {
               rgba(194, 149, 65, 0.12),
               transparent 28%
             ),
-            linear-gradient(145deg, #020711 0%, #07101e 48%, #02050b 100%);
+            linear-gradient(
+              145deg,
+              #020711 0%,
+              #07101e 48%,
+              #02050b 100%
+            );
           isolation: isolate;
         }
 
         .ambient {
           position: absolute;
+          z-index: -1;
           border-radius: 999px;
           filter: blur(90px);
           pointer-events: none;
-          z-index: -1;
         }
 
         .ambient-one {
@@ -485,10 +619,10 @@ export default function EnvoyerPage() {
           gap: 10px;
           min-width: max-content;
           padding: 11px 16px;
-          color: #cfd7e4;
           border: 1px solid rgba(205, 168, 101, 0.19);
           border-radius: 999px;
           background: rgba(7, 14, 25, 0.75);
+          color: #cfd7e4;
           backdrop-filter: blur(18px);
           font-size: 0.76rem;
         }
@@ -503,7 +637,9 @@ export default function EnvoyerPage() {
 
         .main-grid {
           display: grid;
-          grid-template-columns: minmax(0, 1.04fr) minmax(390px, 0.96fr);
+          grid-template-columns:
+            minmax(0, 1.04fr)
+            minmax(390px, 0.96fr);
           gap: 24px;
           align-items: stretch;
         }
@@ -532,9 +668,9 @@ export default function EnvoyerPage() {
 
         .route-title {
           display: flex;
+          align-items: flex-start;
           justify-content: space-between;
           gap: 20px;
-          align-items: flex-start;
           margin-bottom: 24px;
         }
 
@@ -547,10 +683,10 @@ export default function EnvoyerPage() {
 
         .instant-badge {
           padding: 8px 12px;
-          color: #d8b771;
           border: 1px solid rgba(216, 183, 113, 0.2);
           border-radius: 999px;
           background: rgba(216, 183, 113, 0.07);
+          color: #d8b771;
           font-size: 0.68rem;
           font-weight: 700;
           letter-spacing: 0.06em;
@@ -558,7 +694,10 @@ export default function EnvoyerPage() {
 
         .route-card {
           display: grid;
-          grid-template-columns: 1fr minmax(100px, 0.8fr) 1fr;
+          grid-template-columns:
+            1fr
+            minmax(100px, 0.8fr)
+            1fr;
           align-items: center;
           gap: 18px;
           margin-bottom: 27px;
@@ -589,7 +728,8 @@ export default function EnvoyerPage() {
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 50%;
           background: rgba(255, 255, 255, 0.04);
-          box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02);
+          box-shadow:
+            inset 0 0 20px rgba(255, 255, 255, 0.02);
           font-size: 1.32rem;
         }
 
@@ -625,12 +765,13 @@ export default function EnvoyerPage() {
           width: 100%;
           height: 1px;
           overflow: hidden;
-          background: linear-gradient(
-            90deg,
-            rgba(202, 157, 76, 0.22),
-            #cfa75e,
-            rgba(202, 157, 76, 0.22)
-          );
+          background:
+            linear-gradient(
+              90deg,
+              rgba(202, 157, 76, 0.22),
+              #cfa75e,
+              rgba(202, 157, 76, 0.22)
+            );
         }
 
         .route-light {
@@ -653,7 +794,8 @@ export default function EnvoyerPage() {
           border: 1px solid #e9c477;
           border-radius: 50%;
           background: #0b1320;
-          box-shadow: 0 0 11px rgba(233, 196, 119, 0.9);
+          box-shadow:
+            0 0 11px rgba(233, 196, 119, 0.9);
         }
 
         .route-point-left {
@@ -671,7 +813,8 @@ export default function EnvoyerPage() {
           z-index: 3;
           color: #f3d491;
           font-size: 0.72rem;
-          text-shadow: 0 0 10px rgba(243, 212, 145, 0.9);
+          text-shadow:
+            0 0 10px rgba(243, 212, 145, 0.9);
           transform: translate(-50%, -50%);
         }
 
@@ -700,17 +843,18 @@ export default function EnvoyerPage() {
 
         .amount-box:focus-within {
           border-color: rgba(213, 173, 98, 0.52);
-          box-shadow: 0 0 0 4px rgba(213, 173, 98, 0.055);
+          box-shadow:
+            0 0 0 4px rgba(213, 173, 98, 0.055);
         }
 
         .amount-box input {
           width: 100%;
           min-width: 0;
           padding: 19px 20px;
-          color: #fffaf0;
           border: 0;
           outline: none;
           background: transparent;
+          color: #fffaf0;
           font-family: Georgia, "Times New Roman", serif;
           font-size: clamp(1.65rem, 4vw, 2.25rem);
         }
@@ -727,7 +871,8 @@ export default function EnvoyerPage() {
           gap: 8px;
           min-width: 118px;
           padding: 0 18px;
-          border-left: 1px solid rgba(255, 255, 255, 0.06);
+          border-left:
+            1px solid rgba(255, 255, 255, 0.06);
           color: #ebe4d5;
           font-size: 0.82rem;
         }
@@ -768,8 +913,8 @@ export default function EnvoyerPage() {
 
         .exchange-info {
           display: flex;
-          gap: 7px;
           align-items: center;
+          gap: 7px;
         }
 
         .exchange-dash {
@@ -793,14 +938,16 @@ export default function EnvoyerPage() {
           width: 42px;
           height: 42px;
           place-items: center;
-          border: 1px solid rgba(218, 181, 109, 0.28);
+          border:
+            1px solid rgba(218, 181, 109, 0.28);
           border-radius: 50%;
+          background:
+            linear-gradient(
+              145deg,
+              rgba(203, 157, 73, 0.14),
+              rgba(10, 19, 32, 0.8)
+            );
           color: #e2bd74;
-          background: linear-gradient(
-            145deg,
-            rgba(203, 157, 73, 0.14),
-            rgba(10, 19, 32, 0.8)
-          );
           font-size: 0.7rem;
           font-weight: 700;
           letter-spacing: 0.05em;
@@ -830,9 +977,9 @@ export default function EnvoyerPage() {
 
         .change-button {
           padding: 8px 10px;
-          color: #d9b66d;
           border: 0;
           background: transparent;
+          color: #d9b66d;
           cursor: pointer;
           font-size: 0.7rem;
         }
@@ -865,7 +1012,8 @@ export default function EnvoyerPage() {
         .summary-total {
           margin-top: 4px;
           padding-top: 13px;
-          border-top: 1px solid rgba(255, 255, 255, 0.065);
+          border-top:
+            1px solid rgba(255, 255, 255, 0.065);
         }
 
         .summary-total span,
@@ -885,18 +1033,20 @@ export default function EnvoyerPage() {
           justify-content: center;
           gap: 12px;
           padding: 15px 19px;
-          color: #08101d;
-          border: 1px solid rgba(255, 231, 181, 0.52);
+          border:
+            1px solid rgba(255, 231, 181, 0.52);
           border-radius: 17px;
-          background: linear-gradient(
-            110deg,
-            #b98b3f,
-            #e4c17c 48%,
-            #b88739
-          );
+          background:
+            linear-gradient(
+              110deg,
+              #b98b3f,
+              #e4c17c 48%,
+              #b88739
+            );
           box-shadow:
             0 13px 32px rgba(178, 127, 46, 0.18),
             inset 0 1px 0 rgba(255, 255, 255, 0.5);
+          color: #08101d;
           cursor: pointer;
           font-size: 0.82rem;
           font-weight: 800;
@@ -921,21 +1071,27 @@ export default function EnvoyerPage() {
         }
 
         .transfer-button.loading {
+          border-color:
+            rgba(222, 184, 108, 0.28);
+          background:
+            rgba(210, 170, 92, 0.07);
+          box-shadow:
+            inset 0 0 30px rgba(210, 170, 92, 0.04);
           color: #e9c985;
-          border-color: rgba(222, 184, 108, 0.28);
-          background: rgba(210, 170, 92, 0.07);
-          box-shadow: inset 0 0 30px rgba(210, 170, 92, 0.04);
         }
 
         .transfer-button.success {
+          border-color:
+            rgba(216, 187, 124, 0.32);
+          background:
+            linear-gradient(
+              110deg,
+              rgba(109, 86, 44, 0.33),
+              rgba(191, 148, 72, 0.17)
+            );
+          box-shadow:
+            0 12px 30px rgba(178, 127, 46, 0.1);
           color: #d8bb7c;
-          border-color: rgba(216, 187, 124, 0.32);
-          background: linear-gradient(
-            110deg,
-            rgba(109, 86, 44, 0.33),
-            rgba(191, 148, 72, 0.17)
-          );
-          box-shadow: 0 12px 30px rgba(178, 127, 46, 0.1);
         }
 
         .button-arrow {
@@ -945,7 +1101,8 @@ export default function EnvoyerPage() {
         .button-loader {
           width: 17px;
           height: 17px;
-          border: 2px solid rgba(233, 201, 133, 0.25);
+          border:
+            2px solid rgba(233, 201, 133, 0.25);
           border-top-color: #e9c985;
           border-radius: 50%;
           animation: spin 0.75s linear infinite;
@@ -956,7 +1113,8 @@ export default function EnvoyerPage() {
           width: 21px;
           height: 21px;
           place-items: center;
-          border: 1px solid rgba(219, 189, 127, 0.65);
+          border:
+            1px solid rgba(219, 189, 127, 0.65);
           border-radius: 50%;
           font-size: 0.7rem;
         }
@@ -976,8 +1134,7 @@ export default function EnvoyerPage() {
           color: #a68043;
           font-size: 0.55rem;
         }
-
-        .visual-panel {
+                .visual-panel {
           display: flex;
           min-height: 690px;
           flex-direction: column;
@@ -1012,7 +1169,7 @@ export default function EnvoyerPage() {
 
         .visual-top {
           position: relative;
-          z-index: 3;
+          z-index: 10;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -1032,7 +1189,8 @@ export default function EnvoyerPage() {
           height: 6px;
           border-radius: 50%;
           background: #b99a59;
-          box-shadow: 0 0 12px rgba(185, 154, 89, 0.95);
+          box-shadow:
+            0 0 12px rgba(185, 154, 89, 0.95);
           animation: pulse 1.8s ease-in-out infinite;
         }
 
@@ -1051,7 +1209,8 @@ export default function EnvoyerPage() {
           width: min(335px, 76vw);
           aspect-ratio: 1;
           overflow: hidden;
-          border: 1px solid rgba(219, 188, 126, 0.28);
+          border:
+            1px solid rgba(219, 188, 126, 0.28);
           border-radius: 50%;
           background:
             radial-gradient(
@@ -1070,20 +1229,23 @@ export default function EnvoyerPage() {
             0 0 70px rgba(36, 90, 148, 0.28),
             inset -32px -20px 60px rgba(0, 0, 0, 0.55),
             inset 10px 10px 35px rgba(112, 157, 205, 0.1);
-          animation: globeFloat 5.5s ease-in-out infinite;
+          animation:
+            globeFloat 5.5s ease-in-out infinite;
         }
 
         .globe::after {
           position: absolute;
           inset: 0;
+          z-index: 8;
           border-radius: 50%;
-          background: linear-gradient(
-            110deg,
-            rgba(255, 255, 255, 0.12),
-            transparent 30%,
-            transparent 67%,
-            rgba(0, 0, 0, 0.3)
-          );
+          background:
+            linear-gradient(
+              110deg,
+              rgba(255, 255, 255, 0.12),
+              transparent 30%,
+              transparent 67%,
+              rgba(0, 0, 0, 0.3)
+            );
           content: "";
           pointer-events: none;
         }
@@ -1091,73 +1253,81 @@ export default function EnvoyerPage() {
         .globe-grid {
           position: absolute;
           inset: 0;
+          z-index: 1;
           border-radius: 50%;
           opacity: 0.36;
+          pointer-events: none;
         }
 
         .globe-grid-one {
-          background: repeating-linear-gradient(
-            0deg,
-            transparent 0,
-            transparent 26px,
-            rgba(165, 192, 222, 0.15) 27px,
-            transparent 28px
-          );
+          background:
+            repeating-linear-gradient(
+              0deg,
+              transparent 0,
+              transparent 26px,
+              rgba(165, 192, 222, 0.15) 27px,
+              transparent 28px
+            );
         }
 
         .globe-grid-two {
-          background: repeating-linear-gradient(
-            90deg,
-            transparent 0,
-            transparent 34px,
-            rgba(165, 192, 222, 0.12) 35px,
-            transparent 36px
-          );
+          background:
+            repeating-linear-gradient(
+              90deg,
+              transparent 0,
+              transparent 34px,
+              rgba(165, 192, 222, 0.12) 35px,
+              transparent 36px
+            );
           transform: scaleX(0.72);
         }
 
-        .continent {
+        .continent-map {
           position: absolute;
-          z-index: 1;
-          border: 1px solid rgba(212, 180, 113, 0.19);
-          background: linear-gradient(
-            145deg,
-            rgba(75, 119, 156, 0.3),
-            rgba(28, 66, 104, 0.17)
-          );
-          box-shadow: inset 0 0 25px rgba(214, 179, 106, 0.035);
-          transform: rotate(-11deg);
+          inset: 5%;
+          z-index: 3;
+          width: 90%;
+          height: 90%;
+          overflow: visible;
+          filter:
+            drop-shadow(
+              0 0 9px rgba(83, 143, 194, 0.22)
+            )
+            drop-shadow(
+              0 0 18px rgba(214, 179, 106, 0.08)
+            );
         }
 
-        .continent-one {
-          top: 24%;
-          left: 28%;
-          width: 72px;
-          height: 107px;
-          border-radius: 48% 40% 52% 37% / 30% 48% 49% 64%;
+        .land {
+          stroke: rgba(212, 180, 113, 0.35);
+          stroke-width: 1.5;
+          stroke-linecap: round;
+          stroke-linejoin: round;
         }
 
-        .continent-two {
-          top: 31%;
-          left: 49%;
-          width: 101px;
-          height: 149px;
-          border-radius: 45% 56% 42% 57% / 38% 37% 63% 61%;
-          transform: rotate(12deg);
+        .land-europe {
+          fill: rgba(70, 119, 161, 0.42);
         }
 
-        .continent-three {
-          top: 18%;
-          right: 14%;
-          width: 73px;
-          height: 66px;
-          border-radius: 57% 44% 53% 35% / 47% 39% 62% 51%;
-          transform: rotate(18deg);
+        .land-africa {
+          fill: rgba(53, 104, 149, 0.5);
+        }
+
+        .land-asia {
+          fill: rgba(62, 108, 150, 0.38);
+        }
+
+        .land-arabia {
+          fill: rgba(75, 120, 158, 0.42);
+        }
+
+        .land-madagascar {
+          fill: rgba(72, 119, 158, 0.4);
         }
 
         .city-dot {
           position: absolute;
-          z-index: 6;
+          z-index: 7;
           width: 9px;
           height: 9px;
           border: 2px solid #f1d08b;
@@ -1169,46 +1339,39 @@ export default function EnvoyerPage() {
         }
 
         .paris-dot {
-          top: 34%;
-          left: 40%;
+          top: 31%;
+          left: 44%;
         }
 
         .brazza-dot {
-          top: 65%;
-          left: 55%;
+          top: 69%;
+          left: 61%;
         }
 
-        .globe-route {
+        .route-svg {
           position: absolute;
-          top: 38%;
-          left: 41%;
-          z-index: 5;
-          width: 32%;
-          height: 31%;
-          overflow: hidden;
-          border-top: 2px solid rgba(235, 198, 121, 0.82);
-          border-right: 2px solid rgba(235, 198, 121, 0.25);
-          border-radius: 0 100% 0 0;
-          transform: rotate(19deg);
-          filter: drop-shadow(0 0 7px rgba(235, 198, 121, 0.5));
+          inset: 0;
+          z-index: 6;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
         }
 
-        .globe-route-light {
-          position: absolute;
-          top: -3px;
-          left: -15%;
-          width: 34%;
-          height: 4px;
-          border-radius: 999px;
-          background: #fff0bd;
-          box-shadow: 0 0 14px rgba(255, 220, 146, 1);
-          animation: globeTravel 2.7s ease-in-out infinite;
+        .route-node {
+          fill: #fff1b8;
+          stroke: #d1a14c;
+          stroke-width: 2;
+          filter:
+            drop-shadow(
+              0 0 8px rgba(255, 218, 140, 0.85)
+            );
         }
 
         .globe-halo {
           position: absolute;
           z-index: 1;
-          border: 1px solid rgba(201, 163, 91, 0.11);
+          border:
+            1px solid rgba(201, 163, 91, 0.11);
           border-radius: 50%;
         }
 
@@ -1223,20 +1386,23 @@ export default function EnvoyerPage() {
           aspect-ratio: 1;
           border-style: dashed;
           opacity: 0.55;
-          animation: haloSpinReverse 26s linear infinite;
+          animation:
+            haloSpinReverse 26s linear infinite;
         }
 
         .floating-city {
           position: absolute;
-          z-index: 4;
+          z-index: 12;
           display: flex;
           align-items: center;
           gap: 9px;
           padding: 9px 12px;
-          border: 1px solid rgba(255, 255, 255, 0.07);
+          border:
+            1px solid rgba(255, 255, 255, 0.07);
           border-radius: 13px;
-          background: rgba(3, 10, 19, 0.78);
-          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+          background: rgba(3, 10, 19, 0.82);
+          box-shadow:
+            0 12px 28px rgba(0, 0, 0, 0.25);
           backdrop-filter: blur(12px);
         }
 
@@ -1271,14 +1437,15 @@ export default function EnvoyerPage() {
 
         .signature-route {
           position: relative;
-          z-index: 3;
+          z-index: 10;
           display: grid;
           grid-template-columns: auto 1fr auto;
           align-items: center;
           gap: 16px;
           margin-top: auto;
           padding: 17px 18px;
-          border: 1px solid rgba(255, 255, 255, 0.065);
+          border:
+            1px solid rgba(255, 255, 255, 0.065);
           border-radius: 18px;
           background: rgba(2, 8, 16, 0.62);
         }
@@ -1316,12 +1483,13 @@ export default function EnvoyerPage() {
           position: relative;
           height: 1px;
           overflow: hidden;
-          background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(220, 181, 107, 0.9),
-            transparent
-          );
+          background:
+            linear-gradient(
+              90deg,
+              transparent,
+              rgba(220, 181, 107, 0.9),
+              transparent
+            );
         }
 
         .signature-traveller {
@@ -1332,13 +1500,14 @@ export default function EnvoyerPage() {
           height: 5px;
           border-radius: 999px;
           background: #f0ce87;
-          box-shadow: 0 0 12px rgba(240, 206, 135, 0.9);
+          box-shadow:
+            0 0 12px rgba(240, 206, 135, 0.9);
           animation: travel 2.6s linear infinite;
         }
 
         .visual-stats {
           position: relative;
-          z-index: 3;
+          z-index: 10;
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 10px;
@@ -1350,7 +1519,8 @@ export default function EnvoyerPage() {
           flex-direction: column;
           gap: 3px;
           padding: 13px 15px;
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          border:
+            1px solid rgba(255, 255, 255, 0.05);
           border-radius: 14px;
           background: rgba(255, 255, 255, 0.018);
         }
@@ -1364,8 +1534,7 @@ export default function EnvoyerPage() {
           color: #c7ced8;
           font-size: 0.7rem;
         }
-
-        .confirmation-overlay {
+                .confirmation-overlay {
           position: fixed;
           inset: 0;
           z-index: 999;
@@ -1382,8 +1551,8 @@ export default function EnvoyerPage() {
           width: min(485px, 100%);
           overflow: hidden;
           padding: 43px 35px 29px;
-          color: #f3eee2;
-          border: 1px solid rgba(224, 190, 123, 0.26);
+          border:
+            1px solid rgba(224, 190, 123, 0.26);
           border-radius: 29px;
           background:
             radial-gradient(
@@ -1391,12 +1560,19 @@ export default function EnvoyerPage() {
               rgba(197, 151, 66, 0.13),
               transparent 35%
             ),
-            linear-gradient(155deg, #0c1726 0%, #030913 100%);
+            linear-gradient(
+              155deg,
+              #0c1726 0%,
+              #030913 100%
+            );
           box-shadow:
             0 36px 100px rgba(0, 0, 0, 0.65),
             inset 0 1px 0 rgba(255, 255, 255, 0.05);
+          color: #f3eee2;
           text-align: center;
-          animation: cardIn 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+          animation:
+            cardIn 420ms cubic-bezier(0.2, 0.8, 0.2, 1)
+            both;
         }
 
         .confirmation-glow {
@@ -1420,10 +1596,11 @@ export default function EnvoyerPage() {
           width: 32px;
           height: 32px;
           place-items: center;
-          color: #7f8a9a;
-          border: 1px solid rgba(255, 255, 255, 0.06);
+          border:
+            1px solid rgba(255, 255, 255, 0.06);
           border-radius: 50%;
           background: rgba(255, 255, 255, 0.025);
+          color: #7f8a9a;
           cursor: pointer;
           font-size: 1.1rem;
         }
@@ -1435,13 +1612,15 @@ export default function EnvoyerPage() {
           height: 67px;
           place-items: center;
           margin: 0 auto 20px;
-          border: 1px solid rgba(229, 196, 128, 0.52);
+          border:
+            1px solid rgba(229, 196, 128, 0.52);
           border-radius: 50%;
-          background: linear-gradient(
-            145deg,
-            rgba(217, 178, 104, 0.2),
-            rgba(217, 178, 104, 0.04)
-          );
+          background:
+            linear-gradient(
+              145deg,
+              rgba(217, 178, 104, 0.2),
+              rgba(217, 178, 104, 0.04)
+            );
           box-shadow:
             0 0 0 9px rgba(217, 178, 104, 0.035),
             0 0 32px rgba(217, 178, 104, 0.15);
@@ -1463,8 +1642,12 @@ export default function EnvoyerPage() {
 
         .confirmation-card h2 {
           margin-bottom: 11px;
-          font-family: Georgia, "Times New Roman", serif;
-          font-size: clamp(1.85rem, 5vw, 2.5rem);
+          font-family:
+            Georgia,
+            "Times New Roman",
+            serif;
+          font-size:
+            clamp(1.85rem, 5vw, 2.5rem);
           font-weight: 400;
           letter-spacing: -0.035em;
         }
@@ -1484,12 +1667,14 @@ export default function EnvoyerPage() {
           gap: 15px;
           margin-bottom: 20px;
           padding: 17px 19px;
-          border: 1px solid rgba(255, 255, 255, 0.06);
+          border:
+            1px solid rgba(255, 255, 255, 0.06);
           border-radius: 18px;
           background: rgba(0, 5, 12, 0.48);
         }
 
-        .confirmation-route > div:not(.confirmation-journey) {
+        .confirmation-route
+          > div:not(.confirmation-journey) {
           display: flex;
           flex-direction: column;
           gap: 5px;
@@ -1512,32 +1697,36 @@ export default function EnvoyerPage() {
         .confirmation-journey span {
           flex: 1;
           height: 1px;
-          background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(221, 184, 111, 0.74)
-          );
+          background:
+            linear-gradient(
+              90deg,
+              transparent,
+              rgba(221, 184, 111, 0.74)
+            );
         }
 
         .confirmation-journey span:last-child {
-          background: linear-gradient(
-            90deg,
-            rgba(221, 184, 111, 0.74),
-            transparent
-          );
+          background:
+            linear-gradient(
+              90deg,
+              rgba(221, 184, 111, 0.74),
+              transparent
+            );
         }
 
         .confirmation-journey strong {
           color: #e7c984;
           font-size: 0.72rem;
-          text-shadow: 0 0 12px rgba(231, 201, 132, 0.8);
+          text-shadow:
+            0 0 12px rgba(231, 201, 132, 0.8);
         }
 
         .confirmation-details {
           display: flex;
           flex-direction: column;
           margin-bottom: 22px;
-          border: 1px solid rgba(255, 255, 255, 0.055);
+          border:
+            1px solid rgba(255, 255, 255, 0.055);
           border-radius: 17px;
           background: rgba(255, 255, 255, 0.018);
         }
@@ -1548,7 +1737,8 @@ export default function EnvoyerPage() {
           justify-content: space-between;
           gap: 15px;
           padding: 12px 15px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+          border-bottom:
+            1px solid rgba(255, 255, 255, 0.045);
         }
 
         .confirmation-details > div:last-child {
@@ -1568,15 +1758,17 @@ export default function EnvoyerPage() {
         .confirmation-button {
           width: 100%;
           min-height: 49px;
-          color: #08101b;
-          border: 1px solid rgba(255, 238, 200, 0.46);
+          border:
+            1px solid rgba(255, 238, 200, 0.46);
           border-radius: 15px;
-          background: linear-gradient(
-            110deg,
-            #b8883c,
-            #dfbd78,
-            #b48334
-          );
+          background:
+            linear-gradient(
+              110deg,
+              #b8883c,
+              #dfbd78,
+              #b48334
+            );
+          color: #08101b;
           cursor: pointer;
           font-size: 0.77rem;
           font-weight: 800;
@@ -1595,25 +1787,9 @@ export default function EnvoyerPage() {
           0% {
             left: -30%;
           }
+
           100% {
             left: 105%;
-          }
-        }
-
-        @keyframes globeTravel {
-          0% {
-            left: -20%;
-            opacity: 0;
-          }
-          20% {
-            opacity: 1;
-          }
-          80% {
-            opacity: 1;
-          }
-          100% {
-            left: 100%;
-            opacity: 0;
           }
         }
 
@@ -1629,6 +1805,7 @@ export default function EnvoyerPage() {
             opacity: 0.55;
             transform: scale(0.9);
           }
+
           50% {
             opacity: 1;
             transform: scale(1.18);
@@ -1638,10 +1815,15 @@ export default function EnvoyerPage() {
         @keyframes globeFloat {
           0%,
           100% {
-            transform: translateY(0) rotate(-1deg);
+            transform:
+              translateY(0)
+              rotate(-1deg);
           }
+
           50% {
-            transform: translateY(-8px) rotate(1deg);
+            transform:
+              translateY(-8px)
+              rotate(1deg);
           }
         }
 
@@ -1661,6 +1843,7 @@ export default function EnvoyerPage() {
           from {
             opacity: 0;
           }
+
           to {
             opacity: 1;
           }
@@ -1669,11 +1852,16 @@ export default function EnvoyerPage() {
         @keyframes cardIn {
           from {
             opacity: 0;
-            transform: translateY(22px) scale(0.96);
+            transform:
+              translateY(22px)
+              scale(0.96);
           }
+
           to {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform:
+              translateY(0)
+              scale(1);
           }
         }
 
@@ -1748,6 +1936,10 @@ export default function EnvoyerPage() {
 
           .globe-stage {
             min-height: 365px;
+          }
+
+          .globe {
+            width: min(315px, 82vw);
           }
 
           .floating-city {
