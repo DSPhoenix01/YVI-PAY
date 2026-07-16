@@ -40,12 +40,10 @@ function CongoFlag({ width = 30, height = 20 }) {
       }}
     >
       <rect width="3" height="2" fill="#009543" />
-
       <polygon
         points="0.65,2 1.35,2 2.35,0 1.65,0"
         fill="#fbde4a"
       />
-
       <polygon
         points="1.35,2 3,2 3,0 2.35,0"
         fill="#dc241f"
@@ -56,36 +54,36 @@ function CongoFlag({ width = 30, height = 20 }) {
 
 function DashboardGlobe() {
   return (
-    <div className="dashboard-globe">
+    <div className="dashboard-visual">
       <img
         src="/yvi-hero-dashboard.png"
-        alt="Globe YVI PAY"
-        className="dashboard-globe-image"
+        alt="Globe YVI PAY reliant Paris à Brazzaville"
+        className="dashboard-image"
       />
 
-      <div className="dashboard-globe-shade" />
+      <div className="dashboard-overlay" />
 
       <svg
-        className="dashboard-globe-route"
-        viewBox="0 0 400 400"
+        className="transfer-map"
+        viewBox="0 0 600 410"
+        preserveAspectRatio="none"
         aria-hidden="true"
       >
         <defs>
           <linearGradient
-            id="sendRouteGold"
+            id="goldPath"
             x1="0"
             y1="0"
             x2="1"
             y2="1"
           >
-            <stop offset="0%" stopColor="#ad7628" />
-            <stop offset="45%" stopColor="#ffe1a0" />
-            <stop offset="100%" stopColor="#b57c2c" />
+            <stop offset="0%" stopColor="#b87d2d" />
+            <stop offset="45%" stopColor="#ffe3a1" />
+            <stop offset="100%" stopColor="#b87d2d" />
           </linearGradient>
 
-          <filter id="sendRouteGlow">
-            <feGaussianBlur stdDeviation="4" result="blur" />
-
+          <filter id="goldGlow">
+            <feGaussianBlur stdDeviation="5" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
@@ -94,58 +92,71 @@ function DashboardGlobe() {
         </defs>
 
         <path
-          id="parisBrazzavilleRoute"
-          d="M174 126 C205 153 232 197 240 255"
+          d="M255 112 C310 145 355 220 384 300"
           fill="none"
-          stroke="url(#sendRouteGold)"
-          strokeWidth="3.5"
+          stroke="url(#goldPath)"
+          strokeWidth="4"
           strokeLinecap="round"
-          strokeDasharray="8 7"
-          filter="url(#sendRouteGlow)"
+          strokeDasharray="10 8"
+          filter="url(#goldGlow)"
         >
           <animate
             attributeName="stroke-dashoffset"
             from="0"
-            to="-30"
-            dur="2.1s"
+            to="-36"
+            dur="2.4s"
             repeatCount="indefinite"
           />
         </path>
 
         <circle
-          cx="174"
-          cy="126"
-          r="6"
-          fill="#f2c96e"
-          stroke="#fff0bd"
+          cx="255"
+          cy="112"
+          r="7"
+          fill="#f2ca72"
+          stroke="#fff1c2"
           strokeWidth="2"
-          filter="url(#sendRouteGlow)"
+          filter="url(#goldGlow)"
         />
 
         <circle
-          cx="240"
-          cy="255"
-          r="6"
-          fill="#f2c96e"
-          stroke="#fff0bd"
+          cx="384"
+          cy="300"
+          r="7"
+          fill="#f2ca72"
+          stroke="#fff1c2"
           strokeWidth="2"
-          filter="url(#sendRouteGlow)"
+          filter="url(#goldGlow)"
         />
 
         <circle
-          r="4.5"
-          fill="#fff0bd"
-          filter="url(#sendRouteGlow)"
+          r="5"
+          fill="#fff2bd"
+          filter="url(#goldGlow)"
         >
           <animateMotion
             dur="2.8s"
             repeatCount="indefinite"
-            path="M174 126 C205 153 232 197 240 255"
+            path="M255 112 C310 145 355 220 384 300"
           />
         </circle>
       </svg>
 
-      <div className="dashboard-globe-ring" />
+      <div className="city-label city-paris">
+        <FranceFlag width={30} height={20} />
+        <div>
+          <small>Départ</small>
+          <strong>Paris</strong>
+        </div>
+      </div>
+
+      <div className="city-label city-brazzaville">
+        <CongoFlag width={30} height={20} />
+        <div>
+          <small>Arrivée</small>
+          <strong>Brazzaville</strong>
+        </div>
+      </div>
     </div>
   );
 }
@@ -242,7 +253,6 @@ export default function EnvoyerPage() {
                 </span>
 
                 <span className="route-star">✦</span>
-
                 <span className="route-point route-right" />
               </div>
 
@@ -260,9 +270,7 @@ export default function EnvoyerPage() {
             </div>
 
             <div className="amount-section">
-              <label htmlFor="amount">
-                Vous envoyez
-              </label>
+              <label htmlFor="amount">Vous envoyez</label>
 
               <div className="amount-box">
                 <input
@@ -291,10 +299,7 @@ export default function EnvoyerPage() {
             <div className="conversion-row">
               <div>
                 <span>Votre proche reçoit</span>
-
-                <strong>
-                  {formatNumber(received)} FCFA
-                </strong>
+                <strong>{formatNumber(received)} FCFA</strong>
               </div>
 
               <div className="exchange-info">
@@ -305,9 +310,7 @@ export default function EnvoyerPage() {
             </div>
 
             <div className="beneficiary-card">
-              <div className="beneficiary-avatar">
-                ME
-              </div>
+              <div className="beneficiary-avatar">ME</div>
 
               <div className="beneficiary-info">
                 <span>Bénéficiaire</span>
@@ -336,7 +339,6 @@ export default function EnvoyerPage() {
 
               <div className="summary-total">
                 <span>Total</span>
-
                 <strong>
                   {(numericAmount + fees).toFixed(2)} €
                 </strong>
@@ -373,10 +375,7 @@ export default function EnvoyerPage() {
               {status === "success" && (
                 <>
                   <span className="success-check">✓</span>
-
-                  <span>
-                    Transfert envoyé avec succès
-                  </span>
+                  <span>Transfert envoyé avec succès</span>
                 </>
               )}
             </button>
@@ -399,29 +398,8 @@ export default function EnvoyerPage() {
               </span>
             </div>
 
-            <div className="globe-stage">
-              <div className="halo halo-one" />
-              <div className="halo halo-two" />
-
+            <div className="visual-stage">
               <DashboardGlobe />
-
-              <div className="floating-city paris-label">
-                <FranceFlag width={30} height={20} />
-
-                <div>
-                  <small>Départ</small>
-                  <strong>Paris</strong>
-                </div>
-              </div>
-
-              <div className="floating-city brazza-label">
-                <CongoFlag width={30} height={20} />
-
-                <div>
-                  <small>Arrivée</small>
-                  <strong>Brazzaville</strong>
-                </div>
-              </div>
             </div>
 
             <div className="signature-route">
@@ -469,13 +447,12 @@ export default function EnvoyerPage() {
                 type="button"
                 className="confirmation-close"
                 onClick={resetTransfer}
+                aria-label="Fermer"
               >
                 ×
               </button>
 
-              <div className="confirmation-icon">
-                ✓
-              </div>
+              <div className="confirmation-icon">✓</div>
 
               <span className="confirmation-eyebrow">
                 TRANSFERT CONFIRMÉ
@@ -1098,57 +1075,51 @@ export default function EnvoyerPage() {
           animation: pulse 1.8s ease-in-out infinite;
         }
 
-        .globe-stage {
-          position: relative;
+        .visual-stage {
           display: grid;
-          min-height: 420px;
+          min-height: 430px;
           flex: 1;
           place-items: center;
+          padding: 12px 0 18px;
         }
 
-        .dashboard-globe {
+        .dashboard-visual {
           position: relative;
-          z-index: 2;
-          width: min(370px, 76vw);
-          aspect-ratio: 1;
+          width: 100%;
+          height: 410px;
           overflow: hidden;
-          border-radius: 50%;
+          border: 1px solid rgba(220, 180, 104, 0.2);
+          border-radius: 22px;
           background: #020918;
           box-shadow:
-            0 0 0 1px rgba(225, 185, 106, 0.4),
-            0 0 0 10px rgba(38, 86, 140, 0.06),
-            0 0 55px rgba(46, 107, 174, 0.35);
-          animation: globeFloat 5.5s ease-in-out infinite;
+            0 22px 50px rgba(0, 0, 0, 0.34),
+            0 0 45px rgba(41, 94, 153, 0.16);
         }
 
-        .dashboard-globe-image {
+        .dashboard-image {
           position: absolute;
           inset: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
           object-position: center;
-          transform: scale(1.08);
+          animation: dashboardGlow 7s ease-in-out infinite;
         }
 
-        .dashboard-globe-shade {
+        .dashboard-overlay {
           position: absolute;
           inset: 0;
           background:
-            radial-gradient(
-              circle at 33% 25%,
-              rgba(61, 121, 186, 0.03),
-              transparent 32%
-            ),
             linear-gradient(
-              145deg,
-              rgba(2, 16, 40, 0.08),
-              rgba(0, 4, 13, 0.42)
+              180deg,
+              rgba(2, 9, 24, 0.12),
+              rgba(2, 9, 24, 0.04) 45%,
+              rgba(2, 9, 24, 0.56)
             );
           pointer-events: none;
         }
 
-        .dashboard-globe-route {
+        .transfer-map {
           position: absolute;
           inset: 0;
           width: 100%;
@@ -1156,74 +1127,43 @@ export default function EnvoyerPage() {
           pointer-events: none;
         }
 
-        .dashboard-globe-ring {
-          position: absolute;
-          inset: 0;
-          border: 1.5px solid rgba(228, 190, 115, 0.46);
-          border-radius: 50%;
-          box-shadow:
-            inset 0 0 18px rgba(217, 176, 98, 0.08),
-            0 0 14px rgba(217, 176, 98, 0.12);
-          pointer-events: none;
-        }
-
-        .halo {
-          position: absolute;
-          z-index: 1;
-          border: 1px solid rgba(201, 163, 91, 0.11);
-          border-radius: 50%;
-        }
-
-        .halo-one {
-          width: min(410px, 89vw);
-          aspect-ratio: 1;
-          animation: haloSpin 18s linear infinite;
-        }
-
-        .halo-two {
-          width: min(465px, 98vw);
-          aspect-ratio: 1;
-          border-style: dashed;
-          animation: haloSpinReverse 26s linear infinite;
-        }
-
-        .floating-city {
+        .city-label {
           position: absolute;
           z-index: 4;
           display: flex;
           align-items: center;
           gap: 9px;
           padding: 9px 12px;
-          border: 1px solid rgba(255, 255, 255, 0.07);
+          border: 1px solid rgba(255, 255, 255, 0.09);
           border-radius: 13px;
-          background: rgba(3, 10, 19, 0.86);
-          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+          background: rgba(3, 10, 19, 0.84);
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
           backdrop-filter: blur(12px);
         }
 
-        .floating-city div {
+        .city-label div {
           display: flex;
           flex-direction: column;
         }
 
-        .floating-city small {
+        .city-label small {
           color: #707d90;
           font-size: 0.57rem;
         }
 
-        .floating-city strong {
+        .city-label strong {
           color: #eee8da;
           font-size: 0.72rem;
         }
 
-        .paris-label {
-          top: 23%;
-          left: 1%;
+        .city-paris {
+          top: 38px;
+          left: 20px;
         }
 
-        .brazza-label {
-          right: 0;
-          bottom: 20%;
+        .city-brazzaville {
+          right: 20px;
+          bottom: 48px;
         }
 
         .signature-route {
@@ -1517,26 +1457,16 @@ export default function EnvoyerPage() {
           }
         }
 
-        @keyframes globeFloat {
+        @keyframes dashboardGlow {
           0%,
           100% {
-            transform: translateY(0);
+            opacity: 0.78;
+            transform: scale(1);
           }
 
           50% {
-            transform: translateY(-8px);
-          }
-        }
-
-        @keyframes haloSpin {
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
-        @keyframes haloSpinReverse {
-          to {
-            transform: rotate(-360deg);
+            opacity: 1;
+            transform: scale(1.015);
           }
         }
 
@@ -1568,6 +1498,20 @@ export default function EnvoyerPage() {
           .conversion-row {
             align-items: flex-start;
             flex-direction: column;
+          }
+
+          .dashboard-visual {
+            height: 360px;
+          }
+
+          .city-paris {
+            top: 24px;
+            left: 12px;
+          }
+
+          .city-brazzaville {
+            right: 12px;
+            bottom: 32px;
           }
 
           .visual-stats {
