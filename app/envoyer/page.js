@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-const WORLD_MAP =
-  "https://commons.wikimedia.org/wiki/Special:Redirect/file/BlankMap-World-v2.svg";
+const EARTH_IMAGE =
+  "https://commons.wikimedia.org/wiki/Special:Redirect/file/The_Earth_seen_from_Apollo_17.jpg";
 
 function Flag({ country, width = 30, height = 20 }) {
   if (country === "france") {
@@ -31,10 +31,12 @@ function Flag({ country, width = 30, height = 20 }) {
       style={flagStyle}
     >
       <rect width="3" height="2" fill="#009543" />
+
       <polygon
         points="0.65,2 1.35,2 2.35,0 1.65,0"
         fill="#fbde4a"
       />
+
       <polygon
         points="1.35,2 3,2 3,0 2.35,0"
         fill="#dc241f"
@@ -53,38 +55,47 @@ const flagStyle = {
 function PremiumGlobe() {
   return (
     <div className="globe-area">
+      <div className="globe-halo" />
       <div className="orbit orbit-one" />
       <div className="orbit orbit-two" />
 
       <div className="globe">
-        <div className="globe-ocean" />
-
         <img
-          src={WORLD_MAP}
-          alt=""
-          aria-hidden="true"
-          className="world-map"
+          src={EARTH_IMAGE}
+          alt="Globe terrestre centré sur l’Europe et l’Afrique"
+          className="earth-photo"
         />
 
-        <div className="globe-grid horizontal-grid" />
-        <div className="globe-grid vertical-grid" />
-        <div className="globe-light" />
-        <div className="globe-shadow" />
+        <div className="earth-gold" />
+        <div className="earth-grid earth-grid-horizontal" />
+        <div className="earth-grid earth-grid-vertical" />
+        <div className="earth-light" />
+        <div className="earth-shadow" />
 
         <svg
           className="globe-route"
-          viewBox="0 0 400 400"
+          viewBox="0 0 500 500"
           aria-hidden="true"
         >
           <defs>
             <linearGradient id="routeGold" x1="0" x2="1">
-              <stop offset="0%" stopColor="#ad7628" />
-              <stop offset="48%" stopColor="#ffe4a0" />
-              <stop offset="100%" stopColor="#ad7628" />
+              <stop offset="0%" stopColor="#b77722" />
+              <stop offset="45%" stopColor="#fff1bd" />
+              <stop offset="100%" stopColor="#c98b31" />
             </linearGradient>
 
-            <filter id="routeGlow">
-              <feGaussianBlur stdDeviation="4" result="blur" />
+            <filter
+              id="routeGlow"
+              x="-80%"
+              y="-80%"
+              width="260%"
+              height="260%"
+            >
+              <feGaussianBlur
+                stdDeviation="5"
+                result="blur"
+              />
+
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
@@ -93,53 +104,43 @@ function PremiumGlobe() {
           </defs>
 
           <path
-            id="parisToBrazzaville"
-            d="M184 126 C205 154 231 194 236 249"
+            d="M270 151 C319 202 338 268 329 341"
             fill="none"
             stroke="url(#routeGold)"
-            strokeWidth="3.5"
+            strokeWidth="4"
             strokeLinecap="round"
-            strokeDasharray="8 7"
-            filter="url(#routeGlow)"
-          >
-            <animate
-              attributeName="stroke-dashoffset"
-              from="0"
-              to="-30"
-              dur="2.1s"
-              repeatCount="indefinite"
-            />
-          </path>
-
-          <circle
-            cx="184"
-            cy="126"
-            r="6"
-            fill="#f2ca76"
-            stroke="#fff0be"
-            strokeWidth="2"
             filter="url(#routeGlow)"
           />
 
           <circle
-            cx="236"
-            cy="249"
-            r="6"
-            fill="#f2ca76"
-            stroke="#fff0be"
-            strokeWidth="2"
+            cx="270"
+            cy="151"
+            r="8"
+            fill="#fff4c8"
+            stroke="#e5b75f"
+            strokeWidth="3"
             filter="url(#routeGlow)"
           />
 
           <circle
-            r="4.5"
-            fill="#fff2bd"
+            cx="329"
+            cy="341"
+            r="8"
+            fill="#fff4c8"
+            stroke="#e5b75f"
+            strokeWidth="3"
+            filter="url(#routeGlow)"
+          />
+
+          <circle
+            r="5.5"
+            fill="#fff9de"
             filter="url(#routeGlow)"
           >
             <animateMotion
               dur="2.8s"
               repeatCount="indefinite"
-              path="M184 126 C205 154 231 194 236 249"
+              path="M270 151 C319 202 338 268 329 341"
             />
           </circle>
         </svg>
@@ -148,7 +149,12 @@ function PremiumGlobe() {
       </div>
 
       <div className="city-card paris-card">
-        <Flag country="france" />
+        <Flag
+          country="france"
+          width={32}
+          height={22}
+        />
+
         <div>
           <small>Départ</small>
           <strong>Paris</strong>
@@ -156,7 +162,12 @@ function PremiumGlobe() {
       </div>
 
       <div className="city-card brazzaville-card">
-        <Flag country="congo" />
+        <Flag
+          country="congo"
+          width={32}
+          height={22}
+        />
+
         <div>
           <small>Arrivée</small>
           <strong>Brazzaville</strong>
@@ -169,7 +180,8 @@ function PremiumGlobe() {
 export default function EnvoyerPage() {
   const [amount, setAmount] = useState("250");
   const [status, setStatus] = useState("ready");
-  const [confirmation, setConfirmation] = useState(false);
+  const [confirmation, setConfirmation] =
+    useState(false);
 
   const rate = 655.957;
   const fees = 3.9;
@@ -185,7 +197,12 @@ export default function EnvoyerPage() {
   };
 
   const transfer = () => {
-    if (amountNumber <= 0 || status === "loading") return;
+    if (
+      amountNumber <= 0 ||
+      status === "loading"
+    ) {
+      return;
+    }
 
     setStatus("loading");
 
@@ -210,7 +227,8 @@ export default function EnvoyerPage() {
             <h1>Envoyer de l’argent</h1>
 
             <p>
-              De Paris vers vos proches, en toute simplicité.
+              De Paris vers vos proches, en toute
+              simplicité.
             </p>
           </div>
 
@@ -261,6 +279,7 @@ export default function EnvoyerPage() {
                 </div>
 
                 <b>✦</b>
+
                 <i className="point point-right" />
               </div>
 
@@ -281,7 +300,10 @@ export default function EnvoyerPage() {
               </div>
             </div>
 
-            <label className="input-label" htmlFor="amount">
+            <label
+              className="input-label"
+              htmlFor="amount"
+            >
               Vous envoyez
             </label>
 
@@ -316,6 +338,7 @@ export default function EnvoyerPage() {
             <div className="conversion">
               <div>
                 <span>Votre proche reçoit</span>
+
                 <strong>
                   {formatNumber(received)} FCFA
                 </strong>
@@ -331,7 +354,11 @@ export default function EnvoyerPage() {
 
               <div className="beneficiary-text">
                 <span>Bénéficiaire</span>
-                <strong>Marie-Espérance</strong>
+
+                <strong>
+                  Marie-Espérance
+                </strong>
+
                 <small>
                   Mobile Money • Brazzaville
                 </small>
@@ -345,6 +372,7 @@ export default function EnvoyerPage() {
             <div className="summary">
               <div>
                 <span>Montant envoyé</span>
+
                 <strong>
                   {amountNumber.toFixed(2)} €
                 </strong>
@@ -352,11 +380,15 @@ export default function EnvoyerPage() {
 
               <div>
                 <span>Frais YVI PAY</span>
-                <strong>{fees.toFixed(2)} €</strong>
+
+                <strong>
+                  {fees.toFixed(2)} €
+                </strong>
               </div>
 
               <div className="total">
                 <span>Total</span>
+
                 <strong>
                   {(amountNumber + fees).toFixed(2)} €
                 </strong>
@@ -371,7 +403,9 @@ export default function EnvoyerPage() {
                 status === "loading"
               }
               onClick={
-                status === "success" ? reset : transfer
+                status === "success"
+                  ? reset
+                  : transfer
               }
             >
               {status === "ready" && (
@@ -390,7 +424,10 @@ export default function EnvoyerPage() {
 
               {status === "success" && (
                 <>
-                  <span className="check">✓</span>
+                  <span className="check">
+                    ✓
+                  </span>
+
                   Transfert envoyé avec succès
                 </>
               )}
@@ -433,13 +470,15 @@ export default function EnvoyerPage() {
               <div className="signature-city signature-right">
                 <div>
                   <small>Congo</small>
-                  <strong>Brazzaville</strong>
+
+                  <strong>
+                    Brazzaville
+                  </strong>
                 </div>
 
                 <Flag country="congo" />
               </div>
             </div>
-
             <div className="stats">
               <div>
                 <span>Temps estimé</span>
@@ -863,7 +902,7 @@ export default function EnvoyerPage() {
         .conversion {
           display: flex;
           align-items: flex-end;
-          justify-content: space-between;
+                    justify-content: space-between;
           gap: 18px;
           margin-bottom: 24px;
         }
@@ -1061,6 +1100,20 @@ export default function EnvoyerPage() {
           place-items: center;
         }
 
+        .globe-halo {
+          position: absolute;
+          width: min(470px, 94vw);
+          aspect-ratio: 1;
+          border-radius: 50%;
+          background: radial-gradient(
+            circle,
+            rgba(32, 101, 164, 0.3),
+            rgba(17, 65, 112, 0.12) 42%,
+            transparent 70%
+          );
+          filter: blur(10px);
+        }
+
         .globe {
           position: relative;
           z-index: 2;
@@ -1071,95 +1124,96 @@ export default function EnvoyerPage() {
           background: #031023;
           box-shadow:
             0 0 0 1px rgba(224, 186, 112, 0.44),
-            0 0 60px rgba(44, 105, 173, 0.38);
+            0 0 45px rgba(45, 111, 181, 0.45),
+            0 0 100px rgba(24, 74, 128, 0.3);
           animation: float 5.5s ease-in-out infinite;
         }
 
-        .globe-ocean {
+        .earth-photo {
           position: absolute;
-          inset: 0;
-          background:
-            radial-gradient(
-              circle at 30% 24%,
-              #204f7c,
-              #0a294b 45%,
-              #020918 78%
-            );
-        }
-
-        .world-map {
-          position: absolute;
-          top: 20%;
-          left: -17%;
-          width: 138%;
-          height: 61%;
-          object-fit: fill;
-          opacity: 0.68;
+          inset: -3%;
+          width: 106%;
+          height: 106%;
+          object-fit: cover;
+          object-position: 52% 48%;
           filter:
-            invert(82%)
-            sepia(18%)
-            saturate(530%)
-            hue-rotate(165deg)
-            brightness(76%)
-            contrast(105%);
-          transform:
-            scaleX(0.79)
-            perspective(480px)
-            rotateY(-7deg);
-          mix-blend-mode: screen;
+            brightness(0.68)
+            contrast(1.2)
+            saturate(0.8)
+            sepia(0.08);
+          transform: scale(1.04);
         }
 
-        .globe-grid {
+        .earth-gold {
           position: absolute;
           inset: 0;
           border-radius: 50%;
-          opacity: 0.23;
+          background:
+            linear-gradient(
+              120deg,
+              rgba(5, 20, 40, 0.08),
+              rgba(211, 164, 78, 0.12)
+            ),
+            radial-gradient(
+              circle at 55% 45%,
+              transparent 42%,
+              rgba(3, 10, 22, 0.3) 72%
+            );
+          mix-blend-mode: screen;
         }
 
-        .horizontal-grid {
+        .earth-grid {
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          pointer-events: none;
+        }
+
+        .earth-grid-horizontal {
           background: repeating-linear-gradient(
             0deg,
             transparent 0,
             transparent 35px,
-            rgba(177, 205, 229, 0.25) 36px,
+            rgba(202, 220, 237, 0.13) 36px,
             transparent 37px
           );
         }
 
-        .vertical-grid {
+        .earth-grid-vertical {
           background: repeating-linear-gradient(
             90deg,
             transparent 0,
-            transparent 45px,
-            rgba(177, 205, 229, 0.2) 46px,
-            transparent 47px
+            transparent 44px,
+            rgba(202, 220, 237, 0.12) 45px,
+            transparent 46px
           );
-          transform: scaleX(0.7);
+          transform: scaleX(0.74);
         }
 
-        .globe-light {
+        .earth-light {
           position: absolute;
           inset: 0;
           border-radius: 50%;
           background: radial-gradient(
             circle at 28% 22%,
-            rgba(255, 255, 255, 0.18),
-            transparent 35%
+            rgba(255, 255, 255, 0.22),
+            transparent 34%
           );
         }
 
-        .globe-shadow {
+        .earth-shadow {
           position: absolute;
           inset: 0;
           border-radius: 50%;
           box-shadow:
-            inset -48px -25px 75px rgba(0, 0, 0, 0.68),
-            inset 22px 15px 38px rgba(75, 138, 202, 0.12);
+            inset -58px -34px 90px rgba(0, 0, 0, 0.78),
+            inset 28px 16px 42px rgba(82, 146, 208, 0.13);
         }
 
         .globe-route {
           position: absolute;
           inset: 0;
+          z-index: 5;
           width: 100%;
           height: 100%;
         }
@@ -1167,8 +1221,12 @@ export default function EnvoyerPage() {
         .globe-border {
           position: absolute;
           inset: 0;
-          border: 1.5px solid rgba(228, 190, 115, 0.48);
+          z-index: 6;
+          border: 1.5px solid rgba(228, 190, 115, 0.52);
           border-radius: 50%;
+          box-shadow:
+            inset 0 0 24px rgba(222, 181, 104, 0.12),
+            0 0 20px rgba(222, 181, 104, 0.12);
         }
 
         .orbit {
@@ -1193,14 +1251,16 @@ export default function EnvoyerPage() {
 
         .city-card {
           position: absolute;
-          z-index: 4;
+          z-index: 7;
           display: flex;
           align-items: center;
           gap: 9px;
           padding: 9px 12px;
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 13px;
-          background: rgba(3, 10, 19, 0.88);
+          background: rgba(3, 10, 19, 0.9);
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.34);
+          backdrop-filter: blur(8px);
         }
 
         .city-card div {
@@ -1226,8 +1286,7 @@ export default function EnvoyerPage() {
           right: 0;
           bottom: 18%;
         }
-
-        .signature-route {
+                .signature-route {
           display: grid;
           grid-template-columns: auto 1fr auto;
           align-items: center;
@@ -1505,6 +1564,14 @@ export default function EnvoyerPage() {
 
           .stats {
             grid-template-columns: 1fr;
+          }
+
+          .globe {
+            width: min(320px, 82vw);
+          }
+
+          .city-card {
+            transform: scale(0.9);
           }
         }
       `}</style>
