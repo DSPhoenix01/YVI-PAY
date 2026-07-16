@@ -1,370 +1,160 @@
 "use client";
 
-import { useState } from "react";
-
-const EARTH_IMAGE =
-  "https://commons.wikimedia.org/wiki/Special:Redirect/file/The_Earth_seen_from_Apollo_17.jpg";
-
-function Flag({ country, width = 30, height = 20 }) {
-  if (country === "france") {
-    return (
-      <svg
-        viewBox="0 0 3 2"
-        width={width}
-        height={height}
-        aria-label="Drapeau français"
-        style={flagStyle}
-      >
-        <rect width="1" height="2" fill="#002395" />
-        <rect x="1" width="1" height="2" fill="#fff" />
-        <rect x="2" width="1" height="2" fill="#ed2939" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg
-      viewBox="0 0 3 2"
-      width={width}
-      height={height}
-      aria-label="Drapeau du Congo"
-      style={flagStyle}
-    >
-      <rect width="3" height="2" fill="#009543" />
-
-      <polygon
-        points="0.65,2 1.35,2 2.35,0 1.65,0"
-        fill="#fbde4a"
-      />
-
-      <polygon
-        points="1.35,2 3,2 3,0 2.35,0"
-        fill="#dc241f"
-      />
-    </svg>
-  );
-}
-
-const flagStyle = {
-  display: "block",
-  flexShrink: 0,
-  borderRadius: "3px",
-  boxShadow: "0 3px 10px rgba(0,0,0,.4)",
-};
-
-function PremiumGlobe() {
-  return (
-    <div className="globe-area">
-      <div className="globe-halo" />
-      <div className="orbit orbit-one" />
-      <div className="orbit orbit-two" />
-
-      <div className="globe">
-        <img
-          src={EARTH_IMAGE}
-          alt="Globe terrestre centré sur l’Europe et l’Afrique"
-          className="earth-photo"
-        />
-
-        <div className="earth-gold" />
-        <div className="earth-grid earth-grid-horizontal" />
-        <div className="earth-grid earth-grid-vertical" />
-        <div className="earth-light" />
-        <div className="earth-shadow" />
-
-        <svg
-          className="globe-route"
-          viewBox="0 0 500 500"
-          aria-hidden="true"
-        >
-          <defs>
-            <linearGradient id="routeGold" x1="0" x2="1">
-              <stop offset="0%" stopColor="#b77722" />
-              <stop offset="45%" stopColor="#fff1bd" />
-              <stop offset="100%" stopColor="#c98b31" />
-            </linearGradient>
-
-            <filter
-              id="routeGlow"
-              x="-80%"
-              y="-80%"
-              width="260%"
-              height="260%"
-            >
-              <feGaussianBlur
-                stdDeviation="5"
-                result="blur"
-              />
-
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          <path
-            d="M270 151 C319 202 338 268 329 341"
-            fill="none"
-            stroke="url(#routeGold)"
-            strokeWidth="4"
-            strokeLinecap="round"
-            filter="url(#routeGlow)"
-          />
-
-          <circle
-            cx="270"
-            cy="151"
-            r="8"
-            fill="#fff4c8"
-            stroke="#e5b75f"
-            strokeWidth="3"
-            filter="url(#routeGlow)"
-          />
-
-          <circle
-            cx="329"
-            cy="341"
-            r="8"
-            fill="#fff4c8"
-            stroke="#e5b75f"
-            strokeWidth="3"
-            filter="url(#routeGlow)"
-          />
-
-          <circle
-            r="5.5"
-            fill="#fff9de"
-            filter="url(#routeGlow)"
-          >
-            <animateMotion
-              dur="2.8s"
-              repeatCount="indefinite"
-              path="M270 151 C319 202 338 268 329 341"
-            />
-          </circle>
-        </svg>
-
-        <div className="globe-border" />
-      </div>
-
-      <div className="city-card paris-card">
-        <Flag
-          country="france"
-          width={32}
-          height={22}
-        />
-
-        <div>
-          <small>Départ</small>
-          <strong>Paris</strong>
-        </div>
-      </div>
-
-      <div className="city-card brazzaville-card">
-        <Flag
-          country="congo"
-          width={32}
-          height={22}
-        />
-
-        <div>
-          <small>Arrivée</small>
-          <strong>Brazzaville</strong>
-        </div>
-      </div>
-    </div>
-  );
-}
+import { useEffect, useState } from "react";
 
 export default function EnvoyerPage() {
   const [amount, setAmount] = useState("250");
-  const [status, setStatus] = useState("ready");
-  const [confirmation, setConfirmation] =
-    useState(false);
+  const [step, setStep] = useState("ready");
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
-  const rate = 655.957;
-  const fees = 3.9;
-  const amountNumber = Number(amount) || 0;
-  const received = Math.round(amountNumber * rate);
+  const transferFee = 3.9;
+  const exchangeRate = 655.957;
+
+  const numericAmount = Number(amount) || 0;
+  const receivedAmount = Math.round(numericAmount * exchangeRate);
 
   const formatNumber = (value) =>
     new Intl.NumberFormat("fr-FR").format(value);
 
-  const reset = () => {
-    setStatus("ready");
-    setConfirmation(false);
-  };
+  const startTransfer = () => {
+    if (numericAmount <= 0 || step === "loading") return;
 
-  const transfer = () => {
-    if (
-      amountNumber <= 0 ||
-      status === "loading"
-    ) {
-      return;
-    }
-
-    setStatus("loading");
+    setStep("loading");
+    setShowConfirmation(false);
 
     window.setTimeout(() => {
-      setStatus("success");
-      setConfirmation(true);
+      setStep("success");
+      setShowConfirmation(true);
     }, 2200);
   };
 
+  const resetTransfer = () => {
+    setStep("ready");
+    setShowConfirmation(false);
+  };
+
+  useEffect(() => {
+    return () => {
+      window.clearTimeout();
+    };
+  }, []);
+
   return (
-    <main className="page">
-      <div className="ambient ambient-left" />
-      <div className="ambient ambient-right" />
+    <main className="send-page">
+      <div className="ambient ambient-one" />
+      <div className="ambient ambient-two" />
 
-      <section className="shell">
-        <header className="header">
+      <section className="send-shell">
+        <div className="top-line">
           <div>
-            <span className="eyebrow">
-              TRANSFERT INTERNATIONAL
-            </span>
-
+            <span className="eyebrow">TRANSFERT INTERNATIONAL</span>
             <h1>Envoyer de l’argent</h1>
-
-            <p>
-              De Paris vers vos proches, en toute
-              simplicité.
+            <p className="intro">
+              De Paris vers vos proches, en toute simplicité.
             </p>
           </div>
 
-          <div className="secure">
-            <span />
+          <div className="secure-pill">
+            <span className="secure-dot" />
             Transfert sécurisé
           </div>
-        </header>
+        </div>
 
-        <div className="layout">
-          <section className="panel transfer-panel">
-            <div className="title-row">
+        <div className="main-grid">
+          <section className="transfer-panel">
+            <div className="route-title">
               <div>
-                <span className="section-label">
-                  VOTRE TRANSFERT
-                </span>
-
+                <span className="section-label">VOTRE TRANSFERT</span>
                 <h2>Paris vers Brazzaville</h2>
               </div>
 
-              <span className="instant">
-                Instantané
-              </span>
+              <span className="instant-badge">Instantané</span>
             </div>
 
             <div className="route-card">
-              <div className="country">
-                <div className="flag-circle">
-                  <Flag
-                    country="france"
-                    width={31}
-                    height={21}
-                  />
-                </div>
-
+              <div className="country-block">
+                <div className="flag-circle">🇫🇷</div>
                 <div>
-                  <small>Départ</small>
+                  <span className="country-caption">Départ</span>
                   <strong>Paris</strong>
-                  <span>France</span>
+                  <small>France</small>
                 </div>
               </div>
 
-              <div className="route">
-                <i className="point point-left" />
-
-                <div className="route-line">
-                  <i />
-                </div>
-
-                <b>✦</b>
-
-                <i className="point point-right" />
+              <div className="route-visual">
+                <span className="route-point route-point-left" />
+                <span className="route-line">
+                  <span className="route-light" />
+                </span>
+                <span className="route-plane">✦</span>
+                <span className="route-point route-point-right" />
               </div>
 
-              <div className="country country-right">
+              <div className="country-block destination">
                 <div>
-                  <small>Destination</small>
+                  <span className="country-caption">Destination</span>
                   <strong>Brazzaville</strong>
-                  <span>Congo</span>
+                  <small>Congo</small>
                 </div>
-
-                <div className="flag-circle">
-                  <Flag
-                    country="congo"
-                    width={31}
-                    height={21}
-                  />
-                </div>
+                <div className="flag-circle">🇨🇬</div>
               </div>
             </div>
 
-            <label
-              className="input-label"
-              htmlFor="amount"
-            >
-              Vous envoyez
-            </label>
+            <div className="amount-section">
+              <label htmlFor="amount">Vous envoyez</label>
 
-            <div className="amount-box">
-              <input
-                id="amount"
-                type="number"
-                min="1"
-                value={amount}
-                disabled={status === "loading"}
-                onChange={(event) => {
-                  setAmount(event.target.value);
-
-                  if (status === "success") {
-                    reset();
-                  }
-                }}
-              />
-
-              <div className="currency">
-                <Flag
-                  country="france"
-                  width={25}
-                  height={17}
+              <div className="amount-box">
+                <input
+                  id="amount"
+                  type="number"
+                  min="1"
+                  value={amount}
+                  disabled={step === "loading"}
+                  onChange={(event) => {
+                    setAmount(event.target.value);
+                    if (step === "success") {
+                      setStep("ready");
+                      setShowConfirmation(false);
+                    }
+                  }}
+                  aria-label="Montant envoyé"
                 />
 
-                <strong>EUR</strong>
-                <span>⌄</span>
+                <div className="currency-select">
+                  <span>🇫🇷</span>
+                  <strong>EUR</strong>
+                  <span className="currency-arrow">⌄</span>
+                </div>
               </div>
             </div>
 
-            <div className="conversion">
+            <div className="conversion-row">
               <div>
                 <span>Votre proche reçoit</span>
-
-                <strong>
-                  {formatNumber(received)} FCFA
-                </strong>
+                <strong>{formatNumber(receivedAmount)} FCFA</strong>
               </div>
 
-              <small>
-                1 EUR = {rate.toFixed(3)} FCFA
-              </small>
+              <div className="exchange-info">
+                <span>1 EUR</span>
+                <span className="exchange-dash">=</span>
+                <span>{exchangeRate.toFixed(3)} FCFA</span>
+              </div>
             </div>
 
-            <div className="beneficiary">
-              <div className="avatar">ME</div>
+            <div className="beneficiary-card">
+              <div className="beneficiary-avatar">ME</div>
 
-              <div className="beneficiary-text">
+              <div className="beneficiary-info">
                 <span>Bénéficiaire</span>
-
-                <strong>
-                  Marie-Espérance
-                </strong>
-
-                <small>
-                  Mobile Money • Brazzaville
-                </small>
+                <strong>Marie-Espérance</strong>
+                <small>Mobile Money • Brazzaville</small>
               </div>
 
-              <button type="button">
+              <button
+                type="button"
+                className="change-button"
+                disabled={step === "loading"}
+              >
                 Modifier
               </button>
             </div>
@@ -372,91 +162,105 @@ export default function EnvoyerPage() {
             <div className="summary">
               <div>
                 <span>Montant envoyé</span>
-
-                <strong>
-                  {amountNumber.toFixed(2)} €
-                </strong>
+                <strong>{numericAmount.toFixed(2)} €</strong>
               </div>
 
               <div>
                 <span>Frais YVI PAY</span>
-
-                <strong>
-                  {fees.toFixed(2)} €
-                </strong>
+                <strong>{transferFee.toFixed(2)} €</strong>
               </div>
 
-              <div className="total">
+              <div className="summary-total">
                 <span>Total</span>
-
                 <strong>
-                  {(amountNumber + fees).toFixed(2)} €
+                  {(numericAmount + transferFee).toFixed(2)} €
                 </strong>
               </div>
             </div>
 
             <button
               type="button"
-              className={`transfer-button ${status}`}
-              disabled={
-                amountNumber <= 0 ||
-                status === "loading"
-              }
-              onClick={
-                status === "success"
-                  ? reset
-                  : transfer
-              }
+              className={`transfer-button ${step}`}
+              onClick={step === "success" ? resetTransfer : startTransfer}
+              disabled={numericAmount <= 0 || step === "loading"}
             >
-              {status === "ready" && (
+              {step === "ready" && (
                 <>
-                  Confirmer le transfert
-                  <span>→</span>
+                  <span>Confirmer le transfert</span>
+                  <span className="button-arrow">→</span>
                 </>
               )}
 
-              {status === "loading" && (
+              {step === "loading" && (
                 <>
-                  <span className="loader" />
-                  Transfert en cours…
+                  <span className="button-loader" />
+                  <span>Transfert en cours…</span>
                 </>
               )}
 
-              {status === "success" && (
+              {step === "success" && (
                 <>
-                  <span className="check">
-                    ✓
-                  </span>
-
-                  Transfert envoyé avec succès
+                  <span className="success-check">✓</span>
+                  <span>Transfert envoyé avec succès</span>
                 </>
               )}
             </button>
 
             <p className="security-note">
-              ◆ Vos données sont protégées par un
-              chiffrement sécurisé.
+              <span>◆</span>
+              Vos données sont protégées par un chiffrement sécurisé.
             </p>
           </section>
 
-          <aside className="panel visual-panel">
-            <div className="visual-header">
-              <span className="section-label">
-                YVI PAY SIGNATURE
-              </span>
-
-              <span className="network">
-                <i />
+          <aside className="visual-panel">
+            <div className="visual-top">
+              <span className="section-label">YVI PAY SIGNATURE</span>
+              <span className="live-status">
+                <span />
                 Réseau actif
               </span>
             </div>
 
-            <PremiumGlobe />
+            <div className="globe-stage">
+              <div className="globe-halo globe-halo-one" />
+              <div className="globe-halo globe-halo-two" />
+
+              <div className="globe">
+                <div className="globe-grid globe-grid-one" />
+                <div className="globe-grid globe-grid-two" />
+
+                <div className="continent continent-one" />
+                <div className="continent continent-two" />
+                <div className="continent continent-three" />
+
+                <span className="city-dot paris-dot" />
+                <span className="city-dot brazza-dot" />
+
+                <div className="globe-route">
+                  <span className="globe-route-light" />
+                </div>
+              </div>
+
+              <div className="floating-city paris-label">
+                <span>🇫🇷</span>
+                <div>
+                  <small>Départ</small>
+                  <strong>Paris</strong>
+                </div>
+              </div>
+
+              <div className="floating-city brazza-label">
+                <span>🇨🇬</span>
+                <div>
+                  <small>Arrivée</small>
+                  <strong>Brazzaville</strong>
+                </div>
+              </div>
+            </div>
 
             <div className="signature-route">
               <div className="signature-city">
-                <Flag country="france" />
-
+                <span>🇫🇷</span>
                 <div>
                   <small>France</small>
                   <strong>Paris</strong>
@@ -464,22 +268,19 @@ export default function EnvoyerPage() {
               </div>
 
               <div className="signature-line">
-                <i />
+                <span className="signature-traveller" />
               </div>
 
-              <div className="signature-city signature-right">
+              <div className="signature-city right">
                 <div>
                   <small>Congo</small>
-
-                  <strong>
-                    Brazzaville
-                  </strong>
+                  <strong>Brazzaville</strong>
                 </div>
-
-                <Flag country="congo" />
+                <span>🇨🇬</span>
               </div>
             </div>
-            <div className="stats">
+
+            <div className="visual-stats">
               <div>
                 <span>Temps estimé</span>
                 <strong>Moins de 2 min</strong>
@@ -492,91 +293,84 @@ export default function EnvoyerPage() {
             </div>
           </aside>
         </div>
-      </section>
 
-      {confirmation && (
-        <div className="confirmation-overlay">
-          <div className="confirmation-card">
-            <button
-              type="button"
-              className="close"
-              onClick={reset}
-            >
-              ×
-            </button>
+        {showConfirmation && (
+          <div className="confirmation-overlay">
+            <div className="confirmation-card">
+              <div className="confirmation-glow" />
 
-            <div className="confirmation-check">
-              ✓
+              <button
+                type="button"
+                className="confirmation-close"
+                onClick={resetTransfer}
+                aria-label="Fermer la confirmation"
+              >
+                ×
+              </button>
+
+              <div className="confirmation-icon">
+                <span>✓</span>
+              </div>
+
+              <span className="confirmation-eyebrow">
+                TRANSFERT CONFIRMÉ
+              </span>
+
+              <h2>Votre argent est en route.</h2>
+
+              <p>
+                Marie-Espérance recevra son transfert directement sur son
+                portefeuille Mobile Money.
+              </p>
+
+              <div className="confirmation-route">
+                <div>
+                  <span className="confirmation-flag">🇫🇷</span>
+                  <small>Paris</small>
+                </div>
+
+                <div className="confirmation-journey">
+                  <span />
+                  <strong>✦</strong>
+                  <span />
+                </div>
+
+                <div>
+                  <span className="confirmation-flag">🇨🇬</span>
+                  <small>Brazzaville</small>
+                </div>
+              </div>
+
+              <div className="confirmation-details">
+                <div>
+                  <span>Montant envoyé</span>
+                  <strong>{numericAmount.toFixed(2)} €</strong>
+                </div>
+
+                <div>
+                  <span>Montant reçu</span>
+                  <strong>{formatNumber(receivedAmount)} FCFA</strong>
+                </div>
+
+                <div>
+                  <span>Référence</span>
+                  <strong>YVI-{new Date().getFullYear()}-0725</strong>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                className="confirmation-button"
+                onClick={resetTransfer}
+              >
+                Terminer
+              </button>
+
+              <span className="confirmation-brand">YVI PAY</span>
             </div>
-
-            <span className="confirmation-label">
-              TRANSFERT CONFIRMÉ
-            </span>
-
-            <h2>Votre argent est en route.</h2>
-
-            <p>
-              Marie-Espérance recevra son transfert
-              directement sur son portefeuille Mobile Money.
-            </p>
-
-            <div className="confirmation-route">
-              <div>
-                <Flag
-                  country="france"
-                  width={36}
-                  height={24}
-                />
-                <small>Paris</small>
-              </div>
-
-              <span>━━━━ ✦ ━━━━</span>
-
-              <div>
-                <Flag
-                  country="congo"
-                  width={36}
-                  height={24}
-                />
-                <small>Brazzaville</small>
-              </div>
-            </div>
-
-            <div className="confirmation-details">
-              <div>
-                <span>Montant envoyé</span>
-                <strong>
-                  {amountNumber.toFixed(2)} €
-                </strong>
-              </div>
-
-              <div>
-                <span>Montant reçu</span>
-                <strong>
-                  {formatNumber(received)} FCFA
-                </strong>
-              </div>
-
-              <div>
-                <span>Référence</span>
-                <strong>
-                  YVI-{new Date().getFullYear()}-0725
-                </strong>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              className="finish"
-              onClick={reset}
-            >
-              Terminer
-            </button>
-
-            <span className="brand">YVI PAY</span>
           </div>
-        </div>
-      )}
+        )}
+      </section>
 
       <style jsx>{`
         :global(*) {
@@ -585,7 +379,6 @@ export default function EnvoyerPage() {
 
         :global(body) {
           margin: 0;
-          background: #020711;
         }
 
         button,
@@ -593,7 +386,11 @@ export default function EnvoyerPage() {
           font: inherit;
         }
 
-        .page {
+        button {
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        .send-page {
           position: relative;
           min-height: 100vh;
           overflow: hidden;
@@ -610,23 +407,19 @@ export default function EnvoyerPage() {
               rgba(194, 149, 65, 0.12),
               transparent 28%
             ),
-            linear-gradient(
-              145deg,
-              #020711,
-              #07101e 48%,
-              #02050b
-            );
+            linear-gradient(145deg, #020711 0%, #07101e 48%, #02050b 100%);
           isolation: isolate;
         }
 
         .ambient {
           position: absolute;
-          z-index: -1;
           border-radius: 999px;
           filter: blur(90px);
+          pointer-events: none;
+          z-index: -1;
         }
 
-        .ambient-left {
+        .ambient-one {
           top: 8%;
           left: -8%;
           width: 320px;
@@ -634,7 +427,7 @@ export default function EnvoyerPage() {
           background: rgba(34, 72, 123, 0.22);
         }
 
-        .ambient-right {
+        .ambient-two {
           right: -8%;
           bottom: 0;
           width: 380px;
@@ -642,12 +435,12 @@ export default function EnvoyerPage() {
           background: rgba(183, 136, 52, 0.1);
         }
 
-        .shell {
+        .send-shell {
           width: min(1320px, 100%);
-          margin: auto;
+          margin: 0 auto;
         }
 
-        .header {
+        .top-line {
           display: flex;
           align-items: flex-start;
           justify-content: space-between;
@@ -673,90 +466,99 @@ export default function EnvoyerPage() {
 
         h1 {
           margin-bottom: 9px;
-          font-family: Georgia, serif;
+          font-family: Georgia, "Times New Roman", serif;
           font-size: clamp(2.35rem, 5vw, 4.5rem);
           font-weight: 400;
           letter-spacing: -0.045em;
           line-height: 0.98;
         }
 
-        .header p {
+        .intro {
           margin-bottom: 0;
           color: #8994a6;
+          font-size: 0.98rem;
         }
 
-        .secure {
-          display: flex;
+        .secure-pill {
+          display: inline-flex;
           align-items: center;
           gap: 10px;
+          min-width: max-content;
           padding: 11px 16px;
+          color: #cfd7e4;
           border: 1px solid rgba(205, 168, 101, 0.19);
           border-radius: 999px;
           background: rgba(7, 14, 25, 0.75);
-          color: #cfd7e4;
+          backdrop-filter: blur(18px);
           font-size: 0.76rem;
         }
 
-        .secure span {
+        .secure-dot {
           width: 7px;
           height: 7px;
           border-radius: 50%;
           background: #d5ad62;
-          box-shadow: 0 0 14px #d5ad62;
+          box-shadow: 0 0 14px rgba(213, 173, 98, 0.9);
         }
 
-        .layout {
+        .main-grid {
           display: grid;
-          grid-template-columns:
-            minmax(0, 1.04fr)
-            minmax(390px, 0.96fr);
+          grid-template-columns: minmax(0, 1.04fr) minmax(390px, 0.96fr);
           gap: 24px;
+          align-items: stretch;
         }
 
-        .panel {
+        .transfer-panel,
+        .visual-panel {
+          position: relative;
           overflow: hidden;
           border: 1px solid rgba(255, 255, 255, 0.075);
           border-radius: 28px;
-          background: linear-gradient(
-            145deg,
-            rgba(12, 23, 39, 0.91),
-            rgba(4, 10, 19, 0.92)
-          );
+          background:
+            linear-gradient(
+              145deg,
+              rgba(12, 23, 39, 0.91),
+              rgba(4, 10, 19, 0.92)
+            );
           box-shadow:
             0 26px 70px rgba(0, 0, 0, 0.32),
-            inset 0 1px rgba(255, 255, 255, 0.045);
+            inset 0 1px 0 rgba(255, 255, 255, 0.045);
+          backdrop-filter: blur(22px);
         }
 
         .transfer-panel {
           padding: clamp(24px, 4vw, 42px);
         }
 
-        .title-row {
+        .route-title {
           display: flex;
           justify-content: space-between;
           gap: 20px;
+          align-items: flex-start;
           margin-bottom: 24px;
         }
 
-        .title-row h2 {
-          margin: 0;
-          font-family: Georgia, serif;
+        .route-title h2 {
+          margin-bottom: 0;
+          font-family: Georgia, "Times New Roman", serif;
           font-size: clamp(1.55rem, 3vw, 2.25rem);
           font-weight: 400;
         }
 
-        .instant {
-          height: max-content;
+        .instant-badge {
           padding: 8px 12px;
+          color: #d8b771;
           border: 1px solid rgba(216, 183, 113, 0.2);
           border-radius: 999px;
-          color: #d8b771;
+          background: rgba(216, 183, 113, 0.07);
           font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.06em;
         }
 
         .route-card {
           display: grid;
-          grid-template-columns: 1fr 0.8fr 1fr;
+          grid-template-columns: 1fr minmax(100px, 0.8fr) 1fr;
           align-items: center;
           gap: 18px;
           margin-bottom: 27px;
@@ -766,45 +568,53 @@ export default function EnvoyerPage() {
           background: rgba(1, 6, 13, 0.48);
         }
 
-        .country {
+        .country-block {
           display: flex;
           align-items: center;
           gap: 13px;
+          min-width: 0;
         }
 
-        .country-right {
+        .country-block.destination {
           justify-content: flex-end;
           text-align: right;
         }
 
-        .country > div:not(.flag-circle) {
+        .flag-circle {
+          display: grid;
+          flex: 0 0 auto;
+          width: 45px;
+          height: 45px;
+          place-items: center;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.04);
+          box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02);
+          font-size: 1.32rem;
+        }
+
+        .country-block div:not(.flag-circle) {
           display: flex;
+          min-width: 0;
           flex-direction: column;
         }
 
-        .country small,
-        .country span {
+        .country-caption,
+        .country-block small {
           color: #747f91;
           font-size: 0.7rem;
         }
 
-        .country strong {
+        .country-block strong {
+          overflow: hidden;
           margin: 2px 0;
+          color: #f5f0e5;
           font-size: 0.91rem;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
-        .flag-circle {
-          display: grid;
-          flex: 0 0 45px;
-          width: 45px;
-          height: 45px;
-          place-items: center;
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.04);
-        }
-
-        .route {
+        .route-visual {
           position: relative;
           display: flex;
           align-items: center;
@@ -815,30 +625,27 @@ export default function EnvoyerPage() {
           width: 100%;
           height: 1px;
           overflow: hidden;
-          background: #cfa75e;
+          background: linear-gradient(
+            90deg,
+            rgba(202, 157, 76, 0.22),
+            #cfa75e,
+            rgba(202, 157, 76, 0.22)
+          );
         }
 
-        .route-line i,
-        .signature-line i {
+        .route-light {
           position: absolute;
-          top: -2px;
+          top: -1px;
           left: -30%;
           width: 34%;
-          height: 5px;
+          height: 3px;
           border-radius: 999px;
           background: #f5d592;
           box-shadow: 0 0 13px #e8bd6e;
           animation: travel 2.5s linear infinite;
         }
 
-        .route b {
-          position: absolute;
-          left: 50%;
-          color: #f3d491;
-          transform: translateX(-50%);
-        }
-
-        .point {
+        .route-point {
           position: absolute;
           z-index: 2;
           width: 7px;
@@ -846,18 +653,33 @@ export default function EnvoyerPage() {
           border: 1px solid #e9c477;
           border-radius: 50%;
           background: #0b1320;
-          box-shadow: 0 0 11px #e9c477;
+          box-shadow: 0 0 11px rgba(233, 196, 119, 0.9);
         }
 
-        .point-left {
+        .route-point-left {
           left: -1px;
         }
 
-        .point-right {
+        .route-point-right {
           right: -1px;
         }
 
-        .input-label {
+        .route-plane {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          z-index: 3;
+          color: #f3d491;
+          font-size: 0.72rem;
+          text-shadow: 0 0 10px rgba(243, 212, 145, 0.9);
+          transform: translate(-50%, -50%);
+        }
+
+        .amount-section {
+          margin-bottom: 17px;
+        }
+
+        .amount-section label {
           display: block;
           margin-bottom: 9px;
           color: #919baa;
@@ -866,64 +688,95 @@ export default function EnvoyerPage() {
 
         .amount-box {
           display: flex;
+          align-items: stretch;
           overflow: hidden;
-          margin-bottom: 17px;
           border: 1px solid rgba(213, 173, 98, 0.18);
           border-radius: 18px;
           background: rgba(1, 6, 13, 0.62);
+          transition:
+            border-color 180ms ease,
+            box-shadow 180ms ease;
+        }
+
+        .amount-box:focus-within {
+          border-color: rgba(213, 173, 98, 0.52);
+          box-shadow: 0 0 0 4px rgba(213, 173, 98, 0.055);
         }
 
         .amount-box input {
           width: 100%;
           min-width: 0;
           padding: 19px 20px;
+          color: #fffaf0;
           border: 0;
           outline: none;
           background: transparent;
-          color: #fffaf0;
-          font-family: Georgia, serif;
-          font-size: 2rem;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(1.65rem, 4vw, 2.25rem);
         }
 
-        .currency {
+        .amount-box input::-webkit-inner-spin-button,
+        .amount-box input::-webkit-outer-spin-button {
+          margin: 0;
+          appearance: none;
+        }
+
+        .currency-select {
           display: flex;
           align-items: center;
           gap: 8px;
           min-width: 118px;
           padding: 0 18px;
           border-left: 1px solid rgba(255, 255, 255, 0.06);
+          color: #ebe4d5;
+          font-size: 0.82rem;
         }
 
-        .currency span {
+        .currency-select > span:first-child {
+          font-size: 1.15rem;
+        }
+
+        .currency-arrow {
           margin-left: auto;
           color: #8c96a6;
         }
 
-        .conversion {
+        .conversion-row {
           display: flex;
           align-items: flex-end;
-                    justify-content: space-between;
+          justify-content: space-between;
           gap: 18px;
           margin-bottom: 24px;
+          padding: 0 3px;
         }
 
-        .conversion > div {
+        .conversion-row > div:first-child {
           display: flex;
           flex-direction: column;
           gap: 3px;
         }
 
-        .conversion span,
-        .conversion small {
+        .conversion-row span {
           color: #7f8999;
           font-size: 0.7rem;
         }
 
-        .conversion strong {
+        .conversion-row strong {
           color: #dcb96f;
+          font-size: 1rem;
         }
 
-        .beneficiary {
+        .exchange-info {
+          display: flex;
+          gap: 7px;
+          align-items: center;
+        }
+
+        .exchange-dash {
+          color: #c19a56 !important;
+        }
+
+        .beneficiary-card {
           display: flex;
           align-items: center;
           gap: 14px;
@@ -934,38 +787,52 @@ export default function EnvoyerPage() {
           background: rgba(255, 255, 255, 0.025);
         }
 
-        .avatar {
+        .beneficiary-avatar {
           display: grid;
+          flex: 0 0 auto;
           width: 42px;
           height: 42px;
           place-items: center;
           border: 1px solid rgba(218, 181, 109, 0.28);
           border-radius: 50%;
           color: #e2bd74;
+          background: linear-gradient(
+            145deg,
+            rgba(203, 157, 73, 0.14),
+            rgba(10, 19, 32, 0.8)
+          );
           font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.05em;
         }
 
-        .beneficiary-text {
+        .beneficiary-info {
           display: flex;
+          min-width: 0;
           flex: 1;
           flex-direction: column;
         }
 
-        .beneficiary-text span,
-        .beneficiary-text small {
+        .beneficiary-info span,
+        .beneficiary-info small {
           color: #737e90;
           font-size: 0.68rem;
         }
 
-        .beneficiary-text strong {
+        .beneficiary-info strong {
+          overflow: hidden;
           margin: 3px 0;
+          color: #f1ecdf;
           font-size: 0.86rem;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
-        .beneficiary button {
+        .change-button {
+          padding: 8px 10px;
+          color: #d9b66d;
           border: 0;
           background: transparent;
-          color: #d9b66d;
           cursor: pointer;
           font-size: 0.7rem;
         }
@@ -975,11 +842,14 @@ export default function EnvoyerPage() {
           flex-direction: column;
           gap: 11px;
           margin-bottom: 22px;
+          padding: 4px 3px 0;
         }
 
-        .summary div {
+        .summary > div {
           display: flex;
+          align-items: center;
           justify-content: space-between;
+          gap: 15px;
         }
 
         .summary span {
@@ -988,23 +858,34 @@ export default function EnvoyerPage() {
         }
 
         .summary strong {
+          color: #dfe4ec;
           font-size: 0.8rem;
         }
 
-        .summary .total {
+        .summary-total {
           margin-top: 4px;
           padding-top: 13px;
           border-top: 1px solid rgba(255, 255, 255, 0.065);
         }
 
-        .transfer-button,
-        .finish {
+        .summary-total span,
+        .summary-total strong {
+          color: #f5efe1;
+        }
+
+        .summary-total strong {
+          font-size: 1rem;
+        }
+
+        .transfer-button {
           display: flex;
           width: 100%;
           min-height: 57px;
           align-items: center;
           justify-content: center;
           gap: 12px;
+          padding: 15px 19px;
+          color: #08101d;
           border: 1px solid rgba(255, 231, 181, 0.52);
           border-radius: 17px;
           background: linear-gradient(
@@ -1013,22 +894,55 @@ export default function EnvoyerPage() {
             #e4c17c 48%,
             #b88739
           );
-          color: #08101d;
+          box-shadow:
+            0 13px 32px rgba(178, 127, 46, 0.18),
+            inset 0 1px 0 rgba(255, 255, 255, 0.5);
           cursor: pointer;
+          font-size: 0.82rem;
           font-weight: 800;
+          letter-spacing: 0.02em;
+          transition:
+            transform 180ms ease,
+            box-shadow 180ms ease,
+            filter 180ms ease;
+        }
+
+        .transfer-button:hover:not(:disabled) {
+          transform: translateY(-2px);
+          box-shadow:
+            0 17px 36px rgba(178, 127, 46, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.55);
+          filter: brightness(1.04);
+        }
+
+        .transfer-button:disabled {
+          cursor: not-allowed;
+          opacity: 0.75;
         }
 
         .transfer-button.loading {
           color: #e9c985;
+          border-color: rgba(222, 184, 108, 0.28);
           background: rgba(210, 170, 92, 0.07);
+          box-shadow: inset 0 0 30px rgba(210, 170, 92, 0.04);
         }
 
         .transfer-button.success {
           color: #d8bb7c;
-          background: rgba(191, 148, 72, 0.17);
+          border-color: rgba(216, 187, 124, 0.32);
+          background: linear-gradient(
+            110deg,
+            rgba(109, 86, 44, 0.33),
+            rgba(191, 148, 72, 0.17)
+          );
+          box-shadow: 0 12px 30px rgba(178, 127, 46, 0.1);
         }
 
-        .loader {
+        .button-arrow {
+          font-size: 1.15rem;
+        }
+
+        .button-loader {
           width: 17px;
           height: 17px;
           border: 2px solid rgba(233, 201, 133, 0.25);
@@ -1037,20 +951,30 @@ export default function EnvoyerPage() {
           animation: spin 0.75s linear infinite;
         }
 
-        .check {
+        .success-check {
           display: grid;
           width: 21px;
           height: 21px;
           place-items: center;
-          border: 1px solid #d8bb7c;
+          border: 1px solid rgba(219, 189, 127, 0.65);
           border-radius: 50%;
+          font-size: 0.7rem;
         }
 
         .security-note {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
           margin: 13px 0 0;
           color: #687487;
-          text-align: center;
           font-size: 0.64rem;
+          text-align: center;
+        }
+
+        .security-note span {
+          color: #a68043;
+          font-size: 0.55rem;
         }
 
         .visual-panel {
@@ -1071,226 +995,288 @@ export default function EnvoyerPage() {
             );
         }
 
-        .visual-header {
-          display: flex;
-          justify-content: space-between;
+        .visual-panel::before {
+          position: absolute;
+          inset: 0;
+          border-radius: inherit;
+          background:
+            linear-gradient(
+              120deg,
+              transparent 10%,
+              rgba(255, 255, 255, 0.025) 38%,
+              transparent 62%
+            );
+          content: "";
+          pointer-events: none;
         }
 
-        .network {
+        .visual-top {
+          position: relative;
+          z-index: 3;
           display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+        }
+
+        .live-status {
+          display: inline-flex;
           align-items: center;
           gap: 7px;
           color: #9da8b7;
           font-size: 0.67rem;
         }
 
-        .network i {
+        .live-status > span {
           width: 6px;
           height: 6px;
           border-radius: 50%;
           background: #b99a59;
-          box-shadow: 0 0 12px #b99a59;
+          box-shadow: 0 0 12px rgba(185, 154, 89, 0.95);
+          animation: pulse 1.8s ease-in-out infinite;
         }
 
-        .globe-area {
+        .globe-stage {
           position: relative;
           display: grid;
-          min-height: 455px;
+          min-height: 420px;
           flex: 1;
           place-items: center;
-        }
-
-        .globe-halo {
-          position: absolute;
-          width: min(470px, 94vw);
-          aspect-ratio: 1;
-          border-radius: 50%;
-          background: radial-gradient(
-            circle,
-            rgba(32, 101, 164, 0.3),
-            rgba(17, 65, 112, 0.12) 42%,
-            transparent 70%
-          );
-          filter: blur(10px);
+          margin: 5px 0 15px;
         }
 
         .globe {
           position: relative;
           z-index: 2;
-          width: min(355px, 75vw);
+          width: min(335px, 76vw);
           aspect-ratio: 1;
           overflow: hidden;
-          border-radius: 50%;
-          background: #031023;
-          box-shadow:
-            0 0 0 1px rgba(224, 186, 112, 0.44),
-            0 0 45px rgba(45, 111, 181, 0.45),
-            0 0 100px rgba(24, 74, 128, 0.3);
-          animation: float 5.5s ease-in-out infinite;
-        }
-
-        .earth-photo {
-          position: absolute;
-          inset: -3%;
-          width: 106%;
-          height: 106%;
-          object-fit: cover;
-          object-position: 52% 48%;
-          filter:
-            brightness(0.68)
-            contrast(1.2)
-            saturate(0.8)
-            sepia(0.08);
-          transform: scale(1.04);
-        }
-
-        .earth-gold {
-          position: absolute;
-          inset: 0;
+          border: 1px solid rgba(219, 188, 126, 0.28);
           border-radius: 50%;
           background:
-            linear-gradient(
-              120deg,
-              rgba(5, 20, 40, 0.08),
-              rgba(211, 164, 78, 0.12)
+            radial-gradient(
+              circle at 34% 28%,
+              rgba(57, 105, 159, 0.3),
+              transparent 30%
             ),
             radial-gradient(
-              circle at 55% 45%,
-              transparent 42%,
-              rgba(3, 10, 22, 0.3) 72%
+              circle at 50% 50%,
+              #0c213b 0%,
+              #071526 53%,
+              #020814 100%
             );
-          mix-blend-mode: screen;
+          box-shadow:
+            0 0 0 12px rgba(204, 164, 88, 0.025),
+            0 0 70px rgba(36, 90, 148, 0.28),
+            inset -32px -20px 60px rgba(0, 0, 0, 0.55),
+            inset 10px 10px 35px rgba(112, 157, 205, 0.1);
+          animation: globeFloat 5.5s ease-in-out infinite;
         }
 
-        .earth-grid {
+        .globe::after {
           position: absolute;
           inset: 0;
           border-radius: 50%;
+          background: linear-gradient(
+            110deg,
+            rgba(255, 255, 255, 0.12),
+            transparent 30%,
+            transparent 67%,
+            rgba(0, 0, 0, 0.3)
+          );
+          content: "";
           pointer-events: none;
         }
 
-        .earth-grid-horizontal {
+        .globe-grid {
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          opacity: 0.36;
+        }
+
+        .globe-grid-one {
           background: repeating-linear-gradient(
             0deg,
             transparent 0,
-            transparent 35px,
-            rgba(202, 220, 237, 0.13) 36px,
-            transparent 37px
+            transparent 26px,
+            rgba(165, 192, 222, 0.15) 27px,
+            transparent 28px
           );
         }
 
-        .earth-grid-vertical {
+        .globe-grid-two {
           background: repeating-linear-gradient(
             90deg,
             transparent 0,
-            transparent 44px,
-            rgba(202, 220, 237, 0.12) 45px,
-            transparent 46px
+            transparent 34px,
+            rgba(165, 192, 222, 0.12) 35px,
+            transparent 36px
           );
-          transform: scaleX(0.74);
+          transform: scaleX(0.72);
         }
 
-        .earth-light {
+        .continent {
           position: absolute;
-          inset: 0;
-          border-radius: 50%;
-          background: radial-gradient(
-            circle at 28% 22%,
-            rgba(255, 255, 255, 0.22),
-            transparent 34%
+          z-index: 1;
+          border: 1px solid rgba(212, 180, 113, 0.19);
+          background: linear-gradient(
+            145deg,
+            rgba(75, 119, 156, 0.3),
+            rgba(28, 66, 104, 0.17)
           );
+          box-shadow: inset 0 0 25px rgba(214, 179, 106, 0.035);
+          transform: rotate(-11deg);
         }
 
-        .earth-shadow {
+        .continent-one {
+          top: 24%;
+          left: 28%;
+          width: 72px;
+          height: 107px;
+          border-radius: 48% 40% 52% 37% / 30% 48% 49% 64%;
+        }
+
+        .continent-two {
+          top: 31%;
+          left: 49%;
+          width: 101px;
+          height: 149px;
+          border-radius: 45% 56% 42% 57% / 38% 37% 63% 61%;
+          transform: rotate(12deg);
+        }
+
+        .continent-three {
+          top: 18%;
+          right: 14%;
+          width: 73px;
+          height: 66px;
+          border-radius: 57% 44% 53% 35% / 47% 39% 62% 51%;
+          transform: rotate(18deg);
+        }
+
+        .city-dot {
           position: absolute;
-          inset: 0;
+          z-index: 6;
+          width: 9px;
+          height: 9px;
+          border: 2px solid #f1d08b;
           border-radius: 50%;
+          background: #ad7b30;
           box-shadow:
-            inset -58px -34px 90px rgba(0, 0, 0, 0.78),
-            inset 28px 16px 42px rgba(82, 146, 208, 0.13);
+            0 0 0 5px rgba(238, 202, 127, 0.08),
+            0 0 19px rgba(238, 202, 127, 0.95);
+        }
+
+        .paris-dot {
+          top: 34%;
+          left: 40%;
+        }
+
+        .brazza-dot {
+          top: 65%;
+          left: 55%;
         }
 
         .globe-route {
           position: absolute;
-          inset: 0;
+          top: 38%;
+          left: 41%;
           z-index: 5;
-          width: 100%;
-          height: 100%;
+          width: 32%;
+          height: 31%;
+          overflow: hidden;
+          border-top: 2px solid rgba(235, 198, 121, 0.82);
+          border-right: 2px solid rgba(235, 198, 121, 0.25);
+          border-radius: 0 100% 0 0;
+          transform: rotate(19deg);
+          filter: drop-shadow(0 0 7px rgba(235, 198, 121, 0.5));
         }
 
-        .globe-border {
+        .globe-route-light {
           position: absolute;
-          inset: 0;
-          z-index: 6;
-          border: 1.5px solid rgba(228, 190, 115, 0.52);
-          border-radius: 50%;
-          box-shadow:
-            inset 0 0 24px rgba(222, 181, 104, 0.12),
-            0 0 20px rgba(222, 181, 104, 0.12);
+          top: -3px;
+          left: -15%;
+          width: 34%;
+          height: 4px;
+          border-radius: 999px;
+          background: #fff0bd;
+          box-shadow: 0 0 14px rgba(255, 220, 146, 1);
+          animation: globeTravel 2.7s ease-in-out infinite;
         }
 
-        .orbit {
+        .globe-halo {
           position: absolute;
           z-index: 1;
           border: 1px solid rgba(201, 163, 91, 0.11);
           border-radius: 50%;
         }
 
-        .orbit-one {
-          width: min(405px, 88vw);
+        .globe-halo-one {
+          width: min(390px, 89vw);
           aspect-ratio: 1;
-          animation: orbit 18s linear infinite;
+          animation: haloSpin 18s linear infinite;
         }
 
-        .orbit-two {
-          width: min(455px, 96vw);
+        .globe-halo-two {
+          width: min(445px, 98vw);
           aspect-ratio: 1;
           border-style: dashed;
-          animation: reverseOrbit 25s linear infinite;
+          opacity: 0.55;
+          animation: haloSpinReverse 26s linear infinite;
         }
 
-        .city-card {
+        .floating-city {
           position: absolute;
-          z-index: 7;
+          z-index: 4;
           display: flex;
           align-items: center;
           gap: 9px;
           padding: 9px 12px;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.07);
           border-radius: 13px;
-          background: rgba(3, 10, 19, 0.9);
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.34);
-          backdrop-filter: blur(8px);
+          background: rgba(3, 10, 19, 0.78);
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+          backdrop-filter: blur(12px);
         }
 
-        .city-card div {
+        .floating-city > span {
+          font-size: 1.1rem;
+        }
+
+        .floating-city div {
           display: flex;
           flex-direction: column;
         }
 
-        .city-card small {
+        .floating-city small {
           color: #707d90;
           font-size: 0.57rem;
         }
 
-        .city-card strong {
+        .floating-city strong {
+          color: #eee8da;
           font-size: 0.72rem;
         }
 
-        .paris-card {
+        .paris-label {
           top: 23%;
-          left: 0;
+          left: 1%;
         }
 
-        .brazzaville-card {
+        .brazza-label {
           right: 0;
-          bottom: 18%;
+          bottom: 20%;
         }
-                .signature-route {
+
+        .signature-route {
+          position: relative;
+          z-index: 3;
           display: grid;
           grid-template-columns: auto 1fr auto;
           align-items: center;
           gap: 16px;
+          margin-top: auto;
           padding: 17px 18px;
           border: 1px solid rgba(255, 255, 255, 0.065);
           border-radius: 18px;
@@ -1303,7 +1289,15 @@ export default function EnvoyerPage() {
           gap: 9px;
         }
 
-        .signature-city div {
+        .signature-city.right {
+          text-align: right;
+        }
+
+        .signature-city > span {
+          font-size: 1.18rem;
+        }
+
+        .signature-city > div {
           display: flex;
           flex-direction: column;
         }
@@ -1314,11 +1308,8 @@ export default function EnvoyerPage() {
         }
 
         .signature-city strong {
+          color: #e9e3d6;
           font-size: 0.72rem;
-        }
-
-        .signature-right {
-          text-align: right;
         }
 
         .signature-line {
@@ -1328,33 +1319,48 @@ export default function EnvoyerPage() {
           background: linear-gradient(
             90deg,
             transparent,
-            #dcb56b,
+            rgba(220, 181, 107, 0.9),
             transparent
           );
         }
 
-        .stats {
+        .signature-traveller {
+          position: absolute;
+          top: -2px;
+          left: -12%;
+          width: 28%;
+          height: 5px;
+          border-radius: 999px;
+          background: #f0ce87;
+          box-shadow: 0 0 12px rgba(240, 206, 135, 0.9);
+          animation: travel 2.6s linear infinite;
+        }
+
+        .visual-stats {
+          position: relative;
+          z-index: 3;
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 10px;
           margin-top: 10px;
         }
 
-        .stats div {
+        .visual-stats > div {
           display: flex;
           flex-direction: column;
           gap: 3px;
           padding: 13px 15px;
           border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 14px;
+          background: rgba(255, 255, 255, 0.018);
         }
 
-        .stats span {
+        .visual-stats span {
           color: #667387;
           font-size: 0.6rem;
         }
 
-        .stats strong {
+        .visual-stats strong {
           color: #c7ced8;
           font-size: 0.7rem;
         }
@@ -1366,38 +1372,64 @@ export default function EnvoyerPage() {
           display: grid;
           place-items: center;
           padding: 24px;
-          background: rgba(0, 4, 10, 0.82);
+          background: rgba(0, 4, 10, 0.79);
           backdrop-filter: blur(14px);
+          animation: overlayIn 300ms ease both;
         }
 
         .confirmation-card {
           position: relative;
           width: min(485px, 100%);
+          overflow: hidden;
           padding: 43px 35px 29px;
+          color: #f3eee2;
           border: 1px solid rgba(224, 190, 123, 0.26);
           border-radius: 29px;
-          background: linear-gradient(
-            155deg,
-            #0c1726,
-            #030913
-          );
+          background:
+            radial-gradient(
+              circle at 50% 0%,
+              rgba(197, 151, 66, 0.13),
+              transparent 35%
+            ),
+            linear-gradient(155deg, #0c1726 0%, #030913 100%);
+          box-shadow:
+            0 36px 100px rgba(0, 0, 0, 0.65),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
           text-align: center;
+          animation: cardIn 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
         }
 
-        .close {
+        .confirmation-glow {
+          position: absolute;
+          top: -95px;
+          left: 50%;
+          width: 230px;
+          height: 230px;
+          border-radius: 50%;
+          background: rgba(204, 160, 77, 0.11);
+          filter: blur(55px);
+          transform: translateX(-50%);
+          pointer-events: none;
+        }
+
+        .confirmation-close {
           position: absolute;
           top: 15px;
           right: 17px;
+          display: grid;
           width: 32px;
           height: 32px;
+          place-items: center;
+          color: #7f8a9a;
           border: 1px solid rgba(255, 255, 255, 0.06);
           border-radius: 50%;
-          background: transparent;
-          color: #7f8a9a;
+          background: rgba(255, 255, 255, 0.025);
           cursor: pointer;
+          font-size: 1.1rem;
         }
 
-        .confirmation-check {
+        .confirmation-icon {
+          position: relative;
           display: grid;
           width: 67px;
           height: 67px;
@@ -1405,11 +1437,22 @@ export default function EnvoyerPage() {
           margin: 0 auto 20px;
           border: 1px solid rgba(229, 196, 128, 0.52);
           border-radius: 50%;
-          color: #ebce91;
-          font-size: 1.4rem;
+          background: linear-gradient(
+            145deg,
+            rgba(217, 178, 104, 0.2),
+            rgba(217, 178, 104, 0.04)
+          );
+          box-shadow:
+            0 0 0 9px rgba(217, 178, 104, 0.035),
+            0 0 32px rgba(217, 178, 104, 0.15);
         }
 
-        .confirmation-label {
+        .confirmation-icon span {
+          color: #ebce91;
+          font-size: 1.45rem;
+        }
+
+        .confirmation-eyebrow {
           display: block;
           margin-bottom: 10px;
           color: #d7b66f;
@@ -1420,12 +1463,15 @@ export default function EnvoyerPage() {
 
         .confirmation-card h2 {
           margin-bottom: 11px;
-          font-family: Georgia, serif;
-          font-size: 2.2rem;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(1.85rem, 5vw, 2.5rem);
           font-weight: 400;
+          letter-spacing: -0.035em;
         }
 
         .confirmation-card > p {
+          max-width: 360px;
+          margin: 0 auto 24px;
           color: #8995a6;
           font-size: 0.78rem;
           line-height: 1.65;
@@ -1436,38 +1482,76 @@ export default function EnvoyerPage() {
           grid-template-columns: auto 1fr auto;
           align-items: center;
           gap: 15px;
-          margin: 24px 0 20px;
+          margin-bottom: 20px;
           padding: 17px 19px;
           border: 1px solid rgba(255, 255, 255, 0.06);
           border-radius: 18px;
+          background: rgba(0, 5, 12, 0.48);
         }
 
-        .confirmation-route div {
+        .confirmation-route > div:not(.confirmation-journey) {
           display: flex;
-          align-items: center;
           flex-direction: column;
           gap: 5px;
         }
 
-        .confirmation-route span {
+        .confirmation-flag {
+          font-size: 1.35rem;
+        }
+
+        .confirmation-route small {
+          color: #b4bdca;
+          font-size: 0.65rem;
+        }
+
+        .confirmation-journey {
+          display: flex;
+          align-items: center;
+        }
+
+        .confirmation-journey span {
+          flex: 1;
+          height: 1px;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(221, 184, 111, 0.74)
+          );
+        }
+
+        .confirmation-journey span:last-child {
+          background: linear-gradient(
+            90deg,
+            rgba(221, 184, 111, 0.74),
+            transparent
+          );
+        }
+
+        .confirmation-journey strong {
           color: #e7c984;
-          font-size: 0.75rem;
+          font-size: 0.72rem;
+          text-shadow: 0 0 12px rgba(231, 201, 132, 0.8);
         }
 
         .confirmation-details {
+          display: flex;
+          flex-direction: column;
           margin-bottom: 22px;
           border: 1px solid rgba(255, 255, 255, 0.055);
           border-radius: 17px;
+          background: rgba(255, 255, 255, 0.018);
         }
 
-        .confirmation-details div {
+        .confirmation-details > div {
           display: flex;
+          align-items: center;
           justify-content: space-between;
+          gap: 15px;
           padding: 12px 15px;
           border-bottom: 1px solid rgba(255, 255, 255, 0.045);
         }
 
-        .confirmation-details div:last-child {
+        .confirmation-details > div:last-child {
           border-bottom: 0;
         }
 
@@ -1477,14 +1561,28 @@ export default function EnvoyerPage() {
         }
 
         .confirmation-details strong {
+          color: #e7e1d5;
           font-size: 0.72rem;
         }
 
-        .finish {
+        .confirmation-button {
+          width: 100%;
           min-height: 49px;
+          color: #08101b;
+          border: 1px solid rgba(255, 238, 200, 0.46);
+          border-radius: 15px;
+          background: linear-gradient(
+            110deg,
+            #b8883c,
+            #dfbd78,
+            #b48334
+          );
+          cursor: pointer;
+          font-size: 0.77rem;
+          font-weight: 800;
         }
 
-        .brand {
+        .confirmation-brand {
           display: block;
           margin-top: 19px;
           color: #5d687a;
@@ -1494,12 +1592,28 @@ export default function EnvoyerPage() {
         }
 
         @keyframes travel {
-          from {
+          0% {
             left: -30%;
           }
-
-          to {
+          100% {
             left: 105%;
+          }
+        }
+
+        @keyframes globeTravel {
+          0% {
+            left: -20%;
+            opacity: 0;
+          }
+          20% {
+            opacity: 1;
+          }
+          80% {
+            opacity: 1;
+          }
+          100% {
+            left: 100%;
+            opacity: 0;
           }
         }
 
@@ -1509,69 +1623,175 @@ export default function EnvoyerPage() {
           }
         }
 
-        @keyframes float {
+        @keyframes pulse {
           0%,
           100% {
-            transform: translateY(0);
+            opacity: 0.55;
+            transform: scale(0.9);
           }
-
           50% {
-            transform: translateY(-8px);
+            opacity: 1;
+            transform: scale(1.18);
           }
         }
 
-        @keyframes orbit {
+        @keyframes globeFloat {
+          0%,
+          100% {
+            transform: translateY(0) rotate(-1deg);
+          }
+          50% {
+            transform: translateY(-8px) rotate(1deg);
+          }
+        }
+
+        @keyframes haloSpin {
           to {
             transform: rotate(360deg);
           }
         }
 
-        @keyframes reverseOrbit {
+        @keyframes haloSpinReverse {
           to {
             transform: rotate(-360deg);
           }
         }
 
+        @keyframes overlayIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes cardIn {
+          from {
+            opacity: 0;
+            transform: translateY(22px) scale(0.96);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
         @media (max-width: 1050px) {
-          .layout {
+          .main-grid {
             grid-template-columns: 1fr;
+          }
+
+          .visual-panel {
+            min-height: 630px;
           }
         }
 
         @media (max-width: 690px) {
-          .page {
+          .send-page {
             padding: 25px 14px 50px;
           }
 
-          .header {
+          .top-line {
+            align-items: flex-start;
+            flex-direction: column;
+            margin-bottom: 24px;
+          }
+
+          .secure-pill {
+            align-self: flex-start;
+          }
+
+          .transfer-panel,
+          .visual-panel {
+            border-radius: 22px;
+          }
+
+          .route-title {
+            align-items: flex-start;
             flex-direction: column;
           }
 
           .route-card {
             grid-template-columns: 1fr;
+            gap: 14px;
           }
 
-          .country-right {
+          .country-block.destination {
             justify-content: flex-start;
             flex-direction: row-reverse;
             text-align: left;
           }
 
-          .conversion {
+          .route-visual {
+            width: calc(100% - 34px);
+            margin: 2px auto;
+          }
+
+          .conversion-row {
             align-items: flex-start;
             flex-direction: column;
           }
 
-          .stats {
+          .amount-box input {
+            padding: 17px 15px;
+          }
+
+          .currency-select {
+            min-width: 103px;
+            padding: 0 12px;
+          }
+
+          .visual-panel {
+            min-height: 570px;
+          }
+
+          .globe-stage {
+            min-height: 365px;
+          }
+
+          .floating-city {
+            transform: scale(0.9);
+          }
+
+          .paris-label {
+            left: -12px;
+          }
+
+          .brazza-label {
+            right: -11px;
+          }
+
+          .signature-route {
+            gap: 9px;
+            padding: 14px 11px;
+          }
+
+          .signature-city {
+            gap: 6px;
+          }
+
+          .signature-city strong {
+            font-size: 0.65rem;
+          }
+
+          .visual-stats {
             grid-template-columns: 1fr;
           }
 
-          .globe {
-            width: min(320px, 82vw);
+          .confirmation-card {
+            padding: 38px 20px 25px;
+            border-radius: 23px;
           }
+        }
 
-          .city-card {
-            transform: scale(0.9);
+        @media (prefers-reduced-motion: reduce) {
+          *,
+          *::before,
+          *::after {
+            scroll-behavior: auto !important;
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
           }
         }
       `}</style>
