@@ -230,236 +230,601 @@ export default function EnvoyerPage() {
             </p>
           </section>
 
-          <aside className="visual-panel">
-            <div className="visual-top">
-              <span className="section-label">YVI PAY</span>
+         <aside className="visual-panel">
+  <div className="visual-top">
+    <span className="section-label">YVI PAY</span>
 
-              <span className="live-status">
-                <span />
-                Réseau actif
-              </span>
-            </div>
+    <span className="live-status">
+      <span />
+      Réseau actif
+    </span>
+  </div>
 
-            <div className="globe-stage">
-              <div className="globe-halo globe-halo-one" />
-              <div className="globe-halo globe-halo-two" />
+  <div className="globe-stage">
+    <div className="globe-halo globe-halo-one" />
+    <div className="globe-halo globe-halo-two" />
 
-              <div className="globe">
-                <div className="globe-grid globe-grid-one" />
-                <div className="globe-grid globe-grid-two" />
+    <div className="globe">
+      <div className="globe-grid globe-grid-one" />
+      <div className="globe-grid globe-grid-two" />
 
-                <svg
-                  className="continent-map"
-                  viewBox="0 0 400 400"
-                  aria-hidden="true"
-                >
-                                      <path
-                    className="land land-europe"
-                    d="M112 128
-                       L120 116 L130 111 L137 101 L148 103
-                       L154 94 L164 97 L171 89 L181 94
-                       L190 90 L199 96 L210 93 L220 99
-                       L232 96 L242 102 L254 103 L262 111
-                       L275 113 L280 123 L273 131 L262 132
-                       L255 140 L244 138 L237 146 L225 144
-                       L217 153 L207 150 L198 158 L187 154
-                       L178 146 L167 144 L159 136 L146 136
-                       L137 130 L124 132 Z"
-                  />
+      <svg
+        className="continent-map"
+        viewBox="0 0 400 400"
+        role="img"
+        aria-label="Globe représentant l’Europe, l’Afrique et l’Asie"
+      >
+        <defs>
+          <linearGradient
+            id="landGold"
+            x1="80"
+            y1="70"
+            x2="330"
+            y2="325"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#f7dfa4" stopOpacity="0.96" />
+            <stop offset="45%" stopColor="#cfa45a" stopOpacity="0.88" />
+            <stop offset="100%" stopColor="#745329" stopOpacity="0.72" />
+          </linearGradient>
 
-                  <path
-                    className="land land-africa"
-                    d="M153 143
-                       L168 136 L186 137 L201 143 L215 153
-                       L227 166 L236 183 L241 201 L239 220
-                       L232 237 L228 255 L218 273 L210 291
-                       L200 308 L190 321 L181 312 L177 296
-                       L168 284 L163 269 L155 255 L151 239
-                       L144 224 L141 207 L143 189 L146 172
-                       Z"
-                  />
+          <linearGradient
+            id="landShadow"
+            x1="100"
+            y1="90"
+            x2="310"
+            y2="310"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#fff0bd" stopOpacity="0.42" />
+            <stop offset="100%" stopColor="#8d642e" stopOpacity="0.08" />
+          </linearGradient>
 
-                  <path
-                    className="land land-asia"
-                    d="M225 99
-                       L240 90 L258 85 L278 84 L297 88
-                       L315 95 L331 105 L345 117 L356 132
-                       L364 147 L358 159 L345 164 L330 163
-                       L319 171 L304 174 L291 169 L280 160
-                       L267 158 L254 151 L243 145 L234 137
-                       L240 128 L253 125 L264 116 L254 107
-                       L242 105 Z"
-                  />
+          <filter id="continentGlow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="3.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
 
-                  <path
-                    className="land land-arabia"
-                    d="M215 160
-                       L229 157 L242 163 L251 173
-                       L250 184 L242 194 L229 194
-                       L218 185 Z"
-                  />
+          <filter id="cityGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
 
-                  <path
-                    className="land land-madagascar"
-                    d="M230 273
-                       L238 281 L241 294 L239 307
-                       L233 318 L228 307 L227 291 Z"
-                  />
+          <clipPath id="globeClip">
+            <circle cx="200" cy="200" r="178" />
+          </clipPath>
+        </defs>
 
-                  <path
-                    className="land land-uk"
-                    d="M142 102
-                       L146 94 L151 91 L154 98
-                       L151 107 L145 110 Z"
-                  />
+        <g clipPath="url(#globeClip)">
+          <circle
+            cx="200"
+            cy="200"
+            r="178"
+            fill="rgba(3, 12, 24, 0.2)"
+          />
 
-                  <path
-                    className="land land-italy"
-                    d="M188 145
-                       L194 148 L198 157 L203 164
-                       L199 169 L194 163 L191 155 Z"
-                  />
+          <g
+            fill="none"
+            stroke="rgba(220, 186, 112, 0.13)"
+            strokeWidth="1"
+          >
+            <ellipse cx="200" cy="200" rx="177" ry="58" />
+            <ellipse cx="200" cy="200" rx="177" ry="108" />
+            <ellipse cx="200" cy="200" rx="68" ry="177" />
+            <ellipse cx="200" cy="200" rx="120" ry="177" />
+          </g>
 
-                  <path
-                    className="land land-india"
-                    d="M292 167
-                       L303 174 L308 185 L304 199
-                       L297 210 L290 198 L286 184 Z"
-                  />
-                </svg>
+          <g
+            fill="url(#landGold)"
+            stroke="rgba(255, 225, 163, 0.62)"
+            strokeWidth="1.2"
+            strokeLinejoin="round"
+            filter="url(#continentGlow)"
+          >
+            {/* EUROPE */}
+            <path
+              className="land land-europe"
+              d="
+                M94 130
+                L102 119
+                L114 115
+                L119 104
+                L130 101
+                L139 92
+                L151 94
+                L159 85
+                L170 89
+                L179 82
+                L190 87
+                L199 83
+                L209 91
+                L218 88
+                L228 95
+                L239 92
+                L248 100
+                L260 100
+                L268 108
+                L281 111
+                L287 121
+                L280 129
+                L270 129
+                L265 138
+                L254 136
+                L247 145
+                L236 141
+                L227 150
+                L216 146
+                L207 155
+                L196 152
+                L187 160
+                L178 153
+                L167 151
+                L159 143
+                L147 144
+                L138 136
+                L126 138
+                L116 131
+                L105 135
+                Z
+              "
+            />
 
-                <span className="city-dot paris-dot" />
-                <span className="city-dot brazza-dot" />
+            {/* PÉNINSULE IBÉRIQUE */}
+            <path
+              d="
+                M105 135
+                L117 132
+                L126 138
+                L124 148
+                L116 158
+                L105 155
+                L98 147
+                Z
+              "
+            />
 
-                <svg
-                  className="route-svg"
-                  viewBox="0 0 400 400"
-                  aria-hidden="true"
-                >
-                  <defs>
-                    <linearGradient
-                      id="routeGold"
-                      x1="0"
-                      y1="0"
-                      x2="1"
-                      y2="1"
-                    >
-                      <stop offset="0%" stopColor="#b98535" />
-                      <stop offset="50%" stopColor="#ffe5a0" />
-                      <stop offset="100%" stopColor="#c6923f" />
-                    </linearGradient>
+            {/* ITALIE */}
+            <path
+              d="
+                M178 153
+                L186 158
+                L190 168
+                L198 175
+                L194 182
+                L187 177
+                L183 168
+                L175 163
+                Z
+              "
+            />
 
-                    <filter
-                      id="routeGlow"
-                      x="-50%"
-                      y="-50%"
-                      width="200%"
-                      height="200%"
-                    >
-                      <feGaussianBlur
-                        stdDeviation="4"
-                        result="blur"
-                      />
+            {/* ROYAUME-UNI */}
+            <path
+              d="
+                M126 102
+                L132 92
+                L139 89
+                L143 97
+                L138 106
+                L130 110
+                Z
+              "
+            />
 
-                      <feMerge>
-                        <feMergeNode in="blur" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
-                  </defs>
+            {/* AFRIQUE */}
+            <path
+              className="land land-africa"
+              d="
+                M128 151
+                L143 143
+                L160 141
+                L178 145
+                L195 151
+                L211 162
+                L224 176
+                L232 192
+                L237 210
+                L235 227
+                L228 243
+                L224 259
+                L215 275
+                L208 292
+                L197 310
+                L187 324
+                L177 316
+                L172 301
+                L163 289
+                L158 274
+                L149 260
+                L145 244
+                L137 229
+                L134 211
+                L136 194
+                L130 180
+                L119 169
+                L116 159
+                Z
+              "
+            />
 
-                  <path
-                    d="M176 128 C225 157 256 218 248 286"
-                    fill="none"
-                    stroke="url(#routeGold)"
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                    filter="url(#routeGlow)"
-                  />
+            {/* CORNE DE L’AFRIQUE */}
+            <path
+              d="
+                M224 208
+                L239 214
+                L252 221
+                L241 229
+                L229 230
+                L220 224
+                Z
+              "
+            />
 
-                  <circle
-                    cx="176"
-                    cy="128"
-                    r="6"
-                    className="route-node"
-                  />
+            {/* MADAGASCAR */}
+            <path
+              d="
+                M248 265
+                L255 274
+                L254 289
+                L248 303
+                L242 296
+                L243 281
+                Z
+              "
+            />
 
-                  <circle
-                    cx="248"
-                    cy="286"
-                    r="6"
-                    className="route-node"
-                  />
+            {/* ASIE */}
+            <path
+              className="land land-asia"
+              d="
+                M218 89
+                L233 80
+                L251 76
+                L270 74
+                L289 79
+                L307 84
+                L324 94
+                L340 106
+                L354 121
+                L364 137
+                L371 154
+                L365 166
+                L351 169
+                L340 178
+                L326 177
+                L315 185
+                L303 180
+                L291 188
+                L279 182
+                L267 190
+                L254 184
+                L244 190
+                L234 181
+                L224 176
+                L211 162
+                L198 153
+                L207 143
+                L216 146
+                L227 137
+                L239 140
+                L249 130
+                L260 132
+                L270 124
+                L281 120
+                L269 109
+                L257 102
+                L244 102
+                L232 95
+                Z
+              "
+            />
 
-                  <circle
-                    r="4.5"
-                    fill="#fff4c8"
-                    filter="url(#routeGlow)"
-                  >
-                    <animateMotion
-                      dur="2.8s"
-                      repeatCount="indefinite"
-                      path="M176 128 C225 157 256 218 248 286"
-                    />
-                  </circle>
-                </svg>
-              </div>
+            {/* PÉNINSULE ARABIQUE */}
+            <path
+              d="
+                M224 176
+                L239 177
+                L250 186
+                L246 200
+                L235 211
+                L224 204
+                L217 190
+                Z
+              "
+            />
 
-              <div className="floating-city paris-label">
-                <span>🇫🇷</span>
+            {/* INDE */}
+            <path
+              d="
+                M274 181
+                L288 188
+                L294 203
+                L289 221
+                L280 238
+                L272 224
+                L267 208
+                L260 196
+                Z
+              "
+            />
 
-                <div>
-                  <small>Départ</small>
-                  <strong>Paris</strong>
-                </div>
-              </div>
+            {/* ASIE DU SUD-EST */}
+            <path
+              d="
+                M303 180
+                L316 187
+                L322 199
+                L318 210
+                L327 219
+                L322 229
+                L312 222
+                L309 210
+                L299 201
+                L294 190
+                Z
+              "
+            />
 
-              <div className="floating-city brazza-label">
-                <span>🇨🇬</span>
+            {/* JAPON */}
+            <path
+              d="
+                M351 151
+                L357 158
+                L354 169
+                L347 177
+                L343 171
+                L347 161
+                Z
+              "
+            />
+          </g>
 
-                <div>
-                  <small>Arrivée</small>
-                  <strong>Brazzaville</strong>
-                </div>
-              </div>
-            </div>
+          <g
+            fill="url(#landShadow)"
+            opacity="0.65"
+            pointerEvents="none"
+          >
+            <path
+              d="
+                M94 130
+                L102 119
+                L114 115
+                L119 104
+                L130 101
+                L139 92
+                L151 94
+                L159 85
+                L170 89
+                L179 82
+                L190 87
+                L199 83
+                L209 91
+                L218 88
+                L228 95
+                L239 92
+                L248 100
+                L260 100
+                L268 108
+                L281 111
+                L287 121
+                L280 129
+                L270 129
+                L265 138
+                L254 136
+                L247 145
+                L236 141
+                L227 150
+                L216 146
+                L207 155
+                L196 152
+                L187 160
+                L178 153
+                L167 151
+                L159 143
+                L147 144
+                L138 136
+                L126 138
+                L116 131
+                L105 135
+                Z
+              "
+            />
 
-            <div className="signature-route">
-              <div className="signature-city">
-                <span>🇫🇷</span>
+            <path
+              d="
+                M128 151
+                L143 143
+                L160 141
+                L178 145
+                L195 151
+                L211 162
+                L224 176
+                L232 192
+                L237 210
+                L235 227
+                L228 243
+                L224 259
+                L215 275
+                L208 292
+                L197 310
+                L187 324
+                L177 316
+                L172 301
+                L163 289
+                L158 274
+                L149 260
+                L145 244
+                L137 229
+                L134 211
+                L136 194
+                L130 180
+                L119 169
+                L116 159
+                Z
+              "
+            />
 
-                <div>
-                  <small>France</small>
-                  <strong>Paris</strong>
-                </div>
-              </div>
+            <path
+              d="
+                M218 89
+                L233 80
+                L251 76
+                L270 74
+                L289 79
+                L307 84
+                L324 94
+                L340 106
+                L354 121
+                L364 137
+                L371 154
+                L365 166
+                L351 169
+                L340 178
+                L326 177
+                L315 185
+                L303 180
+                L291 188
+                L279 182
+                L267 190
+                L254 184
+                L244 190
+                L234 181
+                L224 176
+                L211 162
+                L198 153
+                L207 143
+                L216 146
+                L227 137
+                L239 140
+                L249 130
+                L260 132
+                L270 124
+                L281 120
+                L269 109
+                L257 102
+                L244 102
+                L232 95
+                Z
+              "
+            />
+          </g>
 
-              <div className="signature-line">
-                <span className="signature-traveller" />
-              </div>
+          <path
+            className="signature-route"
+            d="M151 128 C168 157 181 185 190 226"
+            fill="none"
+            stroke="rgba(220, 183, 105, 0.22)"
+            strokeWidth="2.3"
+            strokeLinecap="round"
+          />
 
-              <div className="signature-city right">
-                <div>
-                  <small>Congo</small>
-                  <strong>Brazzaville</strong>
-                </div>
+          <path
+            className="route-light"
+            d="M151 128 C168 157 181 185 190 226"
+            fill="none"
+            stroke="#f4d58b"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeDasharray="12 90"
+            filter="url(#cityGlow)"
+          />
 
-                <span>🇨🇬</span>
-              </div>
-            </div>
+          <circle
+            cx="151"
+            cy="128"
+            r="4"
+            fill="#f7dda0"
+            filter="url(#cityGlow)"
+          />
+          <circle
+            cx="190"
+            cy="226"
+            r="4"
+            fill="#f7dda0"
+            filter="url(#cityGlow)"
+          />
+        </g>
 
-            <div className="visual-stats">
-              <div>
-                <span>Temps estimé</span>
-                <strong>Moins de 2 min</strong>
-              </div>
+        <circle
+          cx="200"
+          cy="200"
+          r="178"
+          fill="none"
+          stroke="rgba(228, 196, 126, 0.36)"
+          strokeWidth="1.5"
+        />
 
-              <div>
-                <span>Disponibilité</span>
-                <strong>24h / 24</strong>
-              </div>
-            </div>
-          </aside>
+        <circle
+          cx="200"
+          cy="200"
+          r="171"
+          fill="none"
+          stroke="rgba(255, 255, 255, 0.07)"
+          strokeWidth="1"
+        />
+      </svg>
+
+      <div className="city-card city-card-paris">
+        <span className="city-flag">🇫🇷</span>
+        <span>
+          <small>Départ</small>
+          <strong>Paris</strong>
+        </span>
+      </div>
+
+      <div className="city-card city-card-brazzaville">
+        <span className="city-flag">🇨🇬</span>
+        <span>
+          <small>Arrivée</small>
+          <strong>Brazzaville</strong>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div className="visual-route">
+    <div className="visual-location">
+      <span className="visual-location-flag">🇫🇷</span>
+      <div>
+        <small>France</small>
+        <strong>Paris</strong>
+      </div>
+    </div>
+
+    <div className="visual-route-line">
+      <span className="visual-route-dot visual-route-dot-start" />
+      <span className="visual-route-glow" />
+      <span className="visual-route-traveler">✦</span>
+      <span className="visual-route-dot visual-route-dot-end" />
+    </div>
+
+    <div className="visual-location visual-location-end">
+      <span className="visual-location-flag">🇨🇬</span>
+      <div>
+        <small>Congo</small>
+        <strong>Brazzaville</strong>
+      </div>
+    </div>
+  </div>
+
+  <div className="visual-stats">
+    <div className="visual-stat">
+      <span>Temps estimé</span>
+      <strong>Moins de 2 min</strong>
+    </div>
+
+    <div className="visual-stat">
+      <span>Disponibilité</span>
+      <strong>24h / 24</strong>
+    </div>
+  </div>
+</aside>
         </div>
 
         {showConfirmation && (
