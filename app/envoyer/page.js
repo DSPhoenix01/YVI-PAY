@@ -234,7 +234,7 @@ export default function EnvoyerPage() {
             <div className="visual-top">
               <div>
                 <span className="eyebrow">YVI PAY</span>
-                <h2>Votre transfert, sans frontières.</h2>
+                <h2>Votre argent. Vos proches. Sans frontières.</h2>
               </div>
 
               <div className="live-status">
