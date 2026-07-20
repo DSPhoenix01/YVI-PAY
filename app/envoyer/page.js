@@ -769,23 +769,24 @@ export default function EnvoyerPage() {
           strokeWidth="1"
         />
       </svg>
-<div className="city-dot paris-dot" />
-<div className="city-dot brazza-dot" />
-      <div className="floating-city paris-label">
-  <span>🇫🇷</span>
-  <div>
-    <small>Départ</small>
-    <strong>Paris</strong>
-  </div>
-</div>
 
-<div className="floating-city brazza-label">
-  <span>🇨🇬</span>
-  <div>
-    <small>Arrivée</small>
-    <strong>Brazzaville</strong>
+      <div className="city-card city-card-paris">
+        <span className="city-flag">🇫🇷</span>
+        <span>
+          <small>Départ</small>
+          <strong>Paris</strong>
+        </span>
+      </div>
+
+      <div className="city-card city-card-brazzaville">
+        <span className="city-flag">🇨🇬</span>
+        <span>
+          <small>Arrivée</small>
+          <strong>Brazzaville</strong>
+        </span>
+      </div>
+    </div>
   </div>
-</div>
 
   <div className="visual-route">
     <div className="visual-location">
