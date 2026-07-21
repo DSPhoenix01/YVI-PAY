@@ -765,8 +765,8 @@ export default function BeneficiairesPage() {
           position: absolute;
           top: 47%;
           left: 50%;
-          opacity: 0.59;
-          filter: brightness(0.66) saturate(0.82) contrast(1.08);
+          opacity: 0.72;
+          filter: brightness(0.85) saturate(1) contrast(1.1);
           transform: translate(-50%, -50%);
           object-fit: contain;
         }
