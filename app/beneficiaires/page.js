@@ -760,7 +760,7 @@ export default function BeneficiairesPage() {
         }
 
         .globe {
-          width: 111%;
+          width: 105%;
           max-width: 610px;
           position: absolute;
           top: 47%;
