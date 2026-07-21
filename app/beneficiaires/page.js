@@ -207,24 +207,6 @@ export default function BeneficiairesPage() {
               className="globe"
             />
 
-            <div className="ville ville-paris">
-              <span className="point-ville" />
-
-              <div>
-                <strong>Paris</strong>
-                <small>France</small>
-              </div>
-            </div>
-
-            <div className="ville ville-brazzaville">
-              <span className="point-ville actif" />
-
-              <div>
-                <strong>Brazzaville</strong>
-                <small>Congo</small>
-              </div>
-            </div>
-
             <div className="signature-carte">
               <span>YVI PAY</span>
               <p>La proximité, partout où votre argent doit aller.</p>
@@ -265,7 +247,6 @@ export default function BeneficiairesPage() {
 
           <div className="securite">
             <div className="icone-securite">✓</div>
-
             <div>
               <strong>Relations protégées</strong>
               <p>
@@ -577,8 +558,7 @@ export default function BeneficiairesPage() {
           background: #46bd82;
           box-shadow: 0 0 11px rgba(70, 189, 130, 0.7);
         }
-
-        .informations {
+                .informations {
           min-width: 0;
         }
 
@@ -812,58 +792,6 @@ export default function BeneficiairesPage() {
             );
         }
 
-        .ville {
-          position: absolute;
-          z-index: 3;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 8px 10px;
-          border: 1px solid rgba(213, 170, 87, 0.14);
-          border-radius: 10px;
-          background: rgba(5, 14, 25, 0.78);
-          box-shadow: 0 9px 26px rgba(0, 0, 0, 0.2);
-          backdrop-filter: blur(8px);
-        }
-
-        .ville-paris {
-          top: 29%;
-          left: 18%;
-        }
-
-        .ville-brazzaville {
-          right: 13%;
-          bottom: 27%;
-        }
-
-        .point-ville {
-          width: 7px;
-          height: 7px;
-          border-radius: 50%;
-          background: #c99b47;
-          box-shadow: 0 0 10px rgba(201, 155, 71, 0.6);
-        }
-
-        .point-ville.actif {
-          background: #e5bf6c;
-        }
-
-        .ville strong,
-        .ville small {
-          display: block;
-        }
-
-        .ville strong {
-          color: #e7e2da;
-          font-size: 11px;
-        }
-
-        .ville small {
-          margin-top: 2px;
-          color: #738093;
-          font-size: 9px;
-        }
-
         .signature-carte {
           position: absolute;
           z-index: 4;
@@ -885,8 +813,7 @@ export default function BeneficiairesPage() {
           font-size: 12px;
           line-height: 1.45;
         }
-
-        .statistiques {
+                .statistiques {
           display: grid;
           grid-template-columns: repeat(3, minmax(0, 1fr));
           gap: 9px;
