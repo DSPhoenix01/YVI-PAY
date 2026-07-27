@@ -1762,17 +1762,7 @@ function TransactionIcon({ type }) {
   );
 }
 
-function StatIcon({ type }) {
-  if (type === "calendar") {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="4" y="6" width="16" height="14" rx="2" />
-        <path d="M8 3v5" />
-        <path d="M16 3v5" />
-        <path d="M4 10h16" />
-      </svg>
-    );
-  }
+
 
   if (type === "wallet") {
     return (
