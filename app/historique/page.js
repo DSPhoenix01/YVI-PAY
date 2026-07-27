@@ -8,94 +8,108 @@ const transactions = [
     type: "sent",
     title: "Transfert envoyé",
     fromFlag: "🇫🇷",
-    fromCity: "Paris, France",
+    fromCity: "Paris",
     toFlag: "🇨🇬",
-    toCity: "Brazzaville, Congo",
-    date: "Aujourd’hui · 18:42",
+    toCity: "Brazzaville",
+    date: "Aujourd’hui à 18:42",
     amount: "250,00 €",
-    status: "Réussi",
+    status: "Envoyé",
   },
   {
     id: 2,
-    type: "pending",
-    title: "En cours",
-    fromFlag: "🇫🇷",
-    fromCity: "Paris, France",
-    toFlag: "🇨🇩",
-    toCity: "Kinshasa, RDC",
-    date: "Il y a 12 min",
-    amount: "500,00 €",
-    status: "En cours",
+    type: "received",
+    title: "Transfert reçu",
+    fromFlag: "🇨🇩",
+    fromCity: "Kinshasa",
+    toFlag: "🇫🇷",
+    toCity: "Paris",
+    date: "Aujourd’hui à 15:18",
+    amount: "120,00 €",
+    status: "Reçu",
   },
   {
     id: 3,
-    type: "received",
-    title: "Reçu avec succès",
+    type: "pending",
+    title: "Transfert en cours",
     fromFlag: "🇫🇷",
-    fromCity: "Paris, France",
+    fromCity: "Paris",
     toFlag: "🇨🇲",
-    toCity: "Douala, Cameroun",
-    date: "Hier · 21:15",
-    amount: "120,00 €",
-    status: "Reçu",
+    toCity: "Douala",
+    date: "Aujourd’hui à 12:05",
+    amount: "85,00 €",
+    status: "En cours",
   },
   {
     id: 4,
     type: "sent",
     title: "Transfert envoyé",
     fromFlag: "🇫🇷",
-    fromCity: "Paris, France",
+    fromCity: "Paris",
     toFlag: "🇨🇮",
-    toCity: "Abidjan, Côte d’Ivoire",
-    date: "15 juillet · 16:03",
-    amount: "350,00 €",
-    status: "Réussi",
+    toCity: "Abidjan",
+    date: "Hier à 21:36",
+    amount: "310,00 €",
+    status: "Envoyé",
   },
   {
     id: 5,
-    type: "received",
-    title: "Reçu avec succès",
-    fromFlag: "🇨🇬",
-    fromCity: "Brazzaville, Congo",
-    toFlag: "🇫🇷",
-    toCity: "Paris, France",
-    date: "14 juillet · 11:28",
-    amount: "75,00 €",
-    status: "Reçu",
+    type: "sent",
+    title: "Transfert envoyé",
+    fromFlag: "🇫🇷",
+    fromCity: "Paris",
+    toFlag: "🇨🇩",
+    toCity: "Kinshasa",
+    date: "Hier à 16:22",
+    amount: "175,00 €",
+    status: "Envoyé",
   },
 ];
 
-const filters = [
-  { value: "all", label: "Toutes" },
-  { value: "sent", label: "Envoyées" },
-  { value: "received", label: "Reçues" },
-  { value: "pending", label: "En cours" },
-];
+function SearchIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="11" cy="11" r="7" />
+      <path d="m16.5 16.5 4 4" />
+    </svg>
+  );
+}
+
+function FilterIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 6h16" />
+      <path d="M7 12h10" />
+      <path d="M10 18h4" />
+    </svg>
+  );
+}
 
 function TransactionIcon({ type }) {
-  if (type === "pending") {
+  if (type === "received") {
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="12" r="8" />
-        <path d="M12 7v5l3 2" />
+        <path d="M12 4v13" />
+        <path d="m7 12 5 5 5-5" />
+        <path d="M5 20h14" />
       </svg>
     );
   }
 
-  if (type === "received") {
+  if (type === "pending") {
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 3v12" />
-        <path d="m7.5 10.5 4.5 4.5 4.5-4.5" />
-        <path d="M5 20h14" />
+        <circle cx="12" cy="12" r="8" />
+        <path d="M12 8v5" />
+        <path d="M12 16h.01" />
       </svg>
     );
   }
 
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="m4 11 15-7-6.5 16-2.3-6.2L4 11Z" />
-      <path d="m10.2 13.8 3.6-3.6" />
+      <path d="M5 19 19 5" />
+      <path d="M10 5h9v9" />
+      <path d="M5 8v11h11" />
     </svg>
   );
 }
@@ -104,33 +118,39 @@ function StatIcon({ type }) {
   const icons = {
     calendar: (
       <>
-        <rect x="4" y="5" width="16" height="15" rx="2" />
-        <path d="M8 3v4M16 3v4M4 10h16" />
+        <rect x="4" y="6" width="16" height="14" rx="2" />
+        <path d="M8 3v5" />
+        <path d="M16 3v5" />
+        <path d="M4 10h16" />
       </>
     ),
     wallet: (
       <>
-        <path d="M4 7.5h14a2 2 0 0 1 2 2V18H6a2 2 0 0 1-2-2V7.5Z" />
-        <path d="M5 7.5 16 4v3.5M15 12h5" />
+        <path d="M4 7h14a2 2 0 0 1 2 2v9H6a2 2 0 0 1-2-2Z" />
+        <path d="M4 7 15 4a2 2 0 0 1 2 2v1" />
+        <path d="M15 12h5v4h-5a2 2 0 0 1 0-4Z" />
       </>
     ),
     speed: (
       <>
-        <circle cx="12" cy="12" r="8" />
-        <path d="m12 7-2 5h4l-2 5" />
+        <path d="M5 18a8 8 0 1 1 14 0" />
+        <path d="m12 14 4-4" />
+        <circle cx="12" cy="14" r="1" />
       </>
     ),
     globe: (
       <>
         <circle cx="12" cy="12" r="8" />
-        <path d="M4 12h16M12 4c2.2 2.2 3.2 4.9 3.2 8S14.2 17.8 12 20M12 4C9.8 6.2 8.8 8.9 8.8 12s1 5.8 3.2 8" />
+        <path d="M4 12h16" />
+        <path d="M12 4a13 13 0 0 1 0 16" />
+        <path d="M12 4a13 13 0 0 0 0 16" />
       </>
     ),
   };
 
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      {icons[type]}
+      {icons[type] || icons.globe}
     </svg>
   );
 }
@@ -141,61 +161,48 @@ export default function HistoriquePage() {
   const [showFilters, setShowFilters] = useState(false);
 
   const filteredTransactions = useMemo(() => {
-    const normalizedSearch = search.trim().toLowerCase();
+    const query = search.trim().toLowerCase();
 
     return transactions.filter((transaction) => {
       const matchesFilter =
         filter === "all" || transaction.type === filter;
 
-      const searchableText = [
-        transaction.title,
-        transaction.fromCity,
-        transaction.toCity,
-        transaction.amount,
-        transaction.status,
-        transaction.date,
-      ]
-        .join(" ")
-        .toLowerCase();
+      const matchesSearch =
+        !query ||
+        transaction.title.toLowerCase().includes(query) ||
+        transaction.fromCity.toLowerCase().includes(query) ||
+        transaction.toCity.toLowerCase().includes(query) ||
+        transaction.amount.toLowerCase().includes(query) ||
+        transaction.status.toLowerCase().includes(query);
 
-      return (
-        matchesFilter &&
-        (!normalizedSearch || searchableText.includes(normalizedSearch))
-      );
+      return matchesFilter && matchesSearch;
     });
   }, [search, filter]);
 
-  const chooseFilter = (value) => {
-    setFilter(value);
-    setShowFilters(false);
-  };
-
   return (
-    <main className="activity-page">
+    <main className="history-page">
       <div className="ambient ambient-left" />
       <div className="ambient ambient-right" />
 
-      <section className="activity-shell">
+      <section className="history-shell">
         <section className="left-panel">
           <header className="page-heading">
-            <p className="eyebrow">YVI PAY · VOTRE ACTIVITÉ</p>
-            <h1>Activité</h1>
-            <p className="subtitle">Vos dernières opérations</p>
+            <p className="eyebrow">YVI PAY — ACTIVITÉ</p>
+            <h1>Historique</h1>
+            <p className="subtitle">
+              Retrouvez tous vos transferts en un seul endroit.
+            </p>
           </header>
 
           <div className="tools-row">
             <label className="search-box">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="11" cy="11" r="7" />
-                <path d="m20 20-4-4" />
-              </svg>
+              <SearchIcon />
 
               <input
-                type="search"
+                type="text"
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
-                placeholder="Rechercher une transaction, un pays..."
-                aria-label="Rechercher une transaction"
+                placeholder="Rechercher une ville, un montant..."
               />
             </label>
 
@@ -205,25 +212,30 @@ export default function HistoriquePage() {
                 className={`filter-button ${showFilters ? "active" : ""}`}
                 onClick={() => setShowFilters((current) => !current)}
               >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M4 7h10M18 7h2M4 17h2M10 17h10M8 4v6M8 14v6M16 4v6M16 14v6" />
-                </svg>
-
+                <FilterIcon />
                 Filtrer
                 <span>⌄</span>
               </button>
 
               {showFilters && (
                 <div className="filter-menu">
-                  {filters.map((item) => (
+                  {[
+                    ["all", "Toutes les opérations"],
+                    ["sent", "Transferts envoyés"],
+                    ["received", "Transferts reçus"],
+                    ["pending", "En cours"],
+                  ].map(([value, label]) => (
                     <button
-                      key={item.value}
+                      key={value}
                       type="button"
-                      className={filter === item.value ? "selected" : ""}
-                      onClick={() => chooseFilter(item.value)}
+                      className={filter === value ? "selected" : ""}
+                      onClick={() => {
+                        setFilter(value);
+                        setShowFilters(false);
+                      }}
                     >
-                      {item.label}
-                      {filter === item.value && <span>✓</span>}
+                      {label}
+                      {filter === value ? "✓" : ""}
                     </button>
                   ))}
                 </div>
@@ -245,25 +257,37 @@ export default function HistoriquePage() {
                   </div>
 
                   <div className="transaction-content">
-                    <p className="transaction-title">{transaction.title}</p>
+                    <p className="transaction-title">
+                      {transaction.title}
+                    </p>
 
                     <div className="transaction-route">
-                      <span className="flag">{transaction.fromFlag}</span>
+                      <span className="flag">
+                        {transaction.fromFlag}
+                      </span>
+
                       <span>{transaction.fromCity}</span>
 
                       <span className="route-arrow">→</span>
 
-                      <span className="flag">{transaction.toFlag}</span>
+                      <span className="flag">
+                        {transaction.toFlag}
+                      </span>
+
                       <span>{transaction.toCity}</span>
                     </div>
 
-                    <p className="transaction-date">{transaction.date}</p>
+                    <p className="transaction-date">
+                      {transaction.date}
+                    </p>
                   </div>
 
                   <div className="transaction-value">
                     <strong>{transaction.amount}</strong>
 
-                    <span className={`status-badge ${transaction.type}`}>
+                    <span
+                      className={`status-badge ${transaction.type}`}
+                    >
                       {transaction.status}
                     </span>
                   </div>
@@ -271,7 +295,7 @@ export default function HistoriquePage() {
                   <button
                     type="button"
                     className="details-button"
-                    aria-label={`Afficher le détail de ${transaction.title}`}
+                    aria-label={`Voir les détails de ${transaction.title}`}
                   >
                     ›
                   </button>
@@ -281,7 +305,10 @@ export default function HistoriquePage() {
               <div className="empty-state">
                 <span>⌕</span>
                 <h2>Aucune opération trouvée</h2>
-                <p>Essaie un autre pays, un montant ou un statut.</p>
+                <p>
+                  Essaie une autre ville, un autre montant ou un autre
+                  filtre.
+                </p>
               </div>
             )}
           </div>
@@ -291,7 +318,10 @@ export default function HistoriquePage() {
           <section className="map-card">
             <header className="map-header">
               <div>
-                <p className="map-eyebrow">RÉSEAU INTERNATIONAL</p>
+                <p className="map-eyebrow">
+                  RÉSEAU INTERNATIONAL
+                </p>
+
                 <h2>Carte des transferts</h2>
               </div>
 
@@ -310,31 +340,51 @@ export default function HistoriquePage() {
                 className="world-svg"
                 viewBox="0 0 1000 560"
                 role="img"
-                aria-label="Carte du monde avec les transferts YVI PAY entre Paris et l’Afrique"
+                aria-label="Carte mondiale des transferts YVI PAY"
               >
                 <defs>
-                  <linearGradient id="continentFill" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#203550" />
-                    <stop offset="55%" stopColor="#14253d" />
-                    <stop offset="100%" stopColor="#091529" />
+                  <linearGradient
+                    id="continentFillV3"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="1"
+                  >
+                    <stop offset="0%" stopColor="#244365" />
+                    <stop offset="55%" stopColor="#152b47" />
+                    <stop offset="100%" stopColor="#0a172b" />
                   </linearGradient>
 
-                  <linearGradient id="goldRoute" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#fff1aa" />
-                    <stop offset="45%" stopColor="#f6c45c" />
-                    <stop offset="100%" stopColor="#a96c18" />
+                  <linearGradient
+                    id="goldRouteV3"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="1"
+                  >
+                    <stop offset="0%" stopColor="#fff1ae" />
+                    <stop offset="45%" stopColor="#f0bd54" />
+                    <stop offset="100%" stopColor="#a66717" />
                   </linearGradient>
 
-                  <filter id="goldGlow">
-                    <feGaussianBlur stdDeviation="4" result="blur" />
+                  <filter id="goldGlowV3">
+                    <feGaussianBlur
+                      stdDeviation="4"
+                      result="blur"
+                    />
+
                     <feMerge>
                       <feMergeNode in="blur" />
                       <feMergeNode in="SourceGraphic" />
                     </feMerge>
                   </filter>
 
-                  <filter id="pointGlow">
-                    <feGaussianBlur stdDeviation="7" result="blur" />
+                  <filter id="pointGlowV3">
+                    <feGaussianBlur
+                      stdDeviation="7"
+                      result="blur"
+                    />
+
                     <feMerge>
                       <feMergeNode in="blur" />
                       <feMergeNode in="SourceGraphic" />
@@ -344,85 +394,221 @@ export default function HistoriquePage() {
 
                 <g className="world-continents">
                   <path
-                    className="north-america"
-                    d="M58 122 92 83 146 63 197 68 242 91 276 127 263 157 228 166 213 196 181 215 145 203 112 218 79 191 48 164Z"
+                    d="
+                      M52 130
+                      L82 91
+                      L126 66
+                      L176 58
+                      L222 74
+                      L263 101
+                      L286 132
+                      L272 157
+                      L238 166
+                      L219 195
+                      L181 211
+                      L145 203
+                      L110 219
+                      L76 194
+                      L47 162
+                      Z
+                    "
                   />
 
                   <path
-                    className="central-america"
-                    d="M197 213 229 224 249 250 236 266 207 252 188 232Z"
+                    d="
+                      M194 214
+                      L224 222
+                      L247 247
+                      L237 266
+                      L207 255
+                      L187 233
+                      Z
+                    "
                   />
 
                   <path
-                    className="south-america"
-                    d="M238 261 279 279 306 315 310 359 292 405 268 466 238 450 221 401 196 361 199 319Z"
+                    d="
+                      M239 263
+                      L278 278
+                      L305 311
+                      L313 351
+                      L302 393
+                      L282 438
+                      L254 479
+                      L229 453
+                      L216 410
+                      L194 367
+                      L196 321
+                      Z
+                    "
                   />
 
                   <path
-                    className="greenland"
-                    d="M239 52 282 32 317 45 323 76 290 97 254 87Z"
+                    d="
+                      M242 54
+                      L280 34
+                      L316 43
+                      L326 70
+                      L305 92
+                      L269 99
+                      L246 81
+                      Z
+                    "
                   />
 
                   <path
-                    className="europe"
-                    d="M455 116 481 93 511 96 527 112 548 103 565 119 552 136 526 142 512 157 487 151 472 162 451 149 435 134Z"
+                    d="
+                      M439 135
+                      L456 112
+                      L480 96
+                      L505 97
+                      L521 110
+                      L543 102
+                      L564 116
+                      L554 133
+                      L531 140
+                      L515 154
+                      L490 151
+                      L474 163
+                      L451 151
+                      Z
+                    "
                   />
 
                   <path
-                    className="africa"
-                    d="M474 166 518 153 560 169 587 203 579 245 560 286 544 337 511 371 479 347 467 299 438 261 438 215Z"
+                    d="
+                      M467 166
+                      L505 153
+                      L544 160
+                      L573 183
+                      L588 216
+                      L581 251
+                      L563 287
+                      L548 333
+                      L523 365
+                      L493 361
+                      L474 331
+                      L466 294
+                      L439 263
+                      L435 218
+                      Z
+                    "
                   />
 
                   <path
-                    className="asia"
-                    d="M548 104 588 79 636 74 670 88 708 77 747 89 786 80 837 99 878 126 920 141 945 170 926 197 885 196 858 221 817 213 789 234 750 215 713 226 682 205 646 218 616 192 580 187 563 153 534 143Z"
+                    d="
+                      M547 104
+                      L585 78
+                      L631 70
+                      L669 84
+                      L707 75
+                      L750 87
+                      L792 78
+                      L838 97
+                      L878 121
+                      L916 139
+                      L947 165
+                      L938 190
+                      L907 201
+                      L875 196
+                      L852 219
+                      L814 211
+                      L786 231
+                      L750 216
+                      L715 229
+                      L680 207
+                      L648 219
+                      L614 193
+                      L580 186
+                      L561 155
+                      L532 143
+                      Z
+                    "
                   />
 
                   <path
-                    className="india"
-                    d="M692 221 718 230 731 269 714 307 691 282 677 246Z"
+                    d="
+                      M687 216
+                      L715 229
+                      L729 263
+                      L719 296
+                      L700 312
+                      L686 282
+                      L675 245
+                      Z
+                    "
                   />
 
                   <path
-                    className="south-east-asia"
-                    d="M782 232 818 239 839 260 827 283 798 273 772 249Z"
+                    d="
+                      M775 230
+                      L809 238
+                      L836 258
+                      L830 281
+                      L804 285
+                      L781 266
+                      L764 246
+                      Z
+                    "
                   />
 
                   <path
-                    className="australia"
-                    d="M801 349 845 327 897 339 926 373 909 409 863 427 818 413 789 379Z"
+                    d="
+                      M803 350
+                      L842 329
+                      L891 337
+                      L925 365
+                      L930 391
+                      L904 416
+                      L862 429
+                      L820 415
+                      L792 383
+                      Z
+                    "
                   />
 
                   <path
-                    className="madagascar"
-                    d="M581 326 594 349 588 387 572 370Z"
+                    d="
+                      M578 326
+                      L592 347
+                      L589 379
+                      L574 391
+                      L568 363
+                      Z
+                    "
                   />
 
                   <path
-                    className="japan"
-                    d="M883 195 894 210 887 230 877 214Z"
+                    d="
+                      M884 193
+                      L896 207
+                      L891 226
+                      L880 234
+                      L875 215
+                      Z
+                    "
                   />
                 </g>
 
                 <g className="transfer-routes">
                   <path
                     className="route-path route-one"
-                    d="M500 135 C530 185 535 240 520 300"
+                    d="M500 135 C530 185 535 242 520 304"
                   />
 
                   <path
                     className="route-path route-two"
-                    d="M500 135 C550 190 575 245 548 314"
+                    d="M500 135 C552 188 573 247 548 318"
                   />
 
                   <path
                     className="route-path route-three"
-                    d="M500 135 C515 200 500 250 488 283"
+                    d="M500 135 C513 194 501 244 488 283"
                   />
 
                   <path
                     className="route-path route-four"
-                    d="M500 135 C460 185 450 225 445 258"
+                    d="M500 135 C463 181 451 223 445 259"
                   />
                 </g>
 
@@ -431,7 +617,7 @@ export default function HistoriquePage() {
                     <animateMotion
                       dur="3.4s"
                       repeatCount="indefinite"
-                      path="M500 135 C530 185 535 240 520 300"
+                      path="M500 135 C530 185 535 242 520 304"
                     />
                   </circle>
 
@@ -439,7 +625,7 @@ export default function HistoriquePage() {
                     <animateMotion
                       dur="4s"
                       repeatCount="indefinite"
-                      path="M500 135 C550 190 575 245 548 314"
+                      path="M500 135 C552 188 573 247 548 318"
                     />
                   </circle>
 
@@ -447,7 +633,7 @@ export default function HistoriquePage() {
                     <animateMotion
                       dur="4.6s"
                       repeatCount="indefinite"
-                      path="M500 135 C515 200 500 250 488 283"
+                      path="M500 135 C513 194 501 244 488 283"
                     />
                   </circle>
 
@@ -455,17 +641,17 @@ export default function HistoriquePage() {
                     <animateMotion
                       dur="5.1s"
                       repeatCount="indefinite"
-                      path="M500 135 C460 185 450 225 445 258"
+                      path="M500 135 C463 181 451 223 445 259"
                     />
                   </circle>
                 </g>
 
                 <g className="city-points">
                   <circle cx="500" cy="135" r="7" />
-                  <circle cx="520" cy="300" r="6" />
-                  <circle cx="548" cy="314" r="6" />
+                  <circle cx="520" cy="304" r="6" />
+                  <circle cx="548" cy="318" r="6" />
                   <circle cx="488" cy="283" r="6" />
-                  <circle cx="445" cy="258" r="6" />
+                  <circle cx="445" cy="259" r="6" />
                 </g>
               </svg>
               <div className="city-label city-paris">
@@ -576,7 +762,7 @@ export default function HistoriquePage() {
           box-sizing: border-box;
         }
 
-        .activity-page {
+        .history-page {
           position: relative;
           min-height: 100vh;
           overflow: hidden;
@@ -632,7 +818,7 @@ export default function HistoriquePage() {
           background: #b4771e;
         }
 
-        .activity-shell {
+        .history-shell {
           position: relative;
           z-index: 1;
           display: grid;
@@ -773,8 +959,7 @@ export default function HistoriquePage() {
           top: calc(100% + 9px);
           right: 0;
           z-index: 30;
-          width: 180px;
-          overflow: hidden;
+          width: 190px;
           padding: 7px;
           border: 1px solid rgba(219, 166, 70, 0.34);
           border-radius: 14px;
@@ -820,13 +1005,11 @@ export default function HistoriquePage() {
           padding: 17px 16px 17px 23px;
           border: 1px solid rgba(119, 143, 177, 0.16);
           border-radius: 16px;
-          background:
-            linear-gradient(
-              100deg,
-              rgba(10, 25, 43, 0.94),
-              rgba(5, 15, 28, 0.94)
-            ),
-            rgba(7, 16, 29, 0.94);
+          background: linear-gradient(
+            100deg,
+            rgba(10, 25, 43, 0.94),
+            rgba(5, 15, 28, 0.94)
+          );
           box-shadow: 0 14px 42px rgba(0, 0, 0, 0.13);
           transition:
             transform 0.25s ease,
@@ -924,16 +1107,13 @@ export default function HistoriquePage() {
           color: #d7dce5;
           font-size: 13px;
           font-weight: 560;
-          line-height: 1.45;
         }
 
         .flag {
           font-size: 17px;
-          line-height: 1;
         }
 
         .route-arrow {
-          margin: 0 2px;
           color: #c99232;
           font-size: 15px;
         }
@@ -956,7 +1136,6 @@ export default function HistoriquePage() {
           color: #f5f1e8;
           font-size: 17px;
           font-weight: 720;
-          letter-spacing: -0.02em;
         }
 
         .status-badge {
@@ -998,14 +1177,11 @@ export default function HistoriquePage() {
           color: #8490a3;
           background: transparent;
           font-size: 27px;
-          font-weight: 300;
           cursor: pointer;
-          transition: 0.2s ease;
         }
 
         .details-button:hover {
           color: #e6b550;
-          transform: translateX(2px);
         }
 
         .empty-state {
@@ -1024,7 +1200,6 @@ export default function HistoriquePage() {
           place-items: center;
           width: 62px;
           height: 62px;
-          margin-bottom: 10px;
           border: 1px solid rgba(218, 166, 71, 0.35);
           border-radius: 50%;
           color: #dba947;
@@ -1032,7 +1207,7 @@ export default function HistoriquePage() {
         }
 
         .empty-state h2 {
-          margin: 0 0 8px;
+          margin: 10px 0 8px;
           font-family: Georgia, "Times New Roman", serif;
           font-size: 24px;
           font-weight: 500;
@@ -1043,753 +1218,531 @@ export default function HistoriquePage() {
           color: #8691a3;
           font-size: 14px;
         }
-                .right-panel {
-          display: flex;
-          flex-direction: column;
-          gap: 18px;
-        }
-
-        .map-card {
+                .visual-panel {
+          position: relative;
+          min-height: 100%;
           overflow: hidden;
-          border: 1px solid rgba(140, 160, 189, 0.18);
-          border-radius: 24px;
+          padding: 30px;
+          border: 1px solid rgba(129, 151, 183, 0.17);
+          border-radius: 26px;
           background:
+            radial-gradient(
+              circle at 50% 42%,
+              rgba(33, 83, 126, 0.22),
+              transparent 34%
+            ),
             linear-gradient(
-              145deg,
-              rgba(9, 22, 39, 0.96),
-              rgba(3, 12, 24, 0.98)
+              155deg,
+              rgba(8, 22, 39, 0.97),
+              rgba(3, 11, 22, 0.99)
             );
           box-shadow:
-            0 30px 80px rgba(0, 0, 0, 0.24),
+            0 30px 80px rgba(0, 0, 0, 0.28),
             inset 0 1px 0 rgba(255, 255, 255, 0.025);
         }
 
-        .map-header {
+        .visual-panel::before {
+          content: "";
+          position: absolute;
+          top: -160px;
+          right: -130px;
+          width: 360px;
+          height: 360px;
+          border-radius: 50%;
+          background: rgba(199, 142, 41, 0.08);
+          filter: blur(55px);
+          pointer-events: none;
+        }
+
+        .visual-panel::after {
+          content: "";
+          position: absolute;
+          bottom: -180px;
+          left: -140px;
+          width: 370px;
+          height: 370px;
+          border-radius: 50%;
+          background: rgba(28, 111, 175, 0.1);
+          filter: blur(65px);
+          pointer-events: none;
+        }
+
+        .visual-header {
           position: relative;
           z-index: 5;
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           justify-content: space-between;
           gap: 20px;
-          padding: 24px 26px 19px;
-          border-bottom: 1px solid rgba(139, 157, 183, 0.12);
         }
 
-        .map-header h2 {
+        .visual-eyebrow {
+          margin: 0 0 8px;
+          color: #c99436;
+          font-size: 10px;
+          font-weight: 760;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+        }
+
+        .visual-header h2 {
           margin: 0;
+          color: #f4f0e8;
           font-family: Georgia, "Times New Roman", serif;
-          font-size: 28px;
+          font-size: clamp(24px, 2.2vw, 34px);
           font-weight: 500;
           letter-spacing: -0.025em;
         }
 
-        .live-status {
+        .live-badge {
           display: inline-flex;
           align-items: center;
-          gap: 9px;
-          min-height: 34px;
-          padding: 0 13px;
-          border: 1px solid rgba(48, 215, 118, 0.2);
+          gap: 8px;
+          min-height: 30px;
+          padding: 0 12px;
+          border: 1px solid rgba(51, 214, 119, 0.24);
           border-radius: 999px;
-          color: #50dd88;
-          background: rgba(33, 174, 91, 0.07);
-          font-size: 11px;
-          font-weight: 700;
+          color: #46dc83;
+          background: rgba(34, 181, 96, 0.08);
+          font-size: 10px;
+          font-weight: 750;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
           white-space: nowrap;
         }
 
-        .live-status > span {
+        .live-dot {
           width: 7px;
           height: 7px;
           border-radius: 50%;
-          background: #42df82;
-          box-shadow: 0 0 12px #42df82;
+          background: #3cdf7d;
+          box-shadow: 0 0 13px rgba(60, 223, 125, 0.9);
           animation: livePulse 1.8s ease-in-out infinite;
         }
 
-        .world-map {
+        .map-shell,
+        .world-map-shell {
           position: relative;
-          min-height: 570px;
-          overflow: hidden;
-          isolation: isolate;
-          background:
-            radial-gradient(
-              circle at 52% 44%,
-              rgba(30, 70, 116, 0.16),
-              transparent 39%
-            ),
-            linear-gradient(
-              180deg,
-              rgba(6, 17, 32, 0.3),
-              rgba(2, 9, 20, 0.7)
-            );
+          z-index: 3;
+          display: grid;
+          place-items: center;
+          min-height: 470px;
+          margin-top: 18px;
         }
 
-        .map-grid {
+        .map-glow {
           position: absolute;
-          inset: 0;
-          z-index: -1;
-          opacity: 0.18;
-          background-image:
-            linear-gradient(
-              rgba(118, 150, 188, 0.15) 1px,
-              transparent 1px
-            ),
-            linear-gradient(
-              90deg,
-              rgba(118, 150, 188, 0.15) 1px,
-              transparent 1px
-            );
-          background-size: 48px 48px;
-          mask-image: radial-gradient(
-            circle at center,
-            black 18%,
-            transparent 74%
-          );
-        }
-
-        .map-halo {
-          position: absolute;
-          z-index: -1;
+          top: 48%;
+          left: 50%;
+          width: 82%;
+          aspect-ratio: 1;
           border-radius: 50%;
+          background: radial-gradient(
+            circle,
+            rgba(33, 108, 166, 0.12),
+            rgba(19, 71, 112, 0.035) 44%,
+            transparent 70%
+          );
+          filter: blur(3px);
+          transform: translate(-50%, -50%);
           pointer-events: none;
-          filter: blur(55px);
         }
 
-        .map-halo-blue {
-          top: 90px;
-          left: 31%;
-          width: 320px;
-          height: 320px;
-          background: rgba(31, 91, 158, 0.16);
-        }
-
-        .map-halo-gold {
-          right: 19%;
-          bottom: 70px;
-          width: 230px;
-          height: 230px;
-          background: rgba(211, 153, 47, 0.08);
-        }
-
-        .world-svg {
-          position: absolute;
-          inset: 35px 20px 0;
-          width: calc(100% - 40px);
-          height: calc(100% - 45px);
+        .world-map,
+        .map-svg {
+          position: relative;
+          z-index: 2;
+          width: 100%;
+          height: auto;
           overflow: visible;
+          filter: drop-shadow(0 18px 38px rgba(0, 0, 0, 0.22));
         }
 
-        .world-continents path {
-          fill: url(#continentFill);
-          stroke: rgba(121, 155, 197, 0.42);
-          stroke-width: 1.5;
-          vector-effect: non-scaling-stroke;
-          filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.25));
-          transition:
-            fill 0.3s ease,
-            stroke 0.3s ease;
+        .map-continent,
+        .continent {
+          fill: rgba(44, 76, 108, 0.22);
+          stroke: rgba(102, 139, 172, 0.32);
+          stroke-width: 1;
+          transition: 0.3s ease;
         }
 
-        .world-continents path:hover {
-          fill: #1b3554;
-          stroke: rgba(225, 178, 86, 0.65);
+        .map-continent:hover,
+        .continent:hover {
+          fill: rgba(55, 93, 128, 0.31);
+          stroke: rgba(206, 161, 76, 0.45);
         }
 
-        .transfer-routes {
+        .map-grid,
+        .grid-line {
           fill: none;
+          stroke: rgba(111, 139, 169, 0.1);
+          stroke-width: 0.75;
+          stroke-dasharray: 3 7;
+        }
+
+        .route-line,
+        .map-route {
+          fill: none;
+          stroke: url(#routeGold);
+          stroke-width: 1.7;
           stroke-linecap: round;
+          stroke-dasharray: 5 7;
+          opacity: 0.7;
+          filter: drop-shadow(0 0 5px rgba(224, 170, 69, 0.5));
+          animation: routeFlow 9s linear infinite;
         }
 
-        .route-path {
-          stroke: url(#goldRoute);
-          stroke-width: 2.2;
-          opacity: 0.78;
-          filter: url(#goldGlow);
-          stroke-dasharray: 7 9;
-          animation: routeFlow 2.8s linear infinite;
+        .route-line.secondary,
+        .map-route.secondary {
+          stroke-width: 1.15;
+          opacity: 0.44;
+          animation-duration: 12s;
         }
 
-        .route-two {
-          animation-duration: 3.4s;
-          opacity: 0.66;
+        .route-halo {
+          fill: none;
+          stroke: rgba(231, 179, 79, 0.12);
+          stroke-width: 5;
+          stroke-linecap: round;
+          filter: blur(2px);
         }
 
-        .route-three {
-          animation-duration: 3.9s;
-          opacity: 0.58;
+        .city-point,
+        .location-point {
+          fill: #e2ae4c;
+          stroke: rgba(255, 233, 181, 0.86);
+          stroke-width: 1.2;
+          filter: drop-shadow(0 0 6px rgba(228, 174, 73, 0.95));
         }
 
-        .route-four {
-          animation-duration: 4.3s;
-          opacity: 0.52;
-        }
-
-        .moving-particles circle {
-          fill: #ffe8a1;
-          filter: url(#goldGlow);
-        }
-
-        .city-points circle {
-          fill: #f3c45f;
-          stroke: #fff1b3;
-          stroke-width: 2;
-          filter: url(#pointGlow);
+        .city-ring,
+        .location-ring {
+          fill: none;
+          stroke: rgba(226, 174, 76, 0.55);
+          stroke-width: 1;
           transform-box: fill-box;
           transform-origin: center;
-          animation: cityPulse 2.2s ease-in-out infinite;
+          animation: mapPulse 2.4s ease-out infinite;
         }
 
-        .city-points circle:nth-child(2) {
-          animation-delay: 0.25s;
+        .map-particle,
+        .route-particle {
+          fill: #ffe3a0;
+          filter: drop-shadow(0 0 5px rgba(255, 210, 117, 0.95));
         }
 
-        .city-points circle:nth-child(3) {
-          animation-delay: 0.5s;
-        }
-
-        .city-points circle:nth-child(4) {
-          animation-delay: 0.75s;
-        }
-
-        .city-points circle:nth-child(5) {
-          animation-delay: 1s;
-        }
-
-        .city-label {
+        .city-label,
+        .map-label {
           position: absolute;
           z-index: 6;
           display: flex;
           align-items: center;
-          gap: 10px;
-          min-width: 132px;
-          padding: 10px 12px;
-          border: 1px solid rgba(221, 171, 75, 0.31);
-          border-radius: 13px;
-          background:
-            linear-gradient(
-              145deg,
-              rgba(12, 27, 47, 0.93),
-              rgba(4, 13, 25, 0.96)
-            );
-          box-shadow:
-            0 15px 36px rgba(0, 0, 0, 0.28),
-            inset 0 1px 0 rgba(255, 255, 255, 0.035);
-          backdrop-filter: blur(14px);
-          transform: translate(-50%, -50%);
-        }
-
-        .city-label::after {
-          content: "";
-          position: absolute;
-          left: 50%;
-          bottom: -17px;
-          width: 1px;
-          height: 16px;
-          background: linear-gradient(
-            to bottom,
-            rgba(224, 174, 78, 0.6),
-            transparent
-          );
-        }
-
-        .city-flag {
-          font-size: 23px;
-          line-height: 1;
-        }
-
-        .city-label div {
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
-        }
-
-        .city-label strong {
-          color: #f7f3e9;
-          font-size: 12px;
-          line-height: 1.1;
-        }
-
-        .city-label small {
-          color: #8793a7;
-          font-size: 9px;
-          line-height: 1.1;
-        }
-
-        .city-paris {
-          top: 25%;
-          left: 50%;
-        }
-
-        .city-brazzaville {
-          top: 59%;
-          left: 53%;
-        }
-
-        .city-kinshasa {
-          top: 67%;
-          left: 62%;
-        }
-
-        .city-douala {
-          top: 51%;
-          left: 47%;
-        }
-
-        .city-abidjan {
-          top: 46%;
-          left: 35%;
-        }
-
-        .stats-grid {
-          display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-          gap: 12px;
-        }
-
-        .stat-card {
-          min-width: 0;
-          padding: 17px;
-          border: 1px solid rgba(130, 151, 181, 0.15);
-          border-radius: 16px;
-          background:
-            linear-gradient(
-              145deg,
-              rgba(10, 24, 42, 0.91),
-              rgba(4, 13, 25, 0.93)
-            );
-          box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-        }
-
-        .stat-heading {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          margin-bottom: 15px;
-          color: #8e99aa;
+          gap: 7px;
+          min-height: 30px;
+          padding: 0 10px;
+          border: 1px solid rgba(161, 180, 204, 0.17);
+          border-radius: 9px;
+          color: #dce2eb;
+          background: rgba(4, 14, 27, 0.88);
+          box-shadow: 0 10px 26px rgba(0, 0, 0, 0.24);
+          backdrop-filter: blur(10px);
           font-size: 10px;
           font-weight: 650;
           white-space: nowrap;
         }
 
+        .city-label span,
+        .map-label span {
+          font-size: 14px;
+        }
+
+        .city-label.paris,
+        .map-label.paris {
+          top: 25%;
+          left: 45%;
+        }
+
+        .city-label.brazzaville,
+        .map-label.brazzaville {
+          top: 62%;
+          left: 51%;
+        }
+
+        .city-label.kinshasa,
+        .map-label.kinshasa {
+          top: 70%;
+          left: 57%;
+        }
+
+        .city-label.douala,
+        .map-label.douala {
+          top: 52%;
+          left: 42%;
+        }
+
+        .city-label.abidjan,
+        .map-label.abidjan {
+          top: 58%;
+          left: 27%;
+        }
+
+        .visual-stats,
+        .map-stats {
+          position: relative;
+          z-index: 5;
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 10px;
+          margin-top: 4px;
+        }
+
+        .stat-card,
+        .map-stat {
+          min-height: 92px;
+          padding: 15px;
+          border: 1px solid rgba(130, 154, 186, 0.16);
+          border-radius: 15px;
+          background: rgba(5, 16, 29, 0.72);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.018);
+        }
+
         .stat-icon {
           display: grid;
           place-items: center;
-          width: 25px;
-          height: 25px;
-          border: 1px solid rgba(218, 166, 70, 0.25);
-          border-radius: 8px;
-          color: #dfa947;
-          background: rgba(219, 166, 65, 0.06);
+          width: 28px;
+          height: 28px;
+          margin-bottom: 10px;
+          border: 1px solid rgba(220, 168, 67, 0.28);
+          border-radius: 9px;
+          color: #daa744;
+          background: rgba(209, 153, 51, 0.07);
         }
 
         .stat-icon svg {
-          width: 14px;
+          width: 15px;
           fill: none;
           stroke: currentColor;
-          stroke-width: 1.7;
+          stroke-width: 1.6;
           stroke-linecap: round;
           stroke-linejoin: round;
         }
 
-        .stat-card > strong {
+        .stat-card small,
+        .map-stat small {
           display: block;
-          overflow: hidden;
-          color: #f4efe5;
-          font-family: Georgia, "Times New Roman", serif;
-          font-size: clamp(20px, 1.7vw, 27px);
-          font-weight: 500;
-          letter-spacing: -0.025em;
-          text-overflow: ellipsis;
-          white-space: nowrap;
+          margin-bottom: 5px;
+          color: #778397;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
         }
 
-        .stat-card > small {
+        .stat-card strong,
+        .map-stat strong {
           display: block;
-          margin-top: 5px;
-          color: #717d90;
-          font-size: 10px;
+          color: #eef0f3;
+          font-size: 14px;
+          font-weight: 680;
         }
 
-        .brand-note {
+        .visual-signature,
+        .yvi-signature {
+          position: relative;
+          z-index: 5;
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 13px;
-          padding: 10px 0 0;
-          color: #7f8998;
-        }
-
-        .brand-monogram {
-          display: grid;
-          place-items: center;
-          width: 35px;
-          height: 35px;
-          border: 1px solid rgba(220, 169, 72, 0.33);
-          border-radius: 50%;
-          color: #e0aa48;
+          gap: 12px;
+          margin-top: 22px;
+          color: #d6a648;
           font-family: Georgia, "Times New Roman", serif;
-          font-size: 17px;
+          font-size: 12px;
+          letter-spacing: 0.3em;
         }
 
-        .brand-note p {
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
-          margin: 0;
+        .visual-signature::before,
+        .visual-signature::after,
+        .yvi-signature::before,
+        .yvi-signature::after {
+          content: "";
+          width: 52px;
+          height: 1px;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(214, 166, 72, 0.55)
+          );
         }
 
-        .brand-note strong {
-          color: #d7a54a;
-          font-size: 11px;
-          letter-spacing: 0.16em;
-        }
-
-        .brand-note p span {
-          font-size: 9px;
-        }
-
-        @keyframes routeFlow {
-          to {
-            stroke-dashoffset: -32;
-          }
-        }
-
-        @keyframes cityPulse {
-          0%,
-          100% {
-            transform: scale(1);
-            opacity: 0.85;
-          }
-
-          50% {
-            transform: scale(1.35);
-            opacity: 1;
-          }
+        .visual-signature::after,
+        .yvi-signature::after {
+          background: linear-gradient(
+            90deg,
+            rgba(214, 166, 72, 0.55),
+            transparent
+          );
         }
 
         @keyframes livePulse {
           0%,
           100% {
-            opacity: 0.45;
-            transform: scale(0.85);
+            opacity: 1;
+            transform: scale(1);
           }
 
           50% {
-            opacity: 1;
-            transform: scale(1.2);
-          }
-        }
-                @media (max-width: 1450px) {
-          .activity-shell {
-            grid-template-columns:
-              minmax(400px, 0.92fr)
-              minmax(590px, 1.28fr);
-            gap: 22px;
-          }
-
-          .world-map {
-            min-height: 530px;
-          }
-
-          .city-label {
-            min-width: 118px;
-            padding: 9px 10px;
-          }
-
-          .city-flag {
-            font-size: 20px;
-          }
-
-          .stats-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            opacity: 0.42;
+            transform: scale(0.72);
           }
         }
 
-        @media (max-width: 1120px) {
-          .activity-page {
-            padding: 28px 24px 42px;
+        @keyframes routeFlow {
+          to {
+            stroke-dashoffset: -120;
+          }
+        }
+
+        @keyframes mapPulse {
+          0% {
+            opacity: 0.85;
+            transform: scale(0.5);
           }
 
-          .activity-shell {
+          75%,
+          100% {
+            opacity: 0;
+            transform: scale(2.4);
+          }
+        }
+
+        @media (max-width: 1180px) {
+          .history-layout,
+          .activity-layout {
             grid-template-columns: 1fr;
           }
 
-          .right-panel {
-            margin-top: 12px;
+          .visual-panel {
+            min-height: auto;
           }
 
-          .world-map {
-            min-height: 560px;
-          }
-
-          .stats-grid {
-            grid-template-columns: repeat(4, minmax(0, 1fr));
+          .map-shell,
+          .world-map-shell {
+            min-height: 430px;
           }
         }
 
-        @media (max-width: 820px) {
+        @media (max-width: 760px) {
+          .history-page,
           .activity-page {
-            padding: 24px 17px 36px;
+            padding: 22px 14px 40px;
           }
 
-          .page-heading h1 {
-            font-size: 48px;
+          .page-header,
+          .activity-header {
+            flex-direction: column;
+            align-items: flex-start;
           }
 
-          .subtitle {
-            font-size: 15px;
+          .history-toolbar,
+          .activity-toolbar {
+            width: 100%;
           }
 
-          .tools-row {
+          .search-box {
+            flex: 1;
+          }
+
+          .transaction-card {
+            grid-template-columns: 48px minmax(0, 1fr) 22px;
+            min-height: 104px;
+            padding: 15px 12px 15px 18px;
+          }
+
+          .transaction-icon {
+            width: 45px;
+            height: 45px;
+          }
+
+          .transaction-value {
+            grid-column: 2 / 3;
+            align-items: flex-start;
+            gap: 5px;
+          }
+
+          .details-button {
+            grid-column: 3;
+            grid-row: 1 / span 2;
+          }
+
+          .visual-panel {
+            padding: 22px 14px;
+            border-radius: 20px;
+          }
+
+          .map-shell,
+          .world-map-shell {
+            min-height: 370px;
+          }
+
+          .visual-stats,
+          .map-stats {
             grid-template-columns: 1fr;
           }
 
+          .city-label,
+          .map-label {
+            padding: 0 7px;
+            font-size: 8px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .history-toolbar,
+          .activity-toolbar {
+            flex-direction: column;
+          }
+
+          .filter-wrapper,
           .filter-button {
             width: 100%;
           }
 
           .filter-menu {
-            right: auto;
             left: 0;
+            right: auto;
             width: 100%;
           }
 
-          .transaction-card {
-            grid-template-columns: 52px minmax(0, 1fr) auto;
-            gap: 12px;
-            min-height: 120px;
-            padding: 16px 14px 16px 20px;
-          }
-
-          .transaction-icon {
-            width: 48px;
-            height: 48px;
-          }
-
-          .details-button {
-            display: none;
+          .transaction-route {
+            font-size: 11px;
           }
 
           .transaction-value strong {
             font-size: 15px;
           }
 
-          .map-header {
-            padding: 21px 18px 17px;
-          }
-
-          .map-header h2 {
-            font-size: 24px;
-          }
-
-          .world-map {
-            min-height: 470px;
-          }
-
-          .world-svg {
-            inset: 42px 4px 0;
-            width: calc(100% - 8px);
-            height: calc(100% - 48px);
-          }
-
-          .city-label {
-            min-width: 104px;
-            gap: 7px;
-            padding: 8px 9px;
-          }
-
-          .city-label strong {
-            font-size: 10px;
-          }
-
-          .city-label small {
-            font-size: 8px;
-          }
-
-          .city-flag {
-            font-size: 18px;
-          }
-
-          .stats-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-          }
-        }
-
-        @media (max-width: 560px) {
-          .activity-page {
-            padding: 20px 12px 30px;
-          }
-
-          .page-heading h1 {
-            font-size: 42px;
-          }
-
-          .transaction-card {
-            grid-template-columns: 44px minmax(0, 1fr);
-          }
-
-          .transaction-icon {
-            width: 42px;
-            height: 42px;
-          }
-
-          .transaction-icon svg {
-            width: 21px;
-          }
-
-          .transaction-value {
-            grid-column: 2;
-            align-items: flex-start;
-            flex-direction: row;
-            flex-wrap: wrap;
-          }
-
-          .map-header {
-            align-items: flex-start;
+          .visual-header {
             flex-direction: column;
           }
 
-          .world-map {
-            min-height: 410px;
+          .map-shell,
+          .world-map-shell {
+            min-height: 320px;
           }
 
-          .city-label {
-            min-width: auto;
-            padding: 7px;
+          .city-label.kinshasa,
+          .map-label.kinshasa {
+            top: 72%;
+            left: 52%;
           }
 
-          .city-label div {
-            display: none;
-          }
-
-          .city-label::after {
-            height: 11px;
-            bottom: -12px;
-          }
-
-          .city-paris {
-            top: 27%;
-          }
-
-          .city-brazzaville {
-            top: 58%;
-            left: 54%;
-          }
-
-          .city-kinshasa {
-            top: 66%;
-            left: 63%;
-          }
-
-          .city-douala {
-            top: 50%;
-            left: 46%;
-          }
-
-          .city-abidjan {
-            top: 45%;
-            left: 34%;
-          }
-
-          .stats-grid {
-            grid-template-columns: 1fr 1fr;
-          }
-
-          .stat-card {
-            padding: 14px;
-          }
-
-          .stat-heading {
-            white-space: normal;
-          }
-
-          .brand-note {
-            text-align: left;
+          .visual-signature,
+          .yvi-signature {
+            letter-spacing: 0.18em;
           }
         }
-      `}</style>
+              `}</style>
     </main>
-  );
-}
-
-function SearchIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="11" cy="11" r="7" />
-      <path d="m16.4 16.4 4.1 4.1" />
-    </svg>
-  );
-}
-
-function FilterIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 6h16" />
-      <path d="M7 12h10" />
-      <path d="M10 18h4" />
-    </svg>
-  );
-}
-
-function TransactionIcon({ type }) {
-  if (type === "received") {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 4v13" />
-        <path d="m7 12 5 5 5-5" />
-        <path d="M5 20h14" />
-      </svg>
-    );
-  }
-
-  if (type === "pending") {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="12" r="8" />
-        <path d="M12 8v5" />
-        <path d="M12 16h.01" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M5 19 19 5" />
-      <path d="M10 5h9v9" />
-      <path d="M5 8v11h11" />
-    </svg>
-  );
-}
-
-
-
-  if (type === "wallet") {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M4 7h14a2 2 0 0 1 2 2v9H6a2 2 0 0 1-2-2Z" />
-        <path d="M4 7 15 4a2 2 0 0 1 2 2v1" />
-        <path d="M15 12h5v4h-5a2 2 0 0 1 0-4Z" />
-      </svg>
-    );
-  }
-
-  if (type === "speed") {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M5 18a8 8 0 1 1 14 0" />
-        <path d="m12 14 4-4" />
-        <circle cx="12" cy="14" r="1" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="8" />
-      <path d="M4 12h16" />
-      <path d="M12 4a13 13 0 0 1 0 16" />
-      <path d="M12 4a13 13 0 0 0 0 16" />
-    </svg>
   );
 }
