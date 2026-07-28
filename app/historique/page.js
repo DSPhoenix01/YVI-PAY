@@ -67,9 +67,15 @@ const transactions = [
 
 function SearchIcon() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="10.5" cy="10.5" r="6.5" />
-      <path d="m15.5 15.5 4 4" />
+    <svg
+      viewBox="0 0 24 24"
+      width="23"
+      height="23"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path d="M19 11a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" />
+      <path d="m17 17 4 4" />
     </svg>
   );
 }
@@ -159,7 +165,7 @@ export default function HistoriquePage() {
                 type="text"
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
-                placeholder="Rechercher une ville, un montant..."
+                placeholder="Ville ou montant..."
               />
             </label>
 
