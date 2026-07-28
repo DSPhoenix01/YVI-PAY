@@ -165,7 +165,7 @@ export default function HistoriquePage() {
                 type="text"
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
-               placeholder="Ville ou montant..."
+               placeholder="Rechercher ville, montant"
               />
             </label>
 
