@@ -618,17 +618,18 @@ export default function HistoriquePage() {
         }
 
         .search-box {
-          display: flex;
-          align-items: center;
-          height: 60px;
-          padding: 0 18px;
-          border: 1px solid rgba(128, 153, 186, 0.24);
-          border-radius: 15px;
-          background: rgba(5, 16, 31, 0.9);
-          box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.02),
-            0 10px 28px rgba(0, 0, 0, 0.12);
-        }
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 60px;
+  padding: 0 18px;
+  border: 1px solid rgba(128, 153, 186, 0.24);
+  border-radius: 15px;
+  background: rgba(5, 16, 31, 0.9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.02),
+    0 10px 28px rgba(0, 0, 0, 0.12);
+}
 
         .search-box svg {
           flex: 0 0 auto;
