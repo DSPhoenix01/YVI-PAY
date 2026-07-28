@@ -902,7 +902,7 @@ export default function ProfilPage() {
         }
 
         .signature-slogan {
-          margin: 20px 0 16px;
+          margin: 12px 0 16px;
           color: #f4efe5;
           font-family: Georgia, "Times New Roman", serif;
           font-size: 17px;
