@@ -914,14 +914,14 @@ export default function ProfilPage() {
           color: #dcb86f;
         }
 
-        .mini-globe {
+      .mini-globe {
   width: 100%;
-  height: 125px;
-  margin-top: 16px;
+  height: 150px;
+  margin-top: 8px;
   overflow: hidden;
   display: flex;
-  align-items: flex-end;
   justify-content: center;
+  align-items: flex-end;
   background: transparent;
   border: none;
   border-radius: 0;
@@ -929,15 +929,16 @@ export default function ProfilPage() {
 }
 
 .mini-globe-image {
-  width: 235px;
+  width: 270px;
+  max-width: none;
   display: block;
   object-fit: contain;
-  transform: translateY(22px);
+  transform: translateY(30px);
   user-select: none;
   pointer-events: none;
   filter:
-    drop-shadow(0 0 10px rgba(225, 178, 82, 0.25))
-    drop-shadow(0 0 22px rgba(35, 90, 165, 0.20));
+    drop-shadow(0 0 12px rgba(225, 178, 82, 0.28))
+    drop-shadow(0 0 24px rgba(35, 90, 165, 0.22));
 }
 
         .help-card {
