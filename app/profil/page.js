@@ -933,7 +933,7 @@ export default function ProfilPage() {
   max-width: none;
   display: block;
   object-fit: contain;
-  transform: translateY(0px);
+  transform: translateY(-6px);
   user-select: none;
   pointer-events: none;
   filter:
