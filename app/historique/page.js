@@ -225,7 +225,10 @@ export default function HistoriquePage() {
 
                   <div className="transaction-route">
                     <span className="country-flag">
-                      <img src={transaction.fromFlag} alt="" />
+                      <img
+                        src={transaction.fromFlag}
+                        alt=""
+                      />
                     </span>
 
                     <span>{transaction.fromCity}</span>
@@ -233,7 +236,10 @@ export default function HistoriquePage() {
                     <span className="route-arrow">→</span>
 
                     <span className="country-flag">
-                      <img src={transaction.toFlag} alt="" />
+                      <img
+                        src={transaction.toFlag}
+                        alt=""
+                      />
                     </span>
 
                     <span>{transaction.toCity}</span>
@@ -312,12 +318,20 @@ export default function HistoriquePage() {
                     x2="1"
                     y2="1"
                   >
-                    <stop offset="0%" stopColor="#fff4b8" />
-                    <stop offset="45%" stopColor="#f2bd4c" />
-                    <stop offset="100%" stopColor="#c98118" />
+                    <stop
+                      offset="0%"
+                      stopColor="#fff4b8"
+                    />
+                    <stop
+                      offset="45%"
+                      stopColor="#f2bd4c"
+                    />
+                    <stop
+                      offset="100%"
+                      stopColor="#c98118"
+                    />
                   </linearGradient>
                 </defs>
-
                 <g
                   fill="none"
                   stroke="url(#routeGold)"
@@ -348,15 +362,15 @@ export default function HistoriquePage() {
                 <g className="route-points">
                   <circle cx="500" cy="130" r="9" />
                   <circle cx="530" cy="390" r="7" />
-                                        <circle cx="605" cy="415" r="7" />
+                  <circle cx="605" cy="415" r="7" />
                   <circle cx="475" cy="350" r="7" />
                   <circle cx="395" cy="315" r="7" />
                 </g>
               </svg>
 
               <div className="city-card city-paris">
-                <span className="city-flag">
-                  <img src="/flags/fr.png" alt="France" />
+                <span>
+                  <img src="/flags/fr.png" alt="" />
                 </span>
 
                 <p>
@@ -366,11 +380,8 @@ export default function HistoriquePage() {
               </div>
 
               <div className="city-card city-abidjan">
-                <span className="city-flag">
-                  <img
-                    src="/flags/ci.png"
-                    alt="Côte d’Ivoire"
-                  />
+                <span>
+                  <img src="/flags/ci.png" alt="" />
                 </span>
 
                 <p>
@@ -380,8 +391,8 @@ export default function HistoriquePage() {
               </div>
 
               <div className="city-card city-douala">
-                <span className="city-flag">
-                  <img src="/flags/cm.png" alt="Cameroun" />
+                <span>
+                  <img src="/flags/cm.png" alt="" />
                 </span>
 
                 <p>
@@ -391,8 +402,8 @@ export default function HistoriquePage() {
               </div>
 
               <div className="city-card city-brazzaville">
-                <span className="city-flag">
-                  <img src="/flags/cg.png" alt="Congo" />
+                <span>
+                  <img src="/flags/cg.png" alt="" />
                 </span>
 
                 <p>
@@ -402,8 +413,8 @@ export default function HistoriquePage() {
               </div>
 
               <div className="city-card city-kinshasa">
-                <span className="city-flag">
-                  <img src="/flags/cd.png" alt="RDC" />
+                <span>
+                  <img src="/flags/cd.png" alt="" />
                 </span>
 
                 <p>
@@ -420,6 +431,7 @@ export default function HistoriquePage() {
                 <span className="stat-icon">
                   <StatIcon type="calendar" />
                 </span>
+
                 <span>Aujourd’hui</span>
               </div>
 
@@ -432,6 +444,7 @@ export default function HistoriquePage() {
                 <span className="stat-icon">
                   <StatIcon type="wallet" />
                 </span>
+
                 <span>Montant total</span>
               </div>
 
@@ -444,6 +457,7 @@ export default function HistoriquePage() {
                 <span className="stat-icon">
                   <StatIcon type="speed" />
                 </span>
+
                 <span>Temps moyen</span>
               </div>
 
@@ -456,6 +470,7 @@ export default function HistoriquePage() {
                 <span className="stat-icon">
                   <StatIcon type="globe" />
                 </span>
+
                 <span>Pays actifs</span>
               </div>
 
@@ -710,8 +725,7 @@ export default function HistoriquePage() {
           color: #f1ba4a;
           background: rgba(230, 168, 55, 0.1);
         }
-
-        .transactions-list {
+                .transactions-list {
           display: grid;
           gap: 13px;
         }
@@ -820,7 +834,6 @@ export default function HistoriquePage() {
           height: 20px;
           overflow: hidden;
           border-radius: 4px;
-          line-height: 1;
           box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
         }
 
@@ -830,25 +843,29 @@ export default function HistoriquePage() {
           height: 100%;
           object-fit: cover;
         }
-                .route-arrow {
-          color: #d7a53a;
-          font-weight: 700;
+
+        .route-arrow {
+          color: #e8ab32;
+          font-size: 17px;
         }
 
         .transaction-date {
-          margin: 9px 0 0;
-          color: #8893a4;
+          margin: 8px 0 0;
+          color: #7f8999;
           font-size: 12px;
         }
 
         .transaction-amount {
-          text-align: right;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 10px;
+          white-space: nowrap;
         }
 
         .transaction-amount strong {
-          display: block;
-          color: #ffffff;
-          font-size: 21px;
+          color: #f4f1eb;
+          font-size: 18px;
           font-weight: 800;
         }
 
@@ -856,341 +873,574 @@ export default function HistoriquePage() {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          margin-top: 10px;
-          padding: 6px 12px;
+          min-height: 27px;
+          padding: 0 11px;
+          border: 1px solid rgba(35, 223, 118, 0.3);
           border-radius: 999px;
+          color: #23df76;
+          background: rgba(35, 223, 118, 0.08);
           font-size: 11px;
           font-weight: 800;
-          letter-spacing: 0.03em;
-        }
-
-        .transaction-status.sent {
-          color: #23df76;
-          background: rgba(35, 223, 118, 0.12);
         }
 
         .transaction-status.received {
+          border-color: rgba(38, 174, 244, 0.32);
           color: #26aef4;
-          background: rgba(38, 174, 244, 0.12);
+          background: rgba(38, 174, 244, 0.08);
         }
 
         .transaction-status.pending {
+          border-color: rgba(244, 179, 43, 0.32);
           color: #f4b32b;
-          background: rgba(244, 179, 43, 0.12);
+          background: rgba(244, 179, 43, 0.08);
         }
 
         .transaction-details {
+          width: 24px;
+          height: 40px;
+          padding: 0;
           border: 0;
-          color: #8d97a7;
+          color: #98a4b5;
           background: transparent;
           font-size: 28px;
           cursor: pointer;
         }
 
-        .map-panel,
-        .brand-banner,
-        .stat-card {
-          border: 1px solid rgba(123, 147, 176, 0.16);
-          border-radius: 22px;
-          background: rgba(5, 16, 30, 0.92);
+        .history-right {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
         }
 
         .map-panel {
-          padding: 22px;
+          overflow: hidden;
+          border: 1px solid rgba(127, 154, 188, 0.24);
+          border-radius: 23px;
+          background: rgba(4, 14, 27, 0.96);
+          box-shadow:
+            0 24px 65px rgba(0, 0, 0, 0.26),
+            inset 0 1px 0 rgba(255, 255, 255, 0.02);
         }
 
         .map-header {
           display: flex;
-          align-items: flex-start;
+          align-items: center;
           justify-content: space-between;
           gap: 20px;
-          margin-bottom: 18px;
+          min-height: 102px;
+          padding: 22px 30px;
+          border-bottom: 1px solid rgba(126, 150, 180, 0.16);
         }
 
         .map-header h2 {
           margin: 0;
-          font-size: 30px;
-          font-family: Georgia, serif;
-          font-weight: 600;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 29px;
+          font-weight: 500;
         }
 
         .live-badge {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
-          padding: 8px 13px;
+          gap: 9px;
+          min-height: 39px;
+          padding: 0 15px;
+          border: 1px solid rgba(33, 221, 117, 0.26);
           border-radius: 999px;
-          color: #b8f9d2;
-          background: rgba(35, 223, 118, 0.12);
+          color: #48e38a;
+          background: rgba(33, 221, 117, 0.06);
           font-size: 12px;
-          font-weight: 700;
+          font-weight: 800;
+          white-space: nowrap;
         }
 
         .live-badge span {
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          background: #23df76;
-          box-shadow: 0 0 10px #23df76;
+          background: #48e38a;
+          box-shadow: 0 0 12px rgba(72, 227, 138, 0.9);
+          animation: livePulse 1.8s ease-in-out infinite;
         }
 
         .map-area {
           position: relative;
+          min-height: 540px;
           overflow: hidden;
-          height: 560px;
-          border-radius: 22px;
-          background:
-            radial-gradient(circle at center,
-              rgba(27, 59, 109, 0.30),
-              transparent 70%),
-            #030c18;
-        }
-
-        .map-background,
-        .map-overlay,
-        .routes-svg {
-          position: absolute;
-          inset: 0;
+          isolation: isolate;
+          background: #03101f;
         }
 
         .map-background {
-          opacity: .35;
-          background-image:
-            linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-          background-size: 40px 40px;
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          background: url("/yvi-history-map.png") center / cover
+            no-repeat;
+          transform: scale(1.015);
+        }
+
+        .map-overlay {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          background:
+            radial-gradient(
+              circle at 50% 36%,
+              rgba(237, 179, 57, 0.1),
+              transparent 20%
+            ),
+            linear-gradient(
+              180deg,
+              rgba(1, 8, 17, 0.08),
+              rgba(1, 8, 17, 0.3)
+            );
+          pointer-events: none;
         }
 
         .routes-svg {
+          position: absolute;
+          inset: 0;
+          z-index: 3;
           width: 100%;
           height: 100%;
+          overflow: visible;
         }
 
         .route {
-          stroke-width: 2.8;
-          opacity: .75;
-          stroke-dasharray: 12 10;
-          animation: routeMove 10s linear infinite;
+          stroke-width: 3;
+          stroke-dasharray: 10 12;
+          opacity: 0.82;
+          animation: routeFlow 2.4s linear infinite;
         }
 
         .route-main {
-          stroke-width: 4;
+          stroke-width: 4.2;
+          opacity: 1;
         }
 
         .route-points circle {
-          fill: #f2bd4c;
-          filter: drop-shadow(0 0 8px #f2bd4c);
+          fill: #f4ba42;
+          stroke: #fff2ae;
+          stroke-width: 2;
+          filter: url(#goldGlow);
         }
 
         .city-card {
           position: absolute;
+          z-index: 5;
           display: flex;
           align-items: center;
           gap: 10px;
-          padding: 10px 12px;
-          border: 1px solid rgba(255,255,255,.08);
-          border-radius: 14px;
-          background: rgba(6,17,31,.92);
-          backdrop-filter: blur(8px);
+          min-width: 130px;
+          padding: 9px 12px;
+          border: 1px solid rgba(232, 169, 50, 0.46);
+          border-radius: 11px;
+          background: rgba(3, 12, 23, 0.93);
+          box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+          backdrop-filter: blur(12px);
+          transform: translate(-50%, -50%);
         }
 
-        .city-card strong {
-          display: block;
-          font-size: 13px;
-        }
-
-        .city-card small {
-          color: #8c98aa;
-          font-size: 11px;
-        }
-
-        .city-flag {
-          width: 30px;
-          height: 22px;
+        .city-card > span {
+          display: grid;
+          place-items: center;
+          width: 31px;
+          height: 31px;
           overflow: hidden;
-          border-radius: 5px;
-          flex-shrink: 0;
+          border-radius: 6px;
+          background: rgba(255, 255, 255, 0.05);
         }
 
-        .city-flag img {
+        .city-card > span img {
           display: block;
           width: 100%;
           height: 100%;
           object-fit: cover;
-          border-radius: inherit;
+        }
+
+        .city-card p {
+          display: flex;
+          flex-direction: column;
+          margin: 0;
+        }
+
+        .city-card strong {
+          color: #f4f0e8;
+          font-size: 11px;
+          font-weight: 800;
+        }
+
+        .city-card small {
+          margin-top: 2px;
+          color: #9aa4b4;
+          font-size: 9px;
         }
 
         .city-paris {
-          top: 65px;
-          left: 49%;
-          transform: translateX(-50%);
+          top: 20%;
+          left: 50%;
         }
 
         .city-abidjan {
-          bottom: 82px;
-          left: 34%;
+          top: 57%;
+          left: 38%;
         }
 
         .city-douala {
-          bottom: 118px;
-          left: 52%;
+          top: 65%;
+          left: 49%;
         }
 
         .city-brazzaville {
-          bottom: 72px;
-          left: 58%;
+          top: 76%;
+          left: 53%;
         }
 
         .city-kinshasa {
-          bottom: 110px;
-          left: 68%;
+          top: 82%;
+          left: 64%;
         }
                 .stats-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 16px;
-          margin-top: 20px;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 14px;
         }
 
         .stat-card {
+          min-width: 0;
+          min-height: 130px;
           padding: 18px;
+          border: 1px solid rgba(122, 148, 181, 0.24);
+          border-radius: 17px;
+          background: linear-gradient(
+            145deg,
+            rgba(7, 21, 38, 0.97),
+            rgba(3, 13, 26, 0.98)
+          );
+          box-shadow:
+            0 16px 38px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.02);
         }
 
         .stat-top {
           display: flex;
           align-items: center;
           gap: 10px;
-          color: #9ba8ba;
-          font-size: 13px;
-          margin-bottom: 18px;
+          margin-bottom: 14px;
+          color: #9fa9b9;
+          font-size: 10px;
+          font-weight: 800;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
         }
 
         .stat-icon {
           display: grid;
           place-items: center;
-          width: 38px;
-          height: 38px;
-          border-radius: 50%;
-          background: rgba(228, 173, 64, 0.12);
-          color: #e4ad40;
+          flex: 0 0 auto;
+          width: 31px;
+          height: 31px;
+          border: 1px solid rgba(230, 168, 49, 0.4);
+          border-radius: 9px;
+          color: #efb43a;
+          background: rgba(229, 166, 45, 0.06);
+          font-size: 17px;
         }
 
         .stat-card strong {
           display: block;
-          font-size: 28px;
-          font-weight: 800;
-          color: #ffffff;
+          overflow: hidden;
+          color: #f4f0e8;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(22px, 1.8vw, 30px);
+          font-weight: 500;
+          line-height: 1.05;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
         .stat-card small {
-          color: #8d99aa;
+          display: block;
+          margin-top: 7px;
+          color: #8994a5;
+          font-size: 11px;
         }
 
         .brand-banner {
-          position: relative;
-          overflow: hidden;
-          margin-top: 20px;
-          padding: 28px;
-          text-align: center;
+          display: grid;
+          grid-template-columns:
+            auto auto minmax(0, 1fr)
+            minmax(90px, 180px);
+          gap: 18px;
+          align-items: center;
+          min-height: 94px;
+          padding: 14px 20px;
+          border: 1px solid rgba(125, 151, 184, 0.22);
+          border-radius: 17px;
+          background: linear-gradient(
+            145deg,
+            rgba(7, 20, 36, 0.98),
+            rgba(3, 12, 24, 0.98)
+          );
+          box-shadow:
+            0 16px 40px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.02);
         }
 
         .brand-logo {
           display: grid;
           place-items: center;
-          width: 64px;
-          height: 64px;
-          margin: 0 auto 16px;
+          width: 58px;
+          height: 58px;
+          border: 1px solid rgba(234, 172, 51, 0.75);
           border-radius: 50%;
-          background: radial-gradient(circle, #f3c868, #b97b1b);
-          color: #04111d;
-          font-size: 30px;
-          font-weight: 900;
+          color: #eaae3d;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 37px;
+          box-shadow:
+            0 0 25px rgba(224, 162, 44, 0.08),
+            inset 0 0 18px rgba(224, 162, 44, 0.04);
         }
 
-        .brand-banner strong {
-          display: block;
+        .brand-banner > strong {
+          color: #eaae3d;
+          font-family: Georgia, "Times New Roman", serif;
           font-size: 28px;
-          letter-spacing: .08em;
+          font-weight: 500;
+          letter-spacing: 0.12em;
+          white-space: nowrap;
         }
 
-        .brand-banner p {
-          margin: 10px 0 18px;
-          color: #9aa6b8;
+        .brand-banner > p {
+          margin: 0;
+          color: #d39226;
+          font-size: 14px;
+          text-align: center;
         }
 
         .brand-line {
+          position: relative;
           display: block;
-          width: 100%;
-          height: 2px;
-          overflow: hidden;
-          border-radius: 999px;
-          background: rgba(255,255,255,.06);
+          height: 1px;
+          background: linear-gradient(
+            90deg,
+            rgba(229, 168, 54, 0.05),
+            rgba(229, 168, 54, 0.85),
+            rgba(229, 168, 54, 0.08)
+          );
         }
 
         .brand-line i {
-          display: block;
-          width: 120px;
-          height: 100%;
-          background: linear-gradient(
-            90deg,
-            transparent,
-            #efb43a,
-            transparent
-          );
-          animation: lineMove 3.5s linear infinite;
+          position: absolute;
+          top: 50%;
+          right: 12%;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #f5bd49;
+          box-shadow:
+            0 0 8px #f5bd49,
+            0 0 18px rgba(245, 189, 73, 0.8);
+          transform: translateY(-50%);
+          animation: starPulse 2s ease-in-out infinite;
         }
 
-        @keyframes routeMove {
-          from {
-            stroke-dashoffset: 0;
-          }
+        @keyframes routeFlow {
           to {
-            stroke-dashoffset: -220;
+            stroke-dashoffset: -44;
           }
         }
 
-        @keyframes lineMove {
-          from {
-            transform: translateX(-130px);
+        @keyframes livePulse {
+          0%,
+          100% {
+            opacity: 0.55;
+            transform: scale(0.88);
           }
-          to {
-            transform: translateX(700px);
+
+          50% {
+            opacity: 1;
+            transform: scale(1.16);
           }
         }
 
-        @media (max-width: 1400px) {
+        @keyframes starPulse {
+          0%,
+          100% {
+            opacity: 0.55;
+            transform: translateY(-50%) scale(0.85);
+          }
+
+          50% {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.2);
+          }
+        }
+                @media (max-width: 1380px) {
+          .history-layout {
+            grid-template-columns:
+              minmax(400px, 0.9fr)
+              minmax(620px, 1.42fr);
+          }
+
+          .map-area {
+            min-height: 500px;
+          }
+
+          .brand-banner {
+            grid-template-columns: auto auto minmax(0, 1fr);
+          }
+
+          .brand-line {
+            display: none;
+          }
+        }
+
+        @media (max-width: 1120px) {
+          .history-page {
+            overflow: visible;
+          }
+
           .history-layout {
             grid-template-columns: 1fr;
           }
 
+          .history-right {
+            margin-top: 8px;
+          }
+
           .map-area {
-            height: 500px;
+            min-height: 540px;
           }
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 760px) {
+          .history-page {
+            padding: 16px 13px;
+          }
+
+          .page-header h1 {
+            font-size: 52px;
+          }
+
+          .subtitle {
+            font-size: 15px;
+          }
+
           .toolbar {
             grid-template-columns: 1fr;
           }
 
-          .transaction-card {
-            grid-template-columns: 56px 1fr;
-            gap: 14px;
+          .filter-button {
+            width: 100%;
           }
 
-          .transaction-amount,
+          .filter-menu {
+            right: auto;
+            left: 0;
+            width: 100%;
+          }
+
+          .transaction-card {
+            grid-template-columns: 50px minmax(0, 1fr) 22px;
+            min-height: 126px;
+            padding: 16px 13px 16px 20px;
+          }
+
+          .transaction-icon {
+            width: 46px;
+            height: 46px;
+            font-size: 27px;
+          }
+
+          .transaction-amount {
+            grid-column: 2 / 3;
+            align-items: flex-start;
+            flex-direction: row;
+            flex-wrap: wrap;
+          }
+
           .transaction-details {
-            grid-column: 2;
-            justify-self: start;
+            grid-column: 3;
+            grid-row: 1 / span 2;
+          }
+
+          .map-header {
+            padding: 20px;
+          }
+
+          .map-header h2 {
+            font-size: 24px;
+          }
+
+          .map-area {
+            min-height: 430px;
+          }
+
+          .map-background {
+            background-position: center;
+            transform: scale(1.12);
+          }
+
+          .city-card {
+            min-width: 0;
+            padding: 7px;
+          }
+
+          .city-card p {
+            display: none;
+          }
+
+          .city-card > span {
+            width: 30px;
+            height: 30px;
+          }
+
+          .stats-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+
+          .brand-banner {
+            grid-template-columns: auto 1fr;
+          }
+
+          .brand-banner > p {
+            grid-column: 1 / -1;
             text-align: left;
+          }
+        }
+
+        @media (max-width: 460px) {
+          .page-header h1 {
+            font-size: 46px;
+          }
+
+          .map-area {
+            min-height: 390px;
+          }
+
+          .live-badge {
+            width: 38px;
+            padding: 0;
+            justify-content: center;
+            font-size: 0;
           }
 
           .stats-grid {
             grid-template-columns: 1fr;
           }
 
-          .map-area {
-            height: 420px;
+          .brand-banner > strong {
+            font-size: 23px;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .route,
+          .live-badge span,
+          .brand-line i {
+            animation: none;
           }
         }
       `}</style>
