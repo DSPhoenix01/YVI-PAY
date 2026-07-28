@@ -929,11 +929,11 @@ export default function ProfilPage() {
 }
 
 .mini-globe-image {
-  width: 270px;
+  width: 310px;
   max-width: none;
   display: block;
   object-fit: contain;
-  transform: translateY(30px);
+  transform: translateY(12px);
   user-select: none;
   pointer-events: none;
   filter:
