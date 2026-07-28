@@ -262,20 +262,13 @@ export default function ProfilPage() {
             Sans frontières
           </p>
 
-          <div className="mini-globe">
-            <div className="globe-ring ring-one" />
-            <div className="globe-ring ring-two" />
-            <div className="globe-ring ring-three" />
-
-            <span className="globe-point point-one" />
-            <span className="globe-point point-two" />
-            <span className="globe-point point-three" />
-            <span className="globe-point point-four" />
-
-            <span className="globe-route route-one" />
-            <span className="globe-route route-two" />
-            <span className="globe-route route-three" />
-          </div>
+         <div className="mini-globe">
+  <img
+    src="/mini-globe-profile.png"
+    alt="Globe YVI PAY"
+    className="mini-globe-image"
+  />
+</div>
         </section>
 
         <section className="help-card">
