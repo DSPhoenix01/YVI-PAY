@@ -480,6 +480,7 @@ export default function ProfilPage() {
             </button>
           </section>
         </div>
+      </section>
       {showEditProfile && (
         <div
           className="modal-overlay"
