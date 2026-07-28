@@ -72,10 +72,14 @@ function SearchIcon() {
       width="23"
       height="23"
       fill="none"
+      stroke="#9aa6b8"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M19 11a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" />
-      <path d="m17 17 4 4" />
+      <circle cx="11" cy="11" r="7" />
+      <path d="m20 20-4.2-4.2" />
     </svg>
   );
 }
