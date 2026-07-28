@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import "./profil.css";
 
 export default function ProfilPage() {
   const [notifications, setNotifications] = useState(true);
