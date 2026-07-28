@@ -635,17 +635,14 @@ export default function HistoriquePage() {
     0 10px 28px rgba(0, 0, 0, 0.12);
 }
 
-        .search-box svg {
-          flex: 0 0 auto;
-          width: 23px;
-          height: 23px;
-          margin-right: 13px;
-          fill: none;
-          stroke: #9aa6b8;
-          stroke-width: 1.7;
-          stroke-linecap: round;
-          stroke-linejoin: round;
-        }
+       .search-box svg {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin-right: 12px;
+  color: #9aa6b8;
+  overflow: visible;
+}
 
         .search-box input {
   flex: 1;
