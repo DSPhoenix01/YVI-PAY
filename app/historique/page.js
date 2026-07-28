@@ -644,14 +644,16 @@ export default function HistoriquePage() {
         }
 
         .search-box input {
-          width: 100%;
-          border: 0;
-          outline: 0;
-          color: #edf1f7;
-          background: transparent;
-          font: inherit;
-          font-size: 14px;
-        }
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #edf1f7;
+  font: inherit;
+  font-size: 14px;
+}
 
         .search-box input::placeholder {
           color: #7f8a9c;
