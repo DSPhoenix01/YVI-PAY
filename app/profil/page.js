@@ -915,124 +915,30 @@ export default function ProfilPage() {
         }
 
         .mini-globe {
-          position: relative;
-          width: 126px;
-          height: 76px;
-          margin: 4px auto 0;
-          overflow: hidden;
-          border-radius: 50% 50% 0 0;
-          opacity: 0.8;
-          background:
-            radial-gradient(
-              circle at 48% 55%,
-              rgba(207, 167, 88, 0.1),
-              transparent 45%
-            );
-        }
+  width: 100%;
+  height: 125px;
+  margin-top: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
 
-        .mini-globe::before {
-          content: "";
-          position: absolute;
-          left: 15px;
-          bottom: -44px;
-          width: 96px;
-          height: 96px;
-          border: 1px solid rgba(211, 172, 95, 0.5);
-          border-radius: 50%;
-          box-shadow:
-            0 0 22px rgba(204, 162, 79, 0.14),
-            inset 0 0 22px rgba(204, 162, 79, 0.05);
-        }
-
-        .globe-ring {
-          position: absolute;
-          border: 1px solid rgba(207, 169, 95, 0.25);
-          border-radius: 50%;
-        }
-
-        .ring-one {
-          left: 34px;
-          bottom: -37px;
-          width: 58px;
-          height: 86px;
-        }
-
-        .ring-two {
-          left: 20px;
-          bottom: -18px;
-          width: 86px;
-          height: 40px;
-        }
-
-        .ring-three {
-          left: 16px;
-          bottom: 8px;
-          width: 94px;
-          height: 18px;
-        }
-
-        .globe-point {
-          position: absolute;
-          width: 4px;
-          height: 4px;
-          border-radius: 50%;
-          background: #e0b864;
-          box-shadow: 0 0 9px #d6a950;
-        }
-
-        .point-one {
-          left: 36px;
-          top: 43px;
-        }
-
-        .point-two {
-          left: 62px;
-          top: 27px;
-        }
-
-        .point-three {
-          left: 86px;
-          top: 42px;
-        }
-
-        .point-four {
-          left: 70px;
-          top: 55px;
-        }
-
-        .globe-route {
-          position: absolute;
-          height: 1px;
-          transform-origin: left center;
-          background:
-            linear-gradient(
-              90deg,
-              rgba(217, 177, 99, 0.1),
-              rgba(217, 177, 99, 0.8),
-              rgba(217, 177, 99, 0.1)
-            );
-        }
-
-        .route-one {
-          left: 38px;
-          top: 44px;
-          width: 31px;
-          transform: rotate(-30deg);
-        }
-
-        .route-two {
-          left: 63px;
-          top: 29px;
-          width: 31px;
-          transform: rotate(30deg);
-        }
-
-        .route-three {
-          left: 70px;
-          top: 55px;
-          width: 24px;
-          transform: rotate(-31deg);
-        }
+.mini-globe-image {
+  width: 235px;
+  display: block;
+  object-fit: contain;
+  transform: translateY(22px);
+  user-select: none;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 0 10px rgba(225, 178, 82, 0.25))
+    drop-shadow(0 0 22px rgba(35, 90, 165, 0.20));
+}
 
         .help-card {
           margin-top: 4px;
