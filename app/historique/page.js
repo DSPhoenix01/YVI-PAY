@@ -938,9 +938,7 @@ export default function HistoriquePage() {
           position: absolute;
           inset: 0;
           z-index: 0;
-          background:
-            url("/images/yvi-history-map.png")
-            center / cover no-repeat;
+          background: url("/yvi-history-map.png") center / cover no-repeat;
           transform: scale(1.015);
         }
 
